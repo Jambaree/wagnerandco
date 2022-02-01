@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--base-font-family);
+  background-color: var(--peach);
+  color: var(--blue);
+  line-height: var(--line-height-4);
+  font-size: var(--h4);
+  letter-spacing: var(--track-base);
+}
+
+::-moz-selection { background-color: var(--blue); color: var(--white); }
+::selection { background-color: var(--blue); color: var(--white); }
+
+iframe {
+  border: none;
+  display: block;
+}
+
+figure {
+  margin: 0;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  font-weight: 500;
+}
+
+hr {
+  border: none;
+  border-bottom: var(--border-width-medium, 2px) solid;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+blockquote, i, em, cite {
+  font-style: normal;
+}
+
+a, .a-faux {
+  color: var(--blue);
+  text-decoration: none;
+  border-bottom: var(--border-width-medium, 2px) solid;
+  transition: color var(--transiton-duration, 200ms) var(--transition-function);
+}
+
+a:hover,
+a:hover {
+  color: var(--red) !important;
+  /* outline: 2px solid orange; */
+
+}
+
+/* https://stackoverflow.com/a/3809194/864799 */
+form :invalid { box-shadow: 0 0 0 1px var(--red); }
+:required { box-shadow: none; }
+form:empty, [required]:empty { box-shadow: none !important; }
+
+/* Explicity opt out of the invalid styling until use */
+.input-unused:invalid { box-shadow: none}
+
+.p-first-mt0 p:first-of-type {
+  margin-top: 0;
+}
+
+.font-weight-100 { font-weight: 100; }
+.font-weight-200 { font-weight: 200; }
+.font-weight-300 { font-weight: 300; }
+.font-weight-400 { font-weight: 400; }
+.font-weight-500 { font-weight: 500; }
+.font-weight-600 { font-weight: 600; }
+.font-weight-700 { font-weight: 700; }
+.font-weight-800 { font-weight: 800; }
+.font-weight-900 { font-weight: 900; }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+.text-decoration-none,
+abbr.text-decoration-none { text-decoration: none; }
+
+.border-thin { border-width: var(--border-width-thin); }
+.border-medium { border-width: var(--border-width-medium); }
+.border-thick { border-width: var(--border-width-thick); }
+
+blockquote .dquo {
+  margin-left: -0.45em;  
+}
+
+.track-1 { letter-spacing: var(--track-1, 0); }
+.track-2 { letter-spacing: var(--track-2, 0); }
+
+.select-none { user-select: none; }
+
+
+.input,
+.textarea,
+.select {
+  border-color: var(--blue);
+  border-width: 0 0 var(--border-width-medium, 2px) 0;
+  border-radius: 0 !important;
+  background-color: var(--lighten-4);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.select {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="black"><polygon points="0,0 100,0 50,50"/></svg>');
+  background-repeat: no-repeat;
+  background-size: 14px;
+  background-position: 96% 70%;
+}
+
+
+.clear-both { clear: both; }

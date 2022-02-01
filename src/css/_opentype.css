@@ -1,0 +1,7 @@
+/* OpenType feature classes.
+ * Don’t need all of Utility OpenType here. */
+
+.salt { font-feature-settings: "salt" }
+.salt.onum { font-feature-settings: "salt", "onum" }
+.onum { font-variant-numeric: oldstyle-nums; }
+.caps { font-variant-caps: all-small-caps; text-transform: lowercase; }

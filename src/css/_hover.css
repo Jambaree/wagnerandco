@@ -1,0 +1,70 @@
+.hover-media-opacity img,
+.hover-media-opacity video {
+  opacity: 0.8;
+  transition: opacity var(--transition-duration) var(--transition-function);
+}
+
+.hover-media-opacity:hover img,
+.hover-media-opacity:hover video {
+  opacity: 1.0;
+}
+
+.hover-color-red,
+.hover-color-peach,
+.hover-color-blue,
+.hover-color-white {
+  transition: color var(--transition-duration) var(--transition-function);
+}
+
+.hover-bg-red,
+.hover-bg-peach,
+.hover-bg-blue,
+.hover-bg-white {
+  transition: background var(--transition-duration) var(--transition-function);
+}
+
+.hover-fill-red g,
+.hover-fill-peach g,
+.hover-fill-blue g,
+.hover-fill-white g {
+  transition: fill var(--transition-duration) var(--transition-function);
+}
+
+.hover-transition-all {
+  transition: all var(--transition-duration) var(--transition-function);
+}
+
+.hover-color-red:hover { color: var(--red); }
+.hover-color-peach:hover { color: var(--peach); }
+.hover-color-blue:hover { color: var(--blue); }
+.hover-color-white:hover { color: var(--white); }
+
+.hover-bg-red:hover { background-color: var(--red); }
+.hover-bg-peach:hover { background-color: var(--peach); }
+.hover-bg-blue:hover { background-color: var(--blue); }
+.hover-bg-white:hover { background-color: var(--white); }
+
+.hover-fill-red:hover g { fill: var(--red); }
+.hover-fill-peach:hover g { fill: var(--peach); }
+.hover-fill-blue:hover g { fill: var(--blue); }
+.hover-fill-white:hover g { fill: var(--white); }
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .hover-media-opacity img,
+  .hover-media-opacity video,
+  .hover-bg-red,
+  .hover-bg-peach,
+  .hover-bg-blue,
+  .hover-bg-white,
+  .hover-fill-red,
+  .hover-fill-peach,
+  .hover-fill-blue,
+  .hover-fill-white,
+  .hover-color-red,
+  .hover-color-peach,
+  .hover-color-blue,
+  .hover-color-white,
+  .hover-transition-all {
+    transition: none !important;
+  }
+}

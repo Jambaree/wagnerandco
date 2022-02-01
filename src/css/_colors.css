@@ -1,0 +1,42 @@
+/* Colors */
+
+.muted { opacity: 0.5; }
+.bg-transparent { background: transparent; }
+
+.blue { color: var(--blue) }
+.bg-blue { background-color: var(--blue) }
+.blue a { color: var(--blue); border-color: var(--red); }
+.border-blue { border-color: var(--blue) }
+.fill-blue { fill: var(--blue) }
+.stroke-blue { stroke: var(--blue) }
+
+.peach { color: var(--peach) }
+.bg-peach { background-color: var(--peach) }
+.peach a { color: var(--peach); border-color: var(--red); }
+.border-peach { border-color: var(--peach) }
+.fill-peach { fill: var(--peach) }
+.stroke-peach { stroke: var(--peach) }
+
+.white { color: var(--white) }
+.bg-white { background-color: var(--white) }
+.white a { color: var(--white); border-color: var(--blue); }
+.border-white { border-color: var(--white) }
+.fill-white { fill: var(--white) }
+.stroke-white { stroke: var(--white) }
+
+.red { color: var(--red) }
+.bg-red { background-color: var(--red); }
+
+.white a:hover, .bg-red a:focus { color: var(--blue) !important; } 
+.red a:hover, .bg-red a:focus { color: var(--blue) !important; } 
+.red a { color: var(--red); border-color: var(--blue); }
+.border-red { border-color: var(--red) }
+.fill-red { fill: var(--red) }
+.stroke-red { stroke: var(--red) }
+
+.black { color: var(--black) }
+.bg-black { background-color: var(--black) }
+.black a { color: var(--black); border-color: var(--black); }
+.border-black { border-color: var(--black) }
+.fill-black { fill: var(--black) }
+.stroke-black { stroke: var(--black) }

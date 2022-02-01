@@ -1,0 +1,473 @@
+/* Component Specific */
+
+/* <GlobalColors /> transition */
+
+/* Intentionally not transitioning the footer right now */
+.GlobalColors {
+  transition: background 1s cubic-bezier(0.19, 1, 0.22, 1) 0.1s;  
+}
+
+@media (min-height: 40em) and (--breakpoint-lg) {
+  .GlobalColors {
+    padding-top: var(--space-3);
+  } 
+}
+
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .GlobalColors { transition: none !important; }
+}
+
+/* <ButtonPlay /> */
+
+.ButtonPlay svg {
+  transition: fill 0.3s ease-out, transform 0.1s ease-out;
+}
+
+.ButtonPlay:hover svg {
+  fill: var(--white);
+}
+
+/* <SidebarNav /> */
+
+@media (--breakpoint-xlg) {
+  .xlg-right-4 { right: var(--space-4-n); }
+  .xlg-col-12 { width: 100%; }
+}
+
+/* <FAQImage /> */
+
+@media (--breakpoint-lg) {
+
+  .FAQImage-img {
+    max-width: 300px;
+  }
+
+  .FAQImage-img--right {
+    transform: translateX(30%);
+    /* transform: translateX(25%); */
+  }
+}
+
+/* <WeddingsListing /> */
+
+@media (--breakpoint-md) {
+  .WeddingsListing-item {
+    margin-top: 300px;
+  }
+  
+  .md-line-height-4 {
+    line-height: var(--line-height-4, 1.5);
+  }
+}
+
+/* <WeddingMoreThumb /> */
+
+.WeddingMoreThumb {
+  font-size: var(--h4);
+  width: 100%;
+  padding-top: 50%;
+  padding-bottom: 50%;
+}
+
+@media (min-width: 530px)  { .WeddingMoreThumb { font-size: var(--h2); } }
+@media (--breakpoint-sm)   { .WeddingMoreThumb { font-size: 1.2rem; } }
+@media (min-width: 755px)  { .WeddingMoreThumb { font-size: var(--h2); } }
+@media (--breakpoint-md)   { .WeddingMoreThumb { font-size: 1.2rem; } }
+@media (min-width: 900px)  { .WeddingMoreThumb { font-size: var(--h3); } }
+@media (min-width: 1050px) { .WeddingMoreThumb { font-size: var(--h2); } }
+
+
+/* <WPPost /> template inline images */
+
+/* Like .clearfix, if last item in post is a floated image */
+.WPPost:before,
+.WPPage:before,
+.WPPost:after,
+.WPPage:after {
+  content: "";
+  display: table;
+}
+
+.WPPost:after,
+.WPPage:after {
+  clear: both;
+}
+
+.WPPost img,
+.WPPost a img,
+.WPPage img,
+.WPPage a img {
+  width: 100%;
+  height: auto;
+}
+
+.WPPost [id^="attachment"] a,
+.WPPage [id^="attachment"] a {
+  display: block;
+  border-bottom: 2px solid var(--red);
+  background-color: var(--peach);
+}
+
+.WPPost [id^="attachment"] img,
+.WPPage [id^="attachment"] img {
+  display: block;
+}
+
+.WPPost .alignnone,
+.WPPage .alignnone {
+  width: auto;
+  max-width: 100%;
+  display: block;
+}
+
+.wp-caption-text,
+.WPPost figcaption,
+.WPPage figcaption {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  opacity: 0.5;
+}
+
+@media (--breakpoint-lg) {
+  .WPPost .alignnone,
+  .WPPage .alignnone {
+    margin-left: -10%;
+    margin-right: -10%;
+    max-width: none;
+    width: 120% !important;
+  }
+  .wp-caption-text,
+  .WPPost figcaption,
+  .WPPage figcaption {
+    margin-left: 8.33%; /* (100 - 100/120) / 2 */
+    margin-right: 8.33%;
+    width: 100%;
+  }
+}
+
+@media (--breakpoint-xlg) {
+  .WPPost .alignnone,
+  .WPPage .alignnone {
+    margin-left: -20%;
+    margin-right: -20%;
+    max-width: none;
+    width: 140% !important;
+  }
+  .wp-caption-text,
+  .WPPost figcaption,
+  .WPPage figcaption {
+    margin-left: 14.25%; /* 100% * (1 - (100/120)) / 2 */
+    margin-right: 14.25%;
+    width: 100%;
+  }
+}
+
+/* https://codex.wordpress.org/Styling_Images_in_Posts_and_Pages */
+
+.WPPost img.alignright,
+.WPPost a img.alignright,
+.WPPage img.alignright,
+.WPPage a img.alignright { float: right; margin: 0 0 1em 1em; max-width: 50%; }
+
+.WPPost img.alignleft,
+.WPPost a img.alignleft,
+.WPPage img.alignleft,
+.WPPage a img.alignleft { float: left; margin: 0 1em 1em 0; max-width: 50%; }
+
+.WPPost img.aligncenter,
+.WPPost a img.aligncenter,
+.WPPage img.aligncenter,
+.WPPage a img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+
+@media (--breakpoint-sm) {
+  .PackageItem-offset {
+    transform: translateY(39%); 
+  }
+}
+
+@media (--breakpoint-md) {
+  .PackageItemExampleLink-offset {
+    transform: translate(var(--space-2-n), 0);
+  }
+}
+
+@media (--breakpoint-lg) {
+  .PackageItemExampleLink-offset {
+    transform: translate(-100px, 0);
+  }  
+}
+
+
+/* <StylizedAbout /> */
+
+.StylizedAbout {
+  width: 30px;
+  display: none;
+}
+
+@media (--breakpoint-sm) {
+  .StylizedAbout {
+    transform: translateY(2rem);
+    display: block;    
+  }
+}
+
+@media (--breakpoint-md) {
+  .StylizedAbout {
+    width: 50px;
+    transform: translateY(0rem);
+  }
+}
+
+@media (--breakpoint-lg) {
+  .StylizedAbout {
+    transform: translateY(5rem);
+  }
+}
+
+/* <StylizedSayHello /> */
+
+.StylizedSayHello {
+  display: none;
+}
+
+@media (--breakpoint-sm) {
+  .StylizedSayHello {
+    width: 350px;
+    transform: translate(calc(var(--space-3-n) - 5px), 100px);
+    display: block;    
+    z-index: 1;
+  }
+}
+
+@media (--breakpoint-md) {
+  .StylizedSayHello {
+    width: 450px;
+    transform: translate(calc(var(--space-3-n) - 25px), 150px);
+
+  }
+}
+
+/* <StylizedInfo /> */
+
+.StylizedInfo {
+  display: none;
+}
+
+@media (--breakpoint-sm) {
+  .StylizedInfo {
+    width: 150px;
+    z-index: 1;
+    transform: translate(var(--space-3), 200px);
+    display: block;    
+  }
+}
+
+@media (--breakpoint-md) {
+  .StylizedInfo {
+    z-index: 3;
+    width: 150px;
+    transform: translate(var(--space-3), 2rem);
+  }
+}
+
+@media (--breakpoint-lg) {
+  .StylizedInfo {
+    z-index: 1;
+    width: 250px;
+    transform: translate(var(--space-3), 3rem);
+  }
+}
+
+/* <StylizedCinematography /> */
+
+.StylizedCinematography {
+  display: none;
+}
+
+@media (--breakpoint-sm) {
+  .StylizedCinematography {
+    width: 150px;
+    z-index: 1;
+    transform: translate(45px, 110px);
+    display: block;
+  }
+}
+
+@media (--breakpoint-lg) {
+  .StylizedCinematography {
+    width: 200px;
+    transform: translate(calc(var(--space-3) + 28px), 4.5rem);
+  }
+}
+
+/* <StylizedFAQ /> */
+
+.StylizedFAQ {
+  transform: translateY(-20%);
+  margin-right: var(--space-2-n);
+}
+
+@media (--breakpoint-sm) {
+  .StylizedFAQ {
+    margin-right: var(--space-3-n);
+    width: 60%;
+  }
+}
+
+@media (--breakpoint-sm) {
+  .StylizedFAQ {
+    transform: none;
+    margin-right: var(--space-3-n);
+    width: 50%;
+  }
+}
+
+
+@media (--breakpoint-xlg) {
+  .StylizedFAQ {
+    margin-right: 0;
+  }
+}
+
+/* <StylizedFAQLeft /> */
+
+.StylizedFAQLeft {
+  overflow: visible;
+  width: 100%;
+  z-index: -1;
+  transform: translateY(-22%);
+}
+
+@media (--breakpoint-sm) {
+  .StylizedFAQLeft {
+    width: 50%;
+    left: 0;
+  }
+}
+
+@media (--breakpoint-md) {
+  .StylizedFAQLeft {
+    width: 50%;
+    left: -7%;
+  }
+}
+
+@media (--breakpoint-lg) {
+  .StylizedFAQLeft {
+    left: -13.5%;
+  }
+}
+
+@media (--breakpoint-xlg) {
+  .StylizedFAQLeft {
+    left: -30%;
+  }
+}
+
+/* <SidebarNav /> */
+
+.md-mnt2 { margin-top: var(--space-2-n); }
+.md-mnt4 { margin-top: var(--space-4-n); }
+
+/* <WPWedding /> */
+
+@media (--breakpoint-md) {
+  .md-mx-auto { margin: auto; float: none; }  
+
+  .WPWeddingIntro-img {
+    transform: translateX(-25%);
+  }
+}
+
+@media (--breakpoint-lg) {
+  .WPWeddingIntro-img {
+    transform: translateX(-50%);
+  }
+}
+
+.WPWeddingIntro-doodle {
+  padding: var(--space-3);
+}
+
+.WPWeddingIntro-doodle .doodle {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (--breakpoint-md) {
+  .WPWeddingIntro-doodle {
+    padding: 0;
+    transform: translate(0, 300px);    
+  }
+}
+
+/* <TeamMembers /> */
+
+@media (--breakpoint-sm) {
+  .TeamMembers .TeamMembers-item:nth-child(2n) {
+    padding-top: var(--space-4);
+  }
+}
+
+@media (--breakpoint-md) {
+  .TeamMembers .TeamMembers-item {
+    padding-top: var(--space-4);
+  }
+
+  .TeamMembers .TeamMembers-item:nth-child(3n-1) {
+    padding-top: 0; 
+  }
+}
+
+/**
+ * <FAQItemBlock-img />
+ *
+ * Shifting around of images on FAQ page for visual interest.
+ * This is one of the only BEM-like class sections in the whole
+ * site, just because styling with CSS only makes a lot more sense
+ * for this component, rather than conditionally applying a lot
+ * of utility classes here.
+ */
+@media (--breakpoint-sm) {
+
+  /* Items with long answers are wider. */
+  .FAQItems .FAQItemBlock--long .FAQItemBlock-content {
+    width: 66.667% !important;
+  }
+
+  .FAQItems .FAQItemBlock--long .FAQItemBlock-img {
+    width: 33.334% !important;
+  }
+
+  .FAQItems .FAQItemBlock:nth-child(3) .FAQItemBlock-img {
+    transform: translateX(var(--space-3-n));
+  }
+}
+
+
+@media (--breakpoint-lg) {
+  .FAQItems .FAQItemBlock:nth-child(3) .FAQItemBlock-img {
+    transform: translateX(-calc(var(--space-4) * 1.25));
+  }
+}
+
+@media (--breakpoint-xlg) {
+  .FAQItems .FAQItemBlock:nth-child(3) .FAQItemBlock-img {
+    transform: translateX(-40%);
+  }
+}
+
+@media (--breakpoint-sm) {
+  .FAQItems .FAQItemBlock:nth-child(4) .FAQItemBlock-img {
+    transform: translateX(var(--space-3));
+  }
+}
+
+@media (--breakpoint-md) {
+  .FAQItems .FAQItemBlock:nth-child(4) .FAQItemBlock-img {
+    transform: translateX(40%);
+  }
+}

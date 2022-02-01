@@ -1,0 +1,84 @@
+.doodle {
+  pointer-events: none;  
+}
+
+.doodlegroup {
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .doodlegroup {
+    animation-play-state: paused !important;
+  }
+}
+
+@keyframes doodleZag {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-47px); /* Magic number, specific to SVG */ }
+}
+
+@keyframes doodleWave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-31px); /* Magic number, specific to SVG */ }
+}
+
+@keyframes doodleLine {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-25px); }
+}
+
+@keyframes doodleDiagonal {
+  0% { transform: translateX(-3.125px); }
+  100% { transform: translateX(3.125px); }
+}
+
+.doodle-outer {
+  position: absolute;
+  transform: translateX(var(--space-2));
+}
+
+@media (--breakpoint-sm) {
+  .doodle-outer {
+    transform: translateX(var(--space-3));
+  }
+}
+
+@media (--breakpoint-md) {
+  .doodle-outer {
+  }
+}
+
+@media (min-width: 50em) {
+  .doodle-outer {
+    transform: translateX(calc(((100vw - var(--width-3))/2)));
+  }
+}
+
+@media (--breakpoint-lg) {
+}
+
+@media (--breakpoint-xlg) {
+}
+
+
+.doodlegroup-zag,
+.doodlegroup-zagsingle {
+  animation-name: doodleZag;
+  animation-duration: 2s;
+}
+
+.doodlegroup-wave {
+  animation-name: doodleWave;
+  animation-duration: 2500ms;
+}
+
+.doodlegroup-line {
+  animation-name: doodleLine;
+}
+
+.doodlegroup-diagonal {
+  animation-name: doodleDiagonal;
+}

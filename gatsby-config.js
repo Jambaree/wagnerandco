@@ -14,7 +14,17 @@ let config = {
     'gatsby-plugin-layout',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
-    'gatsby-theme-headless-wordpress',
+    {
+      resolve: `gatsby-theme-headless-wordpress`,
+      options: {
+        type: {
+          __all: {
+            // '__all' will override options for all post types
+            postsPerPage: 6, // overrides the postsPerPage option from WordPress reading settings
+          },
+        },
+      },
+    },
     'gatsby-plugin-image',
     {
       resolve: 'gatsby-source-wordpress',

@@ -6669,6 +6669,11 @@ gatsby-telemetry@^1.0.11, gatsby-telemetry@^1.10.2, gatsby-telemetry@^1.2.2:
     node-fetch "^2.6.1"
     uuid "3.4.0"
 
+gatsby-theme-headless-wordpress@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/gatsby-theme-headless-wordpress/-/gatsby-theme-headless-wordpress-0.1.9.tgz#2c08895f25f41626ce41762ce26d27aff6a6bcb4"
+  integrity sha512-RzYHbB8wlyDrD5lDCr6xM7h22Ha9DArdlep8PbiyHfMywbwLyilFcAZCQXOcbzzk4WESx8h44jC/m1cNDtuX6Q==
+
 gatsby-transformer-sharp@2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.4.3.tgz#a5004a872ea649829dd98d1cedb903ac2c9e577f"

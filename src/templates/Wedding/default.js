@@ -17,7 +17,7 @@ import DoodleRandomCorner from '../../components/DoodleRandomCorner'
 import WeddingFeaturedMedia from '../../components/WeddingFeaturedMedia'
 import VideoLoop from '../../components/VideoLoop'
 
-class WeddingTemplate extends React.Component {
+class Wedding extends React.Component {
   getRandomIntInclusive(min, max) {
     min = Math.ceil(min)
     return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive
@@ -144,7 +144,7 @@ class WeddingTemplate extends React.Component {
   }
 }
 
-export default WeddingTemplate
+export default Wedding
 
 export const pageQuery = graphql`
   query WeddingById($id: String!) {

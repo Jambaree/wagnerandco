@@ -1,8 +1,21 @@
 // const path = require(`path`)
 // const graphql = require('gatsby').graphql
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+// const path = require("path")
+// const fs = require("fs")
 
-// // Same as
-// // const permittedSlug = require('./src/utils/permitted-slug')
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    plugins: [new CaseSensitivePathsPlugin()],
+  })
+}
+
+// require("dotenv").config({
+//   path: `.env.${process.env.NODE_ENV}`,
+// })
+
+// Same as
+// const permittedSlug = require('./src/utils/permitted-slug')
 // const permittedSlug = function(slug) {
 //   if (slug === 'schema' || slug === 'placeholder') {
 //     if (process && process.env && process.env.NODE_ENV === 'development') {
@@ -45,7 +58,7 @@
 //   { slug: '', template: 'info', name: 'Info', singular_name: 'Info' },
 // ]
 
-// // Will create pages for Wordpress pages (route : /{slug})
+// Will create pages for Wordpress pages (route : /{slug})
 // exports.createPages = ({ graphql, actions }) => {
 //   const { createPage, createRedirect } = actions
 

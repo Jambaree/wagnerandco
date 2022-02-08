@@ -56,7 +56,6 @@ const IndexPage = props => {
     </PageWrapper>
   )
 }
-
 export default IndexPage
 
 export const pageQuery = graphql`

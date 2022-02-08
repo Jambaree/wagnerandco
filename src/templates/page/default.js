@@ -2,11 +2,11 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 // Ours
-import permittedSlug from '../utils/permitted-slug'
-import PageWrapper from '../components/PageWrapper'
-import Wrapper from '../components/Wrapper'
-import Header from '../components/Header'
-import YoastHelmet from '../components/YoastHelmet'
+import permittedSlug from '../../utils/permitted-slug'
+import PageWrapper from '../../components/PageWrapper'
+import Wrapper from '../../components/Wrapper'
+import Header from '../../components/Header'
+import YoastHelmet from '../../components/YoastHelmet'
 // import GutenbergBlocks from '../components/GutenbergBlocks'
 
 const WPPage = props => {

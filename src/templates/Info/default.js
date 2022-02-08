@@ -2,13 +2,13 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 // Ours
-import permittedSlug from '../utils/permitted-slug'
-import PageWrapper from '../components/PageWrapper'
-import Wrapper from '../components/Wrapper'
-import Header from '../components/Header'
-import WhitespaceHeader from '../components/WhitespaceHeader'
-import GutenbergBlocks from '../components/GutenbergBlocks'
-import YoastHelmet from '../components/YoastHelmet'
+import permittedSlug from '../../utils/permitted-slug'
+import PageWrapper from '../../components/PageWrapper'
+import Wrapper from '../../components/Wrapper'
+import Header from '../../components/Header'
+import WhitespaceHeader from '../../components/WhitespaceHeader'
+import GutenbergBlocks from '../../components/GutenbergBlocks'
+import YoastHelmet from '../../components/YoastHelmet'
 
 const WPInfo = props => {
   const data = props.data

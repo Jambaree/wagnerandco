@@ -4,15 +4,15 @@ import { graphql } from 'gatsby'
 import fecha from 'fecha'
 
 // Ours
-import unesc from '../utils/unescape'
-import permittedSlug from '../utils/permitted-slug'
-import PageWrapper from '../components/PageWrapper'
-import Video from '../components/Video'
-import LinkDuo from '../components/LinkDuo'
+import unesc from '../../utils/unescape'
+import permittedSlug from '../../utils/permitted-slug'
+import PageWrapper from '../../components/PageWrapper'
+import Video from '../../components/Video'
+import LinkDuo from '../../components/LinkDuo'
 import slugify from 'slugify'
-import WhitespaceHeaderCorners from '../components/WhitespaceHeaderCorners'
-import YoastHelmet from '../components/YoastHelmet'
-import SidebarNav from '../components/SidebarNav'
+import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
+import YoastHelmet from '../../components/YoastHelmet'
+import SidebarNav from '../../components/SidebarNav'
 
 const ButtonDownload = props => {
   return (

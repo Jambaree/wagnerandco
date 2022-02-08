@@ -2,14 +2,14 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 // Ours
-import permittedSlug from '../utils/permitted-slug'
-import PageWrapper from '../components/PageWrapper'
-import Wrapper from '../components/Wrapper'
-import WhitespaceHeaderCorners from '../components/WhitespaceHeaderCorners'
-import YoastHelmet from '../components/YoastHelmet'
-import GutenbergBlocks from '../components/GutenbergBlocks'
-import SidebarNav from '../components/SidebarNav'
-import gutenbergBlocksToNav from '../utils/gutenberg-blocks-to-nav'
+import permittedSlug from '../../utils/permitted-slug'
+import PageWrapper from '../../components/PageWrapper'
+import Wrapper from '../../components/Wrapper'
+import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
+import YoastHelmet from '../../components/YoastHelmet'
+import GutenbergBlocks from '../../components/GutenbergBlocks'
+import SidebarNav from '../../components/SidebarNav'
+import gutenbergBlocksToNav from '../../utils/gutenberg-blocks-to-nav'
 
 const WPGuide = props => {
   const data = props.data

@@ -22,7 +22,7 @@ const PostTemplate = props => {
       <YoastHelmet url={data.options.options.url} node={postNode} />
       <Wrapper maxWidth={3}>
         <Header showTitle title={postNode.title} />
-        <GutenbergBlocks blocks={postNode.blocks} />
+        {/* <GutenbergBlocks blocks={postNode.blocks} /> */}
       </Wrapper>
     </PageWrapper>
   )
@@ -43,10 +43,10 @@ export const pageQuery = graphql`
       title
       id
       # content
-      blocks {
-        innerHTML
-        blockName
-      }
+      # blocks {
+      #   innerHTML
+      #   blockName
+      # }
     }
   }
 `

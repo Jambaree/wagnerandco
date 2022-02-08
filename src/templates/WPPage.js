@@ -62,33 +62,33 @@ export const pageQuery = graphql`
       acf {
         wco_page_subtitle
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
+      # yoast_meta {
+      #   yoast_wpseo_title
+      #   yoast_wpseo_metadesc
 
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image {
-        #   id
-        #   localFile {
-        #     childImageSharp {
-        #       id
-        #       fluid(maxWidth: 1200) {
-        #         aspectRatio
-        #         src
-        #       }
-        #     }
-        #   }
-        # }
+      #   # Facebook
+      #   yoast_wpseo_facebook_title
+      #   yoast_wpseo_facebook_description
+      #   yoast_wpseo_facebook_type
+      #   # yoast_wpseo_facebook_image {
+      #   #   id
+      #   #   localFile {
+      #   #     childImageSharp {
+      #   #       id
+      #   #       fluid(maxWidth: 1200) {
+      #   #         aspectRatio
+      #   #         src
+      #   #       }
+      #   #     }
+      #   #   }
+      #   # }
 
-        # yoast_wpseo_facebook_image
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
-      }
+      #   # yoast_wpseo_facebook_image
+      #   # Twitter
+      #   yoast_wpseo_twitter_title
+      #   yoast_wpseo_twitter_description
+      #   # yoast_wpseo_twitter_image
+      # }
     }
   }
 `

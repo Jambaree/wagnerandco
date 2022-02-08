@@ -162,11 +162,7 @@ export const pageQuery = graphql`
       featured_media {
         id
         localFile {
-          childImageSharp {
-            fluid(maxWidth: 1200) {
-              src
-            }
-          }
+          url
         }
       }
       acf {
@@ -191,61 +187,54 @@ export const pageQuery = graphql`
           mime_type
           source_url
           localFile {
-            childImageSharp {
-              id
-              fluid(maxWidth: 2000) {
-                src
-                srcSet
-                aspectRatio
-              }
-            }
+            url
           }
         }
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-        # yoast_wpseo_canonical
-        # yoast_wpseo_social_url
-        # yoast_wpseo_company_or_person
-        # yoast_wpseo_person_name
-        # yoast_wpseo_company_name
-        # yoast_wpseo_website_name
+      # yoast_meta {
+      #   yoast_wpseo_title
+      #   yoast_wpseo_metadesc
+      #   # yoast_wpseo_canonical
+      #   # yoast_wpseo_social_url
+      #   # yoast_wpseo_company_or_person
+      #   # yoast_wpseo_person_name
+      #   # yoast_wpseo_company_name
+      #   # yoast_wpseo_website_name
 
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        yoast_wpseo_facebook_image {
-          id
-          localFile {
-            childImageSharp {
-              id
-              fluid(maxWidth: 1200) {
-                aspectRatio
-                src
-              }
-            }
-          }
-        }
+      #   # Facebook
+      #   yoast_wpseo_facebook_title
+      #   yoast_wpseo_facebook_description
+      #   yoast_wpseo_facebook_type
+      #   yoast_wpseo_facebook_image {
+      #     id
+      #     localFile {
+      #       childImageSharp {
+      #         id
+      #         fluid(maxWidth: 1200) {
+      #           aspectRatio
+      #           src
+      #         }
+      #       }
+      #     }
+      #   }
 
-        # yoast_wpseo_facebook_image
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        yoast_wpseo_twitter_image {
-          id
-          localFile {
-            childImageSharp {
-              id
-              fluid(maxWidth: 1200) {
-                aspectRatio
-                src
-              }
-            }
-          }
-        }
-      }
+      #   # yoast_wpseo_facebook_image
+      #   # Twitter
+      #   yoast_wpseo_twitter_title
+      #   yoast_wpseo_twitter_description
+      #   yoast_wpseo_twitter_image {
+      #     id
+      #     localFile {
+      #       childImageSharp {
+      #         id
+      #         fluid(maxWidth: 1200) {
+      #           aspectRatio
+      #           src
+      #         }
+      #       }
+      #     }
+      #   }
+      # }
     }
     allWordpressWpWeddings(limit: 8) {
       edges {

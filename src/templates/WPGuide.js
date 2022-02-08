@@ -38,7 +38,7 @@ const WPGuide = props => {
       />
       <SidebarNav items={sidebarItems} />
       <Wrapper maxWidth={3}>
-        <GutenbergBlocks blocks={pageNode.blocks} />
+        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
       </Wrapper>
     </PageWrapper>
   )
@@ -65,16 +65,16 @@ export const pageQuery = graphql`
       date
       template
       # content
-      blocks {
-        innerHTML
-        blockName
+      # blocks {
+      #   innerHTML
+      #   blockName
 
-        # For Gravity Forms, probably other Gutenberg block type
-        attrs {
-          formId
-          wordpress_id
-        }
-      }
+      #   # For Gravity Forms, probably other Gutenberg block type
+      #   attrs {
+      #     formId
+      #     wordpress_id
+      #   }
+      # }
       # acf {
       #   wco_page_subtitle
       # }
@@ -92,21 +92,21 @@ export const pageQuery = graphql`
           }
         }
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
+      # yoast_meta {
+      #   yoast_wpseo_title
+      #   yoast_wpseo_metadesc
 
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image
+      #   # Facebook
+      #   yoast_wpseo_facebook_title
+      #   yoast_wpseo_facebook_description
+      #   yoast_wpseo_facebook_type
+      #   # yoast_wpseo_facebook_image
 
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
-      }
+      #   # Twitter
+      #   yoast_wpseo_twitter_title
+      #   yoast_wpseo_twitter_description
+      #   # yoast_wpseo_twitter_image
+      # }
     }
   }
 `

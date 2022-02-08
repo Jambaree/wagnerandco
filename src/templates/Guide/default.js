@@ -11,7 +11,7 @@ import GutenbergBlocks from '../../components/GutenbergBlocks'
 import SidebarNav from '../../components/SidebarNav'
 import gutenbergBlocksToNav from '../../utils/gutenberg-blocks-to-nav'
 
-const WPGuide = props => {
+const Guide = props => {
   const data = props.data
   const pageNode = data.wordpressWpGuides
   let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
@@ -44,14 +44,14 @@ const WPGuide = props => {
   )
 }
 
-export default WPGuide
+export default Guide
 
 WPGuide.defaultProps = {
   showDate: false,
 }
 
 export const pageQuery = graphql`
-  query WordpressGuide($id: String!) {
+  query Guide($id: String!) {
     options: wordpressAcfOptions {
       options {
         url

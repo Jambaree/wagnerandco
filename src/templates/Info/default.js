@@ -10,7 +10,7 @@ import WhitespaceHeader from '../../components/WhitespaceHeader'
 import GutenbergBlocks from '../../components/GutenbergBlocks'
 import YoastHelmet from '../../components/YoastHelmet'
 
-const WPInfo = props => {
+const Info = props => {
   const data = props.data
   const pageNode = data.wordpressWpInfo
 
@@ -31,10 +31,10 @@ const WPInfo = props => {
   )
 }
 
-export default WPInfo
+export default Info
 
 export const pageQuery = graphql`
-  query WordpressInfo($id: String!) {
+  query Info($id: String!) {
     options: wordpressAcfOptions {
       options {
         url

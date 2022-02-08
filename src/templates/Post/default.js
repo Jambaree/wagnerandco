@@ -9,7 +9,7 @@ import Header from '../../components/Header'
 import YoastHelmet from '../../components/YoastHelmet'
 import GutenbergBlocks from '../../components/GutenbergBlocks'
 
-const PostTemplate = props => {
+const Post = props => {
   const data = props.data
   const postNode = data.wordpressPost
 
@@ -28,10 +28,10 @@ const PostTemplate = props => {
   )
 }
 
-export default PostTemplate
+export default Post
 
 export const pageQuery = graphql`
-  query PostById($id: String!) {
+  query Post($id: String!) {
     options: wordpressAcfOptions {
       options {
         url

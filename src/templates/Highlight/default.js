@@ -30,7 +30,7 @@ ButtonDownload.defaultProps = {
   children: 'Download Film Clips',
 }
 
-const HighlightTemplate = props => {
+const Highlight = props => {
   const data = props.data
   const wordpressWpHighlights = data.wordpressWpHighlights
   const videos = wordpressWpHighlights.acf.wco_highlight_videos
@@ -126,16 +126,16 @@ const HighlightTemplate = props => {
   )
 }
 
-HighlightTemplate.propTypes = {
+Highlight.propTypes = {
   sections: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
-HighlightTemplate.defaultProps = {
+Highlight.defaultProps = {
   sections: ['highlight', 'featurette', 'vows', 'speeches'],
 }
 
 export const pageQuery = graphql`
-  query DownloadById($id: String!) {
+  query Highlight($id: String!) {
     settings: wordpressWpSettings {
       title
     }
@@ -221,4 +221,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default HighlightTemplate
+export default Highlight

@@ -9,7 +9,7 @@ import Header from '../../components/Header'
 import YoastHelmet from '../../components/YoastHelmet'
 // import GutenbergBlocks from '../components/GutenbergBlocks'
 
-const WPPage = props => {
+const DefaultPageTemplate = props => {
   const data = props.data
   const pageNode = data.wordpressPage
 
@@ -36,10 +36,10 @@ const WPPage = props => {
   )
 }
 
-export default WPPage
+export default DefaultPageTemplate
 
-export const pageQuery = graphql`
-  query WordpressPage($id: String!) {
+export const CollectionQuery = graphql`
+  query DefaultPage($id: String!) {
     options: wordpressAcfOptions {
       options {
         url

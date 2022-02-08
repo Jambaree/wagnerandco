@@ -147,7 +147,7 @@ class Wedding extends React.Component {
 export default Wedding
 
 export const pageQuery = graphql`
-  query WeddingById($id: String!) {
+  query Wedding($id: String!) {
     options: wordpressAcfOptions {
       options {
         url

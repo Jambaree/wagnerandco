@@ -5,7 +5,7 @@ require('dotenv').config({
   path: `.env.${isWPDev ? 'development' : 'production'}`,
 })
 
-let splitUrl = process.env.WP_URL.toString().split('://')
+let splitUrl = process.env.GATSBY_WP_URL.toString().split('://')
 let baseUrl = splitUrl[1]
 let protocol = splitUrl[0]
 

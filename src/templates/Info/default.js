@@ -1,114 +1,114 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+// import React from 'react'
+// import { graphql } from 'gatsby'
 
-// Ours
-import permittedSlug from '../../utils/permitted-slug'
-import PageWrapper from '../../components/PageWrapper'
-import Wrapper from '../../components/Wrapper'
-import Header from '../../components/Header'
-import WhitespaceHeader from '../../components/WhitespaceHeader'
-import GutenbergBlocks from '../../components/GutenbergBlocks'
-import YoastHelmet from '../../components/YoastHelmet'
+// // Ours
+// import permittedSlug from '../../utils/permitted-slug'
+// import PageWrapper from '../../components/PageWrapper'
+// import Wrapper from '../../components/Wrapper'
+// import Header from '../../components/Header'
+// import WhitespaceHeader from '../../components/WhitespaceHeader'
+// import GutenbergBlocks from '../../components/GutenbergBlocks'
+// import YoastHelmet from '../../components/YoastHelmet'
 
-const Info = props => {
-  const data = props.data
-  const pageNode = data.info
+// const Info = props => {
+//   const data = props.data
+//   const pageNode = data.info
 
-  if (!permittedSlug(pageNode.slug)) {
-    return null
-  }
+//   if (!permittedSlug(pageNode.slug)) {
+//     return null
+//   }
 
-  return (
-    <PageWrapper className="WPInfo pb4" is="article">
-      <YoastHelmet node={pageNode} url={data.page.options.url} />
-      <Wrapper maxWidth={3}>
-        <WhitespaceHeader marginBottom={5}>
-          <Header showTitle title={pageNode.title} />
-        </WhitespaceHeader>
-        <GutenbergBlocks blocks={pageNode.blocks} />
-      </Wrapper>
-    </PageWrapper>
-  )
-}
+//   return (
+//     <PageWrapper className="WPInfo pb4" is="article">
+//       <YoastHelmet node={pageNode} url={data.page.options.url} />
+//       <Wrapper maxWidth={3}>
+//         <WhitespaceHeader marginBottom={5}>
+//           <Header showTitle title={pageNode.title} />
+//         </WhitespaceHeader>
+//         <GutenbergBlocks blocks={pageNode.blocks} />
+//       </Wrapper>
+//     </PageWrapper>
+//   )
+// }
 
-export default Info
+// export default Info
 
-export const pageQuery = graphql`
-  query Info($id: String!) {
-    page: wpPage(id: { eq: $id }) {
-      options {
-        url
-      }
-    }
-    info(id: { eq: $id }) {
-      id
-      slug
-      title
-      uri
-      infoId
-      content
-      blocks {
-        name
-        innerBlocks
-        attributesJSON
-      }
-      featuredImage {
-        node {
-          altText
-          id
-          srcSet
-          sizes
-          uri
-        }
-      }
-    }
+// export const pageQuery = graphql`
+//   query Info($id: String!) {
+//     page: wpPage(id: { eq: $id }) {
+//       options {
+//         url
+//       }
+//     }
+//     info(id: { eq: $id }) {
+//       id
+//       slug
+//       title
+//       uri
+//       infoId
+//       content
+//       blocks {
+//         name
+//         innerBlocks
+//         attributesJSON
+//       }
+//       featuredImage {
+//         node {
+//           altText
+//           id
+//           srcSet
+//           sizes
+//           uri
+//         }
+//       }
+//     }
 
-    # wordpressWpInfo(id: { eq: $id }) {
-    #   id
-    #   wordpress_id
-    #   slug
-    #   title
-    #   template
-    #   # content
-    #   # blocks {
-    #   #   innerHTML
-    #   #   blockName
+//     # wordpressWpInfo(id: { eq: $id }) {
+//     #   id
+//     #   wordpress_id
+//     #   slug
+//     #   title
+//     #   template
+//     #   # content
+//     #   # blocks {
+//     #   #   innerHTML
+//     #   #   blockName
 
-    #   #   # For Gravity Forms, probably other Gutenberg block type
-    #   #   attrs {
-    #   #     formId
-    #   #     wordpress_id
-    #   #   }
-    #   # }
-    #   featured_media {
-    #     id
-    #     alt_text
-    #     localFile {
-    #       childImageSharp {
-    #         id
-    #         fluid(maxWidth: 960) {
-    #           src
-    #           srcSet
-    #           sizes
-    #         }
-    #       }
-    #     }
-    #   }
-    #   # yoast_meta {
-    #   #   yoast_wpseo_title
-    #   #   yoast_wpseo_metadesc
+//     #   #   # For Gravity Forms, probably other Gutenberg block type
+//     #   #   attrs {
+//     #   #     formId
+//     #   #     wordpress_id
+//     #   #   }
+//     #   # }
+//     #   featured_media {
+//     #     id
+//     #     alt_text
+//     #     localFile {
+//     #       childImageSharp {
+//     #         id
+//     #         fluid(maxWidth: 960) {
+//     #           src
+//     #           srcSet
+//     #           sizes
+//     #         }
+//     #       }
+//     #     }
+//     #   }
+//     #   # yoast_meta {
+//     #   #   yoast_wpseo_title
+//     #   #   yoast_wpseo_metadesc
 
-    #   #   # Facebook
-    #   #   yoast_wpseo_facebook_title
-    #   #   yoast_wpseo_facebook_description
-    #   #   yoast_wpseo_facebook_type
-    #   #   # yoast_wpseo_facebook_image
+//     #   #   # Facebook
+//     #   #   yoast_wpseo_facebook_title
+//     #   #   yoast_wpseo_facebook_description
+//     #   #   yoast_wpseo_facebook_type
+//     #   #   # yoast_wpseo_facebook_image
 
-    #   #   # Twitter
-    #   #   yoast_wpseo_twitter_title
-    #   #   yoast_wpseo_twitter_description
-    #   #   # yoast_wpseo_twitter_image
-    #   # }
-    # }
-  }
-`
+//     #   #   # Twitter
+//     #   #   yoast_wpseo_twitter_title
+//     #   #   yoast_wpseo_twitter_description
+//     #   #   # yoast_wpseo_twitter_image
+//     #   # }
+//     # }
+//   }
+// `

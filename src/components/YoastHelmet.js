@@ -87,9 +87,9 @@ class YoastHelmet extends React.Component {
   // Temp
   componentDidMount() {
     let openGraph = this.formatOpenGraph()
-    if (process && process.env && process.env.NODE_ENV === 'development') {
-      console.log('open graph data', openGraph)
-    }
+    // if (process && process.env && process.env.NODE_ENV === 'development') {
+    //   console.log('open graph data', openGraph)
+    // }
   }
 
   render() {

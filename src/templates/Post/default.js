@@ -19,7 +19,7 @@ const Post = props => {
 
   return (
     <PageWrapper is="article" className="WPPost">
-      <YoastHelmet url={data.options.options.url} node={postNode} />
+      <YoastHelmet url={data.page.options.url} node={postNode} />
       <Wrapper maxWidth={3}>
         <Header showTitle title={postNode.title} />
         {/* <GutenbergBlocks blocks={postNode.blocks} /> */}
@@ -32,7 +32,7 @@ export default Post
 
 export const pageQuery = graphql`
   query Post($id: String!) {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

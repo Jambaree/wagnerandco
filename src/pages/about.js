@@ -29,7 +29,7 @@ const AboutPage = props => {
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
+      <YoastHelmet node={pageNode} url={data.page.options.url} />
       <StylizedAbout />
       <Header
         title={pageNode.title}
@@ -85,7 +85,7 @@ export default AboutPage
 
 export const pageQuery = graphql`
   query AboutQuery {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

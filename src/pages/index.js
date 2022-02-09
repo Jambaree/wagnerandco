@@ -19,7 +19,7 @@ const IndexPage = props => {
 
   return (
     <PageWrapper>
-      <YoastHelmet url={data.options.options.url} node={data.wordpressPage} />
+      <YoastHelmet url={data.page.options.url} node={data.wordpressPage} />
       <Wrapper padding>
         <WhitespaceHeader is="div" marginBottom={5}>
           <Header
@@ -61,7 +61,7 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

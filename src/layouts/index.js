@@ -46,7 +46,7 @@ const Layout = props => {
               }
             }
           }
-          wordpressAcfOptions {
+          page: wpPage(id: { eq: $id }) {
             options {
               url
               wco_service_typekit
@@ -65,7 +65,7 @@ const Layout = props => {
         const children = props.children
         const site = data.site
         const pathname = props.location.pathname
-        const options = data.wordpressAcfOptions.options
+        const options = data.page.options
 
         let wrapperProps = { padding: true, maxWidth: 5 }
         let pathnameSplit = pathname.split('/')[1]

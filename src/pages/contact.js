@@ -29,7 +29,7 @@ const ContactPage = props => {
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
+      <YoastHelmet node={pageNode} url={data.page.options.url} />
       <StylizedSayHello />
       <Wrapper maxWidth={3}>
         <div className="z2 relative mb4">
@@ -55,7 +55,7 @@ export default ContactPage
 
 export const pageQuery = graphql`
   query ContactQuery {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

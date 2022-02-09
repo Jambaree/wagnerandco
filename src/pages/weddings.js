@@ -18,7 +18,7 @@ const WeddingsIndexPage = props => {
 
   return (
     <PageWrapper>
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
+      <YoastHelmet node={pageNode} url={data.page.options.url} />
       <Header title={title} />
       <Wrapper maxWidth={5} padding>
         <WeddingsListing
@@ -39,7 +39,7 @@ export const pageQuery = graphql`
       title
       posts_per_page
     }
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

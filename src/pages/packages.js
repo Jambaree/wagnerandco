@@ -281,7 +281,7 @@ class PackagesPage extends React.Component {
         }}
         onSuccess="/packages">
         <PageWrapper>
-          <YoastHelmet node={pageNode} url={data.options.options.url}>
+          <YoastHelmet node={pageNode} url={data.page.options.url}>
             <meta name="robots" content="noindex" />
           </YoastHelmet>
           {/*
@@ -435,7 +435,7 @@ PackagesPage.defaultProps = {
 
 export const pageQuery = graphql`
   query PackagesQuery {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }
@@ -555,7 +555,6 @@ export const pageQuery = graphql`
         }
       }
     }
-    # allWordpressAcfOptions
   }
 `
 

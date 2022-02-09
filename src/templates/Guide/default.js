@@ -27,7 +27,7 @@ const Guide = props => {
 
   return (
     <PageWrapper className="WPGuide pb4" is="article">
-      <YoastHelmet node={pageNode} url={data.options.options.url}>
+      <YoastHelmet node={pageNode} url={data.page.options.url}>
         <meta name="robots" content="noindex" />
       </YoastHelmet>
       <WhitespaceHeaderCorners
@@ -52,7 +52,7 @@ WPGuide.defaultProps = {
 
 export const pageQuery = graphql`
   query Guide($id: String!) {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

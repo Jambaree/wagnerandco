@@ -83,7 +83,7 @@ const Highlight = props => {
 
   return (
     <PageWrapper is="article">
-      <YoastHelmet node={wordpressWpHighlights} url={data.options.options.url}>
+      <YoastHelmet node={wordpressWpHighlights} url={data.page.options.url}>
         <meta name="robots" content="noindex" />
         <meta name={og.description} content="og:description" />
         <meta name={og.date} content="og:date" />
@@ -107,7 +107,7 @@ const Highlight = props => {
       ) : null}
       <footer className="clearfix center my4 mb4">
         <ButtonDownload href={wordpressWpHighlights.acf.wco_highlight_url} />
-        {data.options.options.wco_socialmedia.map((social, index) => {
+        {data.page.options.wco_socialmedia.map((social, index) => {
           if (social.label !== 'Instagram') {
             return null
           }
@@ -139,8 +139,7 @@ export const pageQuery = graphql`
     settings: wordpressWpSettings {
       title
     }
-
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
         wco_socialmedia {
@@ -150,6 +149,7 @@ export const pageQuery = graphql`
         }
       }
     }
+
     wordpressWpHighlights(id: { eq: $id }) {
       date
       slug

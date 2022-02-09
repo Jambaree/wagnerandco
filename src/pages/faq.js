@@ -159,7 +159,7 @@ const FAQPage = props => {
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
+      <YoastHelmet node={pageNode} url={data.page.options.url} />
       <StylizedFAQ right />
       <Header title={pageNode.title} />
       <Wrapper maxWidth={5}>
@@ -180,7 +180,7 @@ export const pageQuery = graphql`
       title
       url
     }
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

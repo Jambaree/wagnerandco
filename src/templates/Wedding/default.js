@@ -88,7 +88,7 @@ class Wedding extends React.Component {
     return (
       <React.Fragment>
         <PageWrapper is="article">
-          <YoastHelmet node={weddingNode} url={data.options.options.url} />
+          <YoastHelmet node={weddingNode} url={data.page.options.url} />
           <div className="md-flex flex-wrap mb4">
             <div className="mt4 md-mt0 order-last col-12">
               <Video {...vimeoProps} />
@@ -148,7 +148,7 @@ export default Wedding
 
 export const pageQuery = graphql`
   query Wedding($id: String!) {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

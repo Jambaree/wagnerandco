@@ -23,7 +23,7 @@ const DefaultPageTemplate = props => {
 
   return (
     <PageWrapper className="WPPage">
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
+      <YoastHelmet node={pageNode} url={data.page.options.url} />
       <Wrapper maxWidth={3}>
         <Header
           showTitle
@@ -40,7 +40,7 @@ export default DefaultPageTemplate
 
 export const CollectionQuery = graphql`
   query DefaultPage($id: String!) {
-    options: wordpressAcfOptions {
+    page: wpPage(id: { eq: $id }) {
       options {
         url
       }

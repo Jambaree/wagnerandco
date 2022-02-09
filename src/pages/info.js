@@ -7,7 +7,7 @@ import { H2 } from '../components/Headings'
 
 const InfoIndexPage = props => {
   const data = props.data
-  let edges = data.allWordpressWpInfo.edges
+  let edges = data.infos.edges
 
   return (
     <div>
@@ -31,14 +31,23 @@ export default InfoIndexPage
 
 export const pageQuery = graphql`
   query InfoQuery {
-    allWordpressWpInfo {
+    infos {
       edges {
         node {
-          title
           slug
+          title
           id
         }
       }
     }
+    # allWordpressWpInfo {
+    #   edges {
+    #     node {
+    #       title
+    #       slug
+    #       id
+    #     }
+    #   }
+    # }
   }
 `

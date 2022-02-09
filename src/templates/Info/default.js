@@ -12,7 +12,7 @@ import YoastHelmet from '../../components/YoastHelmet'
 
 const Info = props => {
   const data = props.data
-  const pageNode = data.wordpressWpInfo
+  const pageNode = data.info
 
   if (!permittedSlug(pageNode.slug)) {
     return null
@@ -25,7 +25,7 @@ const Info = props => {
         <WhitespaceHeader marginBottom={5}>
           <Header showTitle title={pageNode.title} />
         </WhitespaceHeader>
-        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
+        <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
     </PageWrapper>
   )
@@ -40,52 +40,75 @@ export const pageQuery = graphql`
         url
       }
     }
-    wordpressWpInfo(id: { eq: $id }) {
+    info(id: { eq: $id }) {
       id
-      wordpress_id
       slug
       title
-      template
-      # content
-      # blocks {
-      #   innerHTML
-      #   blockName
-
-      #   # For Gravity Forms, probably other Gutenberg block type
-      #   attrs {
-      #     formId
-      #     wordpress_id
-      #   }
-      # }
-      featured_media {
-        id
-        alt_text
-        localFile {
-          childImageSharp {
-            id
-            fluid(maxWidth: 960) {
-              src
-              srcSet
-              sizes
-            }
-          }
+      uri
+      infoId
+      content
+      blocks {
+        name
+        innerBlocks
+        attributesJSON
+      }
+      featuredImage {
+        node {
+          altText
+          id
+          srcSet
+          sizes
+          uri
         }
       }
-      # yoast_meta {
-      #   yoast_wpseo_title
-      #   yoast_wpseo_metadesc
-
-      #   # Facebook
-      #   yoast_wpseo_facebook_title
-      #   yoast_wpseo_facebook_description
-      #   yoast_wpseo_facebook_type
-      #   # yoast_wpseo_facebook_image
-
-      #   # Twitter
-      #   yoast_wpseo_twitter_title
-      #   yoast_wpseo_twitter_description
-      #   # yoast_wpseo_twitter_image
-      # }
     }
+
+    # wordpressWpInfo(id: { eq: $id }) {
+    #   id
+    #   wordpress_id
+    #   slug
+    #   title
+    #   template
+    #   # content
+    #   # blocks {
+    #   #   innerHTML
+    #   #   blockName
+
+    #   #   # For Gravity Forms, probably other Gutenberg block type
+    #   #   attrs {
+    #   #     formId
+    #   #     wordpress_id
+    #   #   }
+    #   # }
+    #   featured_media {
+    #     id
+    #     alt_text
+    #     localFile {
+    #       childImageSharp {
+    #         id
+    #         fluid(maxWidth: 960) {
+    #           src
+    #           srcSet
+    #           sizes
+    #         }
+    #       }
+    #     }
+    #   }
+    #   # yoast_meta {
+    #   #   yoast_wpseo_title
+    #   #   yoast_wpseo_metadesc
+
+    #   #   # Facebook
+    #   #   yoast_wpseo_facebook_title
+    #   #   yoast_wpseo_facebook_description
+    #   #   yoast_wpseo_facebook_type
+    #   #   # yoast_wpseo_facebook_image
+
+    #   #   # Twitter
+    #   #   yoast_wpseo_twitter_title
+    #   #   yoast_wpseo_twitter_description
+    #   #   # yoast_wpseo_twitter_image
+    #   # }
+    # }
   }
 `

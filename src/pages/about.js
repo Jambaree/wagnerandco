@@ -24,8 +24,8 @@ const AboutH2 = props => {
 const About = props => {
   const data = props.data
   const pageNode = data.wpPage
-  const pressItemsEdges = pageNode.acfPress.wcoPressItems
-  const pressLogoEdges = pageNode.acfPress.wcoPressLogos
+  const pressItemsEdges = pageNode.template.acfPress.wcoPressItems
+  const pressLogoEdges = pageNode.template.acfPress.wcoPressLogos
 
   return (
     <PageWrapper className="relative">
@@ -39,8 +39,8 @@ const About = props => {
         <WeddingIntro>{pageNode.content}</WeddingIntro>
       </Wrapper>
       <Wrapper maxWidth={5}>
-        <AboutH2>{pageNode.acfTeam.wcoTeamTitle}</AboutH2>
-        <TeamMembers members={pageNode.acfTeam.wcoTeamMembers} />
+        <AboutH2>{pageNode.template.acfTeam.wcoTeamTitle}</AboutH2>
+        <TeamMembers members={pageNode.template.acfTeam.wcoTeamMembers} />
       </Wrapper>
       <AboutH2>Where we’ve been featured</AboutH2>
       <div className="sm-flex sm-mxn2">
@@ -124,61 +124,69 @@ export const pageQuery = graphql`
       #     yoast_wpseo_twitter_description
       #     # yoast_wpseo_twitter_image
       #   }
-
-      acfTeam {
-        wcoTeamTitle
-        wcoTeamMembers {
-          role
-          name
-          location
-          links {
-            link {
-              target
-              title
-              url
+      template {
+        ... on WpTemplate_AboutPage {
+          templateName
+          acfPages {
+            wcoPageSubtitle
+          }
+          acfTeam {
+            wcoTeamTitle
+            wcoTeamMembers {
+              role
+              name
+              location
+              links {
+                link {
+                  target
+                  title
+                  url
+                }
+              }
+              image {
+                altText
+                localFile {
+                  childImageSharp {
+                    id
+                    fluid(maxWidth: 1200) {
+                      aspectRatio
+                      src
+                      srcSet
+                      sizes
+                    }
+                  }
+                }
+              }
             }
           }
-          image {
-            altText
-            localFile {
-              childImageSharp {
-                id
-                fluid(maxWidth: 1200) {
-                  aspectRatio
-                  src
-                  srcSet
-                  sizes
+          acfPress {
+            wcoPressItems {
+              date
+              link {
+                url
+                title
+                target
+              }
+            }
+            wcoPressLogos {
+              title
+              id
+              altText
+              localFile {
+                childImageSharp {
+                  id
+                  fluid {
+                    src
+                    srcSet
+                    aspectRatio
+                  }
                 }
               }
             }
           }
         }
       }
-      acfPress {
-        wcoPressItems {
-          date
-          link {
-            url
-            title
-            target
-          }
-        }
-        wcoPressLogos {
-          title
-          id
-          altText
-          localFile {
-            childImageSharp {
-              id
-              fluid {
-                src
-                srcSet
-                aspectRatio
-              }
-            }
-          }
-        }
-      }
+
       #   acf {
       #     wco_page_subtitle
       #     wco_team_title

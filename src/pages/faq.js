@@ -156,7 +156,6 @@ FAQItems.propTypes = {
 const Faq = props => {
   const data = props.data
   const pageNode = data.wpPage
-  console.log(props)
 
   return (
     <PageWrapper className="relative">

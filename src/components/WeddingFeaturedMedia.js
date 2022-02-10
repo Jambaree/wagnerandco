@@ -6,17 +6,17 @@ import VideoLoop from './VideoLoop'
 
 const WeddingFeaturedMedia = props => {
   const node = props.node
-  const img = node.featured_media
+  const img = node.featuredImage.node
   let sharp = img && img.localFile ? img.localFile.childImageSharp : false
 
   return (
     <Fragment>
-      {node.acf.featured_loop ? (
+      {node.acfFeaturedLoop ? (
         <VideoLoop
           poster={
             img.localFile ? img.localFile.childImageSharp.fluid.src : null
           }
-          src={`${process.env.GATSBY_WP_URL}${node.acf.featured_loop.source_url}`}
+          src={`${process.env.GATSBY_WP_URL}${node.acfFeaturedLoop.featuredLoop.sourceUrl}`}
         />
       ) : img && sharp ? (
         <ImgSharp {...img} />

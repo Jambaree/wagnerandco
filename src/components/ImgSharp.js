@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const ImgSharp = props => {
-  let { localFile, alt_text, ...remainder } = props
+  let { localFile, altText, ...remainder } = props
   let sharp = localFile ? localFile.childImageSharp : false
 
   if (sharp && sharp.fluid) {
@@ -10,7 +10,7 @@ const ImgSharp = props => {
     remainder.srcSet = sharp.srcSet
   }
 
-  remainder.alt = remainder.alt || alt_text || ''
+  remainder.alt = remainder.alt || altText || ''
 
   return <img alt={remainder.alt} {...remainder} />
 }

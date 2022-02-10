@@ -35,7 +35,7 @@ class WeddingsListing extends React.Component {
             let keyStr = `Weddings_${edge.id}_${index}`
             let columnClasses = `col-12 sm-col-8 sm-left md-col-12 md-left`
             let formattedTitle = format.subtitle(
-              post.acf.wco_page_subtitle,
+              post.acfPages.wcoPageSubtitle,
               post.title,
               { bold: true }
             )

@@ -14,6 +14,8 @@ let config = {
     'gatsby-plugin-layout',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
+    `gatsby-plugin-gatsby-cloud`,
+
     {
       resolve: `gatsby-theme-headless-wordpress`,
       options: {

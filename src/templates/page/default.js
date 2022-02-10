@@ -12,6 +12,7 @@ import YoastHelmet from '../../components/YoastHelmet'
 const WPPage = props => {
   const data = props.data
   const pageNode = data.wpPage
+  console.log(pageNode.template.acfPages.wcoPageSubtitle)
 
   // TODO Add placeholder schema page for Gutenberg
   //      blocks on generic pages

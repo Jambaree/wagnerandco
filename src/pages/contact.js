@@ -7,7 +7,7 @@ import PageWrapper from '../components/PageWrapper'
 import Wrapper from '../components/Wrapper'
 import Header from '../components/Header'
 import GravityForms from '../components/GravityForms'
-import StylizedSayHello from '../components/HeadingsStylized'
+import { StylizedSayHello } from '../components/HeadingsStylized'
 import YoastHelmet from '../components/YoastHelmet'
 
 const ContactPage = props => {
@@ -15,7 +15,7 @@ const ContactPage = props => {
   const pageNode = data.wpPage
 
   // eslint-disable-next-line
-  const results = data.gfForm
+  // const results = data.gfForm
 
   // results.labelPlacement
   // results.subLabelPlacement
@@ -103,7 +103,7 @@ export const pageQuery = graphql`
       title
       content
       template {
-        ... on WpDefaultTemplate {
+        ... on WpTemplate_ContactPage {
           templateName
           acfPages {
             wcoPageSubtitle

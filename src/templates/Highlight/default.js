@@ -1,8 +1,12 @@
-// import React from 'react'
+import React from 'react'
 // import PropTypes from 'prop-types'
 // import { graphql } from 'gatsby'
 // import fecha from 'fecha'
+const Highlight = props => {
+  return <></>
+}
 
+export default Highlight
 // // Ours
 // import unesc from '../../utils/unescape'
 // import permittedSlug from '../../utils/permitted-slug'

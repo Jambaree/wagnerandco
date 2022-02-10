@@ -159,7 +159,7 @@
 
 //   return (
 //     <PageWrapper className="relative">
-//       <YoastHelmet node={pageNode} url={data.page.options.url} />
+//       <YoastHelmet node={pageNode} url={data.options.options.url} />
 //       <StylizedFAQ right />
 //       <Header title={pageNode.title} />
 //       <Wrapper maxWidth={5}>
@@ -180,7 +180,7 @@
 //       title
 //       url
 //     }
-//     page: wpPage(id: { eq: $id }) {
+//     options: wordpressAcfOptions {
 //       options {
 //         url
 //       }
@@ -202,21 +202,21 @@
 //           }
 //         }
 //       }
-//       # yoast_meta {
-//       #   yoast_wpseo_title
-//       #   yoast_wpseo_metadesc
+//       yoast_meta {
+//         yoast_wpseo_title
+//         yoast_wpseo_metadesc
 
-//       #   # Facebook
-//       #   yoast_wpseo_facebook_title
-//       #   yoast_wpseo_facebook_description
-//       #   yoast_wpseo_facebook_type
-//       #   # yoast_wpseo_facebook_image
+//         # Facebook
+//         yoast_wpseo_facebook_title
+//         yoast_wpseo_facebook_description
+//         yoast_wpseo_facebook_type
+//         # yoast_wpseo_facebook_image
 
-//       #   # Twitter
-//       #   yoast_wpseo_twitter_title
-//       #   yoast_wpseo_twitter_description
-//       #   # yoast_wpseo_twitter_image
-//       # }
+//         # Twitter
+//         yoast_wpseo_twitter_title
+//         yoast_wpseo_twitter_description
+//         # yoast_wpseo_twitter_image
+//       }
 //       acf {
 //         wco_page_subtitle
 //         wco_faq_images {

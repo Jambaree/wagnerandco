@@ -1,6 +1,10 @@
-// import React from 'react'
+import React from 'react'
 // import { graphql } from 'gatsby'
+const Wedding = props => {
+  return <></>
+}
 
+export default Wedding
 // // Ours
 // import { subtitle } from '../../utils/format'
 // import permittedSlug from '../../utils/permitted-slug'

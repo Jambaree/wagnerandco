@@ -1,8 +1,9 @@
-// import React from 'react'
-// import { graphql } from 'gatsby'
+import * as React from 'react'
 
+export default function Component() {
+  return 'Hello world'
+}
 // // Ours
-// import PageWrapper from '../components/PageWrapper'
 // import Wrapper from '../components/Wrapper'
 // import Video from '../components/Video'
 // import WeddingsListing from '../components/WeddingsListing'

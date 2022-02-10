@@ -1,6 +1,11 @@
-// import React from 'react'
+import React from 'react'
 // import { graphql } from 'gatsby'
 
+const DefaultPage = props => {
+  return <>jjjjjjjjjjjjjjjjjj</>
+}
+
+export default DefaultPage
 // // Ours
 // import permittedSlug from '../../utils/permitted-slug'
 // import PageWrapper from '../../components/PageWrapper'

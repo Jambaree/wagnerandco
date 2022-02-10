@@ -1,6 +1,10 @@
-// import React from 'react'
+import React from 'react'
 // import { graphql } from 'gatsby'
+const Post = props => {
+  return <></>
+}
 
+export default Post
 // // Ours
 // import permittedSlug from '../../utils/permitted-slug'
 // import PageWrapper from '../../components/PageWrapper'

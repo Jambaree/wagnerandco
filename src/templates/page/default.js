@@ -24,7 +24,7 @@ const WPPage = props => {
         <Header
           showTitle
           title={pageNode.title}
-          subtitle={pageNode.template.acfPages.wcoPageSubtitlee}
+          subtitle={pageNode.template.acfPages.wcoPageSubtitle}
         />
         <div dangerouslySetInnerHTML={{ __html: pageNode.content }} />
       </Wrapper>

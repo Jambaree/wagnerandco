@@ -14,7 +14,7 @@ import gutenbergBlocksToNav from '../../utils/gutenberg-blocks-to-nav'
 const WPGuide = props => {
   const data = props.data
   const pageNode = data.wpGuide
-  // let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
+  let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
 
   if (!permittedSlug(pageNode.slug)) {
     return null
@@ -36,9 +36,9 @@ const WPGuide = props => {
         location=""
         reverse={true}
       />
-      {/* <SidebarNav items={sidebarItems} /> */}
+      <SidebarNav items={sidebarItems} />
       <Wrapper maxWidth={3}>
-        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
+        <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
     </PageWrapper>
   )
@@ -67,11 +67,7 @@ export const pageQuery = graphql`
       # content
       blocks {
         name
-        attributesJSON
-        innerBlocks {
-          dynamicContent
-          saveContent
-        }
+        originalContent
       }
       # acf {
       #   wco_page_subtitle

@@ -13,7 +13,9 @@ import GravityForms from './GravityForms'
 import GravityFormIFrame from './GravityFormIFrame'
 
 const getBlockClass = function(name) {
-  return `block_${name.replace('/', '_')}`
+  if (name) {
+    return `block_${name.replace('/', '_')}`
+  }
 }
 
 // List from WordPress theme:
@@ -81,7 +83,7 @@ const handleTransformImage = function(node) {
 
 const handleTransformVideo = function(node, index) {
   if (!node || typeof node.children === 'undefined' || !node.children.length) {
-    return null;
+    return null
   }
 
   let child = node.children[0]
@@ -384,14 +386,14 @@ const GutenbergBlocks = props => {
     //       `}
     //       render={data => {
     return props.blocks.map((block, index) => {
-      if (block && block.blockName) {
+      if (block && block.name) {
         let blockName
 
-        if (block.blockName && blocks[block.blockName]) {
-          blockName = block.blockName
+        if (block.name && blocks[block.name]) {
+          blockName = block.name
         } else if (
-          block.blockName &&
-          block.blockName.includes('core-embed') &&
+          block.name &&
+          block.name.includes('core-embed') &&
           blocks['core-embed/default']
         ) {
           blockName = 'core-embed/default'
@@ -404,7 +406,7 @@ const GutenbergBlocks = props => {
         // }
 
         let El = blocks[blockName]
-        return <El key={`block_${block.blockName}_${index}`} {...block} />
+        return <El key={`block_${block.name}_${index}`} {...block} />
       }
 
       return null

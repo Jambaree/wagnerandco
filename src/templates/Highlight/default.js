@@ -1,228 +1,228 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
-// import { graphql } from 'gatsby'
-// import fecha from 'fecha'
-const Highlight = props => {
-  return <></>
+import PropTypes from 'prop-types'
+import { graphql } from 'gatsby'
+import fecha from 'fecha'
+
+// Ours
+import unesc from '../../utils/unescape'
+import permittedSlug from '../../utils/permitted-slug'
+import PageWrapper from '../../components/PageWrapper'
+import Video from '../../components/Video'
+import LinkDuo from '../../components/LinkDuo'
+import slugify from 'slugify'
+import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
+import YoastHelmet from '../../components/YoastHelmet'
+import SidebarNav from '../../components/SidebarNav'
+
+const ButtonDownload = props => {
+  return (
+    <LinkDuo to={props.href} className="h2 line-height-2">
+      {props.children}
+    </LinkDuo>
+  )
 }
 
-export default Highlight
-// // Ours
-// import unesc from '../../utils/unescape'
-// import permittedSlug from '../../utils/permitted-slug'
-// import PageWrapper from '../../components/PageWrapper'
-// import Video from '../../components/Video'
-// import LinkDuo from '../../components/LinkDuo'
-// import slugify from 'slugify'
-// import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
-// import YoastHelmet from '../../components/YoastHelmet'
-// import SidebarNav from '../../components/SidebarNav'
+ButtonDownload.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
-// const ButtonDownload = props => {
-//   return (
-//     <LinkDuo to={props.href} className="h2 line-height-2">
-//       {props.children}
-//     </LinkDuo>
-//   )
-// }
+ButtonDownload.defaultProps = {
+  children: 'Download Film Clips',
+}
 
-// ButtonDownload.propTypes = {
-//   children: PropTypes.node.isRequired,
-// }
+const HighlightTemplate = props => {
+  const data = props.data
+  const wpHighlight = data.wpHighlight
+  const videos = wpHighlight.acfHighlight.wcoHighlightVideos
 
-// ButtonDownload.defaultProps = {
-//   children: 'Download Film Clips',
-// }
+  if (!permittedSlug(wpHighlight.slug)) {
+    return null
+  }
 
-// const Highlight = props => {
-//   const data = props.data
-//   const wordpressWpHighlights = data.wordpressWpHighlights
-//   const videos = wordpressWpHighlights.acf.wco_highlight_videos
+  let navSections = []
+  let sections = []
 
-//   if (!permittedSlug(wordpressWpHighlights.slug)) {
-//     return null
-//   }
+  if (videos && videos.length >= 1) {
+    videos.forEach((video, index) => {
+      let type = (video.type === 'Other'
+        ? video.typeCustom
+        : video.type
+      ).toLowerCase()
+      let slug = slugify(type)
+      navSections.push({ href: `#${slug}`, label: type })
 
-//   let navSections = []
-//   let sections = []
+      sections.push(
+        <section
+          id={slug}
+          key={`HighlightTemplate_${data.id}_${index}`}
+          className="py4 md-my4">
+          <Video vimeoId={video.vimeoId} />
+        </section>
+      )
+    })
+  }
 
-//   if (videos && videos.length >= 1) {
-//     videos.forEach((video, index) => {
-//       let type = (video.type === 'Other'
-//         ? video.type_custom
-//         : video.type
-//       ).toLowerCase()
-//       let slug = slugify(type)
-//       navSections.push({ href: `#${slug}`, label: type })
+  let og = {
+    location: unesc(wpHighlight.acfHighlight.wcoHighlightLocation),
+    date: wpHighlight.date,
+    description: `${fecha.format(
+      new Date(wpHighlight.date),
+      'MMMM Do, YYYY'
+    )}. ${wpHighlight.acfHighlight.wcoHighlightLocation}.`,
+  }
 
-//       sections.push(
-//         <section
-//           id={slug}
-//           key={`HighlightTemplate_${data.id}_${index}`}
-//           className="py4 md-my4">
-//           <Video vimeoId={video.vimeo_id} />
-//         </section>
-//       )
-//     })
-//   }
+  // Adds manual fix for constructing Highlights title, when it comes
+  // through as Not Found from Yoast SEO
+  // if (
+  //   wordpressWpHighlights &&
+  //   wordpressWpHighlights.yoast_meta &&
+  //   wordpressWpHighlights.yoast_meta.yoast_wpseo_title.includes('not found')
+  // ) {
+  //   wordpressWpHighlights.yoast_meta.yoast_wpseo_title = `${wordpressWpHighlights.title} • ${data.settings.title}`
+  // }
 
-//   let og = {
-//     location: unesc(wordpressWpHighlights.acf.wco_highlight_location),
-//     date: wordpressWpHighlights.date,
-//     description: `${fecha.format(
-//       new Date(wordpressWpHighlights.date),
-//       'MMMM Do, YYYY'
-//     )}. ${wordpressWpHighlights.acf.wco_highlight_location}.`,
-//   }
+  return (
+    <PageWrapper is="article">
+      <YoastHelmet node={wpHighlight} url={data.wp.acfOptions.options.url}>
+        <meta name="robots" content="noindex" />
+        <meta name={og.description} content="og:description" />
+        <meta name={og.date} content="og:date" />
+        <meta name={og.location} content="og:location" />
+      </YoastHelmet>
+      <WhitespaceHeaderCorners
+        title={wpHighlight.title}
+        date={wpHighlight.date}
+        location={wpHighlight.acfHighlight.wcoHighlightLocation}
+      />
+      {navSections.length >= 1 ? (
+        <div className="col-12 relative">
+          <SidebarNav
+            className={WhitespaceHeaderCorners.defaultProps.className}
+            items={navSections}
+          />
+          <div className={WhitespaceHeaderCorners.defaultProps.className}>
+            {sections}
+          </div>
+        </div>
+      ) : null}
+      <footer className="clearfix center my4 mb4">
+        <ButtonDownload href={wpHighlight.acfHighlight.wcoHighlightUrl} />
+        {data.wp.acfOptions.options.wcoSocialmedia.map((social, index) => {
+          if (social.label !== 'Instagram') {
+            return null
+          }
 
-//   // Adds manual fix for constructing Highlights title, when it comes
-//   // through as Not Found from Yoast SEO
-//   if (
-//     wordpressWpHighlights &&
-//     wordpressWpHighlights.yoast_meta &&
-//     wordpressWpHighlights.yoast_meta.yoast_wpseo_title.includes('not found')
-//   ) {
-//     wordpressWpHighlights.yoast_meta.yoast_wpseo_title = `${wordpressWpHighlights.title} • ${data.settings.title}`
-//   }
+          return (
+            <p
+              key={`HighlightTemplate_cta_${index}`}
+              className="my4 h3 max-width-1 mx-auto">
+              Upload your film clips to {social.label} and tag us at&nbsp;
+              <LinkDuo to={social.url}>{social.handle}</LinkDuo>
+            </p>
+          )
+        })}
+      </footer>
+    </PageWrapper>
+  )
+}
 
-//   return (
-//     <PageWrapper is="article">
-//       <YoastHelmet node={wordpressWpHighlights} url={data.page.options.url}>
-//         <meta name="robots" content="noindex" />
-//         <meta name={og.description} content="og:description" />
-//         <meta name={og.date} content="og:date" />
-//         <meta name={og.location} content="og:location" />
-//       </YoastHelmet>
-//       <WhitespaceHeaderCorners
-//         title={wordpressWpHighlights.title}
-//         date={wordpressWpHighlights.date}
-//         location={wordpressWpHighlights.acf.wco_highlight_location}
-//       />
-//       {navSections.length >= 1 ? (
-//         <div className="col-12 relative">
-//           <SidebarNav
-//             className={WhitespaceHeaderCorners.defaultProps.className}
-//             items={navSections}
-//           />
-//           <div className={WhitespaceHeaderCorners.defaultProps.className}>
-//             {sections}
-//           </div>
-//         </div>
-//       ) : null}
-//       <footer className="clearfix center my4 mb4">
-//         <ButtonDownload href={wordpressWpHighlights.acf.wco_highlight_url} />
-//         {data.page.options.wco_socialmedia.map((social, index) => {
-//           if (social.label !== 'Instagram') {
-//             return null
-//           }
+HighlightTemplate.propTypes = {
+  sections: PropTypes.arrayOf(PropTypes.string).isRequired,
+}
 
-//           return (
-//             <p
-//               key={`HighlightTemplate_cta_${index}`}
-//               className="my4 h3 max-width-1 mx-auto">
-//               Upload your film clips to {social.label} and tag us at&nbsp;
-//               <LinkDuo to={social.url}>{social.handle}</LinkDuo>
-//             </p>
-//           )
-//         })}
-//       </footer>
-//     </PageWrapper>
-//   )
-// }
+HighlightTemplate.defaultProps = {
+  sections: ['highlight', 'featurette', 'vows', 'speeches'],
+}
 
-// Highlight.propTypes = {
-//   sections: PropTypes.arrayOf(PropTypes.string).isRequired,
-// }
+export const pageQuery = graphql`
+  query DownloadById($id: String!) {
+    wp {
+      allSettings {
+        generalSettingsTitle
+      }
+      acfOptions {
+        options {
+          wcoSocialmedia {
+            label
+            url
+            handle
+          }
+          url
+        }
+      }
+    }
+    wpHighlight(id: { eq: $id }) {
+      date
+      slug
+      title
+      id
+      featuredImage {
+        node {
+          id
+          slug
+          altText
+          localFile {
+            childImageSharp {
+              fluid {
+                aspectRatio
+                src
+                srcSet
+              }
+            }
+          }
+        }
+      }
+      acfHighlight {
+        wcoHighlightLocation
+        wcoHighlightUrl
+        wcoHighlightVideos {
+          fieldGroupName
+          type
+          typeCustom
+          vimeoId
+        }
+      }
+      # yoast_meta {
+      #   yoast_wpseo_title
+      #   yoast_wpseo_metadesc
 
-// Highlight.defaultProps = {
-//   sections: ['highlight', 'featurette', 'vows', 'speeches'],
-// }
+      #   # Facebook
+      #   yoast_wpseo_facebook_title
+      #   yoast_wpseo_facebook_description
+      #   yoast_wpseo_facebook_type
 
-// export const pageQuery = graphql`
-//   query Highlight($id: String!) {
-//     settings: wordpressWpSettings {
-//       title
-//     }
-//     page: wpPage(id: { eq: $id }) {
-//       options {
-//         url
-//         wco_socialmedia {
-//           label
-//           handle
-//           url
-//         }
-//       }
-//     }
+      #   # If there is at least one Facebook-specific image…
+      #   # yoast_wpseo_facebook_image {
+      #   #   id
+      #   #   localFile {
+      #   #     childImageSharp {
+      #   #       id
+      #   #       fluid(maxWidth: 1200) {
+      #   #         aspectRatio
+      #   #         src
+      #   #       }
+      #   #     }
+      #   #   }
+      #   # }
 
-//     wordpressWpHighlights(id: { eq: $id }) {
-//       date
-//       slug
-//       title
-//       id
-//       featured_media {
-//         id
-//         slug
-//         alt_text
-//         localFile {
-//           childImageSharp {
-//             fluid {
-//               aspectRatio
-//               src
-//               srcSet
-//             }
-//           }
-//         }
-//       }
-//       acf {
-//         wco_highlight_location
-//         wco_highlight_url
-//         wco_highlight_videos {
-//           vimeo_id
-//           type
-//           type_custom
-//         }
-//       }
-//       # yoast_meta {
-//       #   yoast_wpseo_title
-//       #   yoast_wpseo_metadesc
+      #   # Twitter
+      #   yoast_wpseo_twitter_title
+      #   yoast_wpseo_twitter_description
+      #   # yoast_wpseo_twitter_image {
+      #   #   id
+      #   #   localFile {
+      #   #     childImageSharp {
+      #   #       id
+      #   #       fluid(maxWidth: 1200) {
+      #   #         aspectRatio
+      #   #         src
+      #   #       }
+      #   #     }
+      #   #   }
+      #   # }
+      # }
+    }
+  }
+`
 
-//       #   # Facebook
-//       #   yoast_wpseo_facebook_title
-//       #   yoast_wpseo_facebook_description
-//       #   yoast_wpseo_facebook_type
-
-//       #   # If there is at least one Facebook-specific image…
-//       #   # yoast_wpseo_facebook_image {
-//       #   #   id
-//       #   #   localFile {
-//       #   #     childImageSharp {
-//       #   #       id
-//       #   #       fluid(maxWidth: 1200) {
-//       #   #         aspectRatio
-//       #   #         src
-//       #   #       }
-//       #   #     }
-//       #   #   }
-//       #   # }
-
-//       #   # Twitter
-//       #   yoast_wpseo_twitter_title
-//       #   yoast_wpseo_twitter_description
-//       #   # yoast_wpseo_twitter_image {
-//       #   #   id
-//       #   #   localFile {
-//       #   #     childImageSharp {
-//       #   #       id
-//       #   #       fluid(maxWidth: 1200) {
-//       #   #         aspectRatio
-//       #   #         src
-//       #   #       }
-//       #   #     }
-//       #   #   }
-//       #   # }
-//       # }
-//     }
-//   }
-// `
-
-// export default Highlight
+export default HighlightTemplate

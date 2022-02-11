@@ -8,10 +8,9 @@ const WeddingFeaturedMedia = props => {
   const node = props.node
   const img = node.featuredImage.node
   let sharp = img && img.localFile ? img.localFile.childImageSharp : false
-
   return (
     <Fragment>
-      {node.acfFeaturedLoop.featuredLoop ? (
+      {node.acfFeaturedLoop?.featuredLoop ? (
         <VideoLoop
           poster={
             img.localFile ? img.localFile.childImageSharp.fluid.src : null

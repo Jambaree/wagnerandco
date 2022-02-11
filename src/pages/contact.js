@@ -15,7 +15,7 @@ const ContactPage = props => {
   const pageNode = data.wpPage
 
   // eslint-disable-next-line
-  // const results = data.gfForm
+  const results = data.gfForm
 
   // results.labelPlacement
   // results.subLabelPlacement
@@ -25,7 +25,7 @@ const ContactPage = props => {
   // results.date_created
   // results.is_trash
 
-  //   let confirmationMessage = getConfirmationMessage(results)
+  let confirmationMessage = getConfirmationMessage(results)
 
   return (
     <PageWrapper className="relative">
@@ -39,13 +39,13 @@ const ContactPage = props => {
           />
           <div dangerouslySetInnerHTML={{ __html: pageNode.content }} />
         </div>
-        {/* <GravityForms
+        <GravityForms
           showTitle={false}
           formId={1}
           url={process.env.GATSBY_WP_URL}
           data={results}
           confirmationMessage={confirmationMessage}
-        /> */}
+        />
       </Wrapper>
     </PageWrapper>
   )
@@ -62,41 +62,42 @@ export const pageQuery = graphql`
         }
       }
     }
-    # gfForm(formId: { eq: 1 }) {
-    #   id
-    #   title
-    #   labelPlacement
-    #   descriptionPlacement
-    #   button {
-    #     type
-    #     text
-    #   }
-    #   formFields {
-    #     id
-    #     formId
-    #     label
-    #     labelPlacement
-    #     description
-    #     descriptionPlacement
-    #     type
-    #     isRequired
-    #     placeholder
-    #     defaultValue
-    #     choices
-    #     # maxLength
-    #     # phoneFormat
-    #     inputMask
-    #     inputMaskValue
-    #     size
-    #     # rangeMin
-    #     # rangeMax
-    #     # HTML inputs
-    #     content
-    #   }
-    #   confirmations {
-    #     message
-    #   }
-    # }
+    gfForm(formId: { eq: 1 }) {
+      id
+      title
+      labelPlacement
+      descriptionPlacement
+      button {
+        type
+        text
+      }
+      formFields {
+        id
+        formId
+        label
+        labelPlacement
+        description
+        descriptionPlacement
+        type
+        isRequired
+        placeholder
+        defaultValue
+        choices
+        # maxLength
+        # phoneFormat
+        inputMask
+        inputMaskValue
+        size
+        # rangeMin
+        # rangeMax
+        # HTML inputs
+        content
+      }
+      confirmations {
+        message
+      }
+    }
+
     wpPage(slug: { eq: "contact" }) {
       id
       slug

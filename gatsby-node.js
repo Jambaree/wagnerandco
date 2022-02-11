@@ -12,13 +12,13 @@ exports.createSchemaCustomization = ({ actions }) => {
 //   path: `.env.${process.env.NODE_ENV}`,
 // })
 
-// const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
-// exports.onCreateWebpackConfig = ({ actions }) => {
-//   actions.setWebpackConfig({
-//     plugins: [new CaseSensitivePathsPlugin()],
-//   })
-// }
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    plugins: [new CaseSensitivePathsPlugin()],
+  })
+}
 
 // const path = require(`path`)
 // const graphql = require('gatsby').graphql

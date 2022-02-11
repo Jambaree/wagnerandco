@@ -10,7 +10,7 @@ import Header from '../components/Header'
 import { H4 } from '../components/Headings'
 import ImgSharp from '../components/ImgSharp'
 import { StylizedFAQ } from '../components/HeadingsStylized'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import DoodleRandomCorner from '../components/DoodleRandomCorner'
 
 const FAQImage = props => {
@@ -159,7 +159,7 @@ const Faq = props => {
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} />
+      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <StylizedFAQ right />
       <Header title={pageNode.title} />
       <Wrapper maxWidth={5}>

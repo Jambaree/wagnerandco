@@ -24,7 +24,7 @@ import {
 } from '../components/HeadingsStylized'
 import ImgSharp from '../components/ImgSharp'
 import ScrollAnchor from '../components/ScrollAnchor'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import Doodle from '../components/Doodle'
 import { isLoggedIn, logout, getCurrentUser } from '../utils/auth'
 
@@ -281,9 +281,9 @@ class PackagesPage extends React.Component {
         }}
         onSuccess="/packages">
         <PageWrapper>
-          <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url}>
+          {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url}>
             <meta name="robots" content="noindex" />
-          </YoastHelmet>
+          </YoastHelmet> */}
           {/*
           <div className="bg-red blue">
             Country: {state.countryKey} {activeCountry.currencyCode}

@@ -6,7 +6,7 @@ import permittedSlug from '../../utils/permitted-slug'
 import PageWrapper from '../../components/PageWrapper'
 import Wrapper from '../../components/Wrapper'
 import Header from '../../components/Header'
-import YoastHelmet from '../../components/YoastHelmet'
+// import YoastHelmet from '../../components/YoastHelmet'
 // import GutenbergBlocks from '../components/GutenbergBlocks'
 
 const WPPage = props => {
@@ -20,7 +20,7 @@ const WPPage = props => {
 
   return (
     <PageWrapper className="WPPage">
-      <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} />
+      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <Wrapper maxWidth={3}>
         <Header
           showTitle

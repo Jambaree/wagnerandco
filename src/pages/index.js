@@ -9,7 +9,7 @@ import WeddingsListing from '../components/WeddingsListing'
 import Header from '../components/Header'
 import WhitespaceHeader from '../components/WhitespaceHeader'
 import { H1, Intro } from '../components/Headings'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import Doodle from '../components/Doodle'
 
 const IndexPage = props => {
@@ -19,7 +19,7 @@ const IndexPage = props => {
 
   return (
     <PageWrapper>
-      <YoastHelmet url={data.wp.acfOptions.options.url} node={data.wpPage} />
+      {/* <YoastHelmet url={data.wp.acfOptions.options.url} node={data.wpPage} /> */}
       <Wrapper padding>
         <WhitespaceHeader is="div" marginBottom={5}>
           <Header

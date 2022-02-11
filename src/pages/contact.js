@@ -8,7 +8,7 @@ import Wrapper from '../components/Wrapper'
 import Header from '../components/Header'
 import GravityForms from '../components/GravityForms'
 import { StylizedSayHello } from '../components/HeadingsStylized'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 
 const ContactPage = props => {
   const data = props.data
@@ -29,7 +29,7 @@ const ContactPage = props => {
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} />
+      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <StylizedSayHello />
       <Wrapper maxWidth={3}>
         <div className="z2 relative mb4">

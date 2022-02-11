@@ -6,7 +6,7 @@ import permittedSlug from '../../utils/permitted-slug'
 import PageWrapper from '../../components/PageWrapper'
 import Wrapper from '../../components/Wrapper'
 import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
-import YoastHelmet from '../../components/YoastHelmet'
+// import YoastHelmet from '../../components/YoastHelmet'
 import GutenbergBlocks from '../../components/GutenbergBlocks'
 import SidebarNav from '../../components/SidebarNav'
 import gutenbergBlocksToNav from '../../utils/gutenberg-blocks-to-nav'
@@ -27,9 +27,9 @@ const WPGuide = props => {
 
   return (
     <PageWrapper className="WPGuide pb4" is="article">
-      <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url}>
+      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url}>
         <meta name="robots" content="noindex" />
-      </YoastHelmet>
+      </YoastHelmet> */}
       <WhitespaceHeaderCorners
         title={pageNode.title}
         date={props.showDate ? pageNode.date : undefined}

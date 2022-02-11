@@ -11,7 +11,7 @@ import Video from '../../components/Video'
 import LinkDuo from '../../components/LinkDuo'
 import slugify from 'slugify'
 import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
-import YoastHelmet from '../../components/YoastHelmet'
+// import YoastHelmet from '../../components/YoastHelmet'
 import SidebarNav from '../../components/SidebarNav'
 
 const ButtonDownload = props => {
@@ -83,12 +83,12 @@ const HighlightTemplate = props => {
 
   return (
     <PageWrapper is="article">
-      <YoastHelmet node={wpHighlight} url={data.wp.acfOptions.options.url}>
+      {/* <YoastHelmet node={wpHighlight} url={data.wp.acfOptions.options.url}>
         <meta name="robots" content="noindex" />
         <meta name={og.description} content="og:description" />
         <meta name={og.date} content="og:date" />
         <meta name={og.location} content="og:location" />
-      </YoastHelmet>
+      </YoastHelmet> */}
       <WhitespaceHeaderCorners
         title={wpHighlight.title}
         date={wpHighlight.date}

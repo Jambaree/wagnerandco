@@ -11,7 +11,6 @@ import ImgSharp from '../components/ImgSharp'
 import { H1, H4 } from '../components/Headings'
 import { StylizedAbout } from '../components/HeadingsStylized'
 import WeddingIntro from '../components/WeddingIntro'
-import YoastHelmet from '../components/YoastHelmet'
 
 const AboutH2 = props => {
   return (
@@ -29,7 +28,7 @@ const About = props => {
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} />
+      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <StylizedAbout />
       <Header
         title={pageNode.title}

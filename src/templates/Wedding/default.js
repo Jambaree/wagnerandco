@@ -12,7 +12,7 @@ import WeddingCredits from '../../components/WeddingCredits'
 import WeddingMore from '../../components/WeddingMore'
 import Video from '../../components/Video'
 import ImgSharp from '../../components/ImgSharp'
-import YoastHelmet from '../../components/YoastHelmet'
+// import YoastHelmet from '../../components/YoastHelmet'
 import DoodleRandomCorner from '../../components/DoodleRandomCorner'
 import WeddingFeaturedMedia from '../../components/WeddingFeaturedMedia'
 import VideoLoop from '../../components/VideoLoop'
@@ -86,10 +86,10 @@ class WeddingTemplate extends React.Component {
     return (
       <React.Fragment>
         <PageWrapper is="article">
-          <YoastHelmet
+          {/* <YoastHelmet
             node={weddingNode}
             url={data.wp.acfOptions.options.url}
-          />
+          /> */}
           <div className="md-flex flex-wrap mb4">
             <div className="mt4 md-mt0 order-last col-12">
               <Video {...vimeoProps} />

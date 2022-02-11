@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import PageWrapper from '../components/PageWrapper'
 import Wrapper from '../components/Wrapper'
 import WeddingsListing from '../components/WeddingsListing'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import { stripTrailingSlash } from '../utils/format'
 
 const WeddingsIndexPage = props => {
@@ -18,7 +18,7 @@ const WeddingsIndexPage = props => {
   console.log(data.allWpWedding.edges)
   return (
     <PageWrapper>
-      <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} />
+      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <Header title={title} />
       <Wrapper maxWidth={5} padding>
         <WeddingsListing

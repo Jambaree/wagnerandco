@@ -8,7 +8,7 @@ import unesc from '../utils/unescape'
 class YoastHelmet extends React.Component {
   formatOpenGraph() {
     let { node, url } = this.props
-    let y = node.yoast_meta
+    // let y = node.yoast_meta
 
     let ogDefaults = {
       title:
@@ -122,11 +122,11 @@ YoastHelmet.defaultProps = {
   children: null,
 }
 
-YoastHelmet.propTypes = {
-  url: PropTypes.string.isRequired,
-  node: PropTypes.shape({
-    yoast_meta: PropTypes.object.isRequired,
-  }).isRequired,
-}
+// YoastHelmet.propTypes = {
+//   url: PropTypes.string.isRequired,
+//   node: PropTypes.shape({
+//     yoast_meta: PropTypes.object.isRequired,
+//   }).isRequired,
+// }
 
 export default YoastHelmet

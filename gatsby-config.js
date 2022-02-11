@@ -56,47 +56,6 @@ let config = {
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        exclude: [
-          '/home',
-          '/packages', // Packages are noindex
-          '/packages/*',
-          '/guides', // Packages are noindex
-          '/guides/*',
-          '/highlights', // Packages are noindex
-          '/highlights/*',
-          '/video-demo',
-          '/styleguide',
-          '/info',
-        ],
-        serialize: ({ site, allSitePage }) =>
-          allSitePage.edges.map(edge => {
-            let edgePath = edge.node.path
-            let priority = 0.7
-            let changefreq = 'weekly'
-
-            if (edgePath.includes('blog')) {
-              priority = 0.4
-            }
-
-            if (edgePath.includes('weddings')) {
-              priority = 0.8
-            }
-
-            if (edge.node.path === '' || edge.node.path === '/') {
-              priority = 1.0
-            }
-
-            return {
-              url: site.siteMetadata.siteUrl + edgePath,
-              changefreq: changefreq,
-              priority: priority,
-            }
-          }),
-      },
-    },
   ],
 }
 
@@ -104,4 +63,32 @@ if (isDev) {
   config.plugins.push('gatsby-plugin-accessibilityjs')
 }
 
+if (isDev) {
+  config.plugins.push({
+    /**
+     * ? Create a sitemap for your Gatsby site.
+     * ? See https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/
+     */
+    resolve: `gatsby-plugin-sitemap`,
+    options: {
+      query: `{
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allSitePage(filter: {context: {id: {ne: null}}}) {
+            edges {
+              node {
+                path
+                context {
+                  id
+                }
+              }
+            }
+          }
+      }`,
+    },
+  })
+}
 module.exports = config

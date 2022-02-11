@@ -38,7 +38,7 @@ const WPGuide = props => {
       />
       <SidebarNav items={sidebarItems} />
       <Wrapper maxWidth={3}>
-        <GutenbergBlocks blocks={pageNode.blocks} />
+        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
       </Wrapper>
     </PageWrapper>
   )

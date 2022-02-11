@@ -63,7 +63,6 @@ let config = {
 if (isDev) {
   config.plugins.push('gatsby-plugin-accessibilityjs')
 }
-
 if (isDev) {
   config.plugins.push({
     /**
@@ -78,13 +77,11 @@ if (isDev) {
               siteUrl
             }
           }
-          allSitePage(filter: {context: {id: {ne: null}}}) {
+          allSitePage(filter: {id: {ne: null}}) {
             edges {
               node {
                 path
-                context {
                   id
-                }
               }
             }
           }

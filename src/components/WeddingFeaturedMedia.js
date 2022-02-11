@@ -11,12 +11,12 @@ const WeddingFeaturedMedia = props => {
 
   return (
     <Fragment>
-      {node.acfFeaturedLoop ? (
+      {node.acfFeaturedLoop.featuredLoop ? (
         <VideoLoop
           poster={
             img.localFile ? img.localFile.childImageSharp.fluid.src : null
           }
-          src={`${process.env.GATSBY_WP_URL}${node.acfFeaturedLoop.featuredLoop.sourceUrl}`}
+          src={`${node.acfFeaturedLoop.featuredLoop.mediaItemUrl}`}
         />
       ) : img && sharp ? (
         <ImgSharp {...img} />

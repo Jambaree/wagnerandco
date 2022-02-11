@@ -95,7 +95,7 @@ export const pageQuery = graphql`
           }
           acfFeaturedLoop {
             featuredLoop {
-              sourceUrl
+              mediaItemUrl
               id
             }
           }

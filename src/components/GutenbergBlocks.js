@@ -13,9 +13,7 @@ import GravityForms from './GravityForms'
 import GravityFormIFrame from './GravityFormIFrame'
 
 const getBlockClass = function(name) {
-  if (name) {
-    return `block_${name.replace('/', '_')}`
-  }
+  return `block_${name.replace('/', '_')}`
 }
 
 // List from WordPress theme:
@@ -66,7 +64,8 @@ const handleTransformImage = function(node) {
         // because Gutenberg blocks are all innerHTML)
         //   The only obvious alternative to me is to use ACF blocks
         // instead of Gutenberg blocks.
-        node.attribs.src = `${process.env.GATSBY_WP_URL}${node.attribs.src}`
+        node.attribs.src = `${node.attribs['data-src']}`
+        node.attribs.style = `${node.attribs['style']}`
         node.attribs.class += ' block col-12'
         break
       // case 'figure':
@@ -89,13 +88,16 @@ const handleTransformVideo = function(node, index) {
   let child = node.children[0]
 
   if (child.type === 'tag' && child.name === 'video') {
+    {
+      console.log(child.attribs.src)
+    }
     return (
       <figure
         key={`VideoLoop_${index}`}
         className={`${node.attribs.class} block col-12`}>
         <VideoLoop
-          poster={`${process.env.GATSBY_WP_URL}${child.attribs.poster}`}
-          src={`${process.env.GATSBY_WP_URL}${child.attribs.src}`}
+          poster={`${child.attribs.poster}`}
+          src={`${child.attribs.src}`}
         />
       </figure>
     )
@@ -107,8 +109,8 @@ const handleTransformVideo = function(node, index) {
 const gutenbergBlocks = {
   core: {
     image: function(props) {
-      let { innerHTML } = props
-      let content = reactHtmlParser(innerHTML, {
+      let { originalContent } = props
+      let content = reactHtmlParser(originalContent, {
         transform: handleTransformImage,
       })
 
@@ -131,7 +133,7 @@ const gutenbergBlocks = {
       return <div>{content}</div>
     },
     gallery: function(props) {
-      let { innerHTML, blockName, className } = props
+      let { originalContent, name, className } = props
 
       // A different approach for replacing the URL
       // return (
@@ -144,35 +146,41 @@ const gutenbergBlocks = {
       //   />
       // )
 
-      let content = reactHtmlParser(innerHTML, {
+      let content = reactHtmlParser(originalContent, {
         transform: handleTransformImage,
       })
 
       return (
-        <div className={`${getBlockClass(blockName)} ${className || ''}`}>
+        <div className={`${getBlockClass(name)} ${className || ''}`}>
           {content}
         </div>
       )
     },
     video: function(props) {
-      let { innerHTML, blockName, className } = props
+      let { originalContent, name, className } = props
 
-      let content = reactHtmlParser(innerHTML, {
+      let content = reactHtmlParser(originalContent, {
         transform: handleTransformVideo,
       })
 
       return (
-        <div className={`${getBlockClass(blockName)} ${className || ''}`}>
+        <div className={`${getBlockClass(name)} ${className || ''}`}>
           {content}
         </div>
       )
     },
     default: function(props) {
       // eslint-ignore
-      let { innerHTML, blockName, className, attrs, ...remainingProps } = props
-      let content = reactHtmlParser(innerHTML)
+      let {
+        originalContent,
+        name,
+        className,
+        attributes,
+        ...remainingProps
+      } = props
+      let content = reactHtmlParser(originalContent)
 
-      if (blockName === 'core/heading') {
+      if (name === 'core/heading') {
         let label = content[0].props.children[0]
 
         // If the label isn’t a string by this point,
@@ -185,7 +193,7 @@ const gutenbergBlocks = {
 
       return (
         <div
-          className={`${getBlockClass(blockName)} ${className || ''}`}
+          className={`${getBlockClass(name)} ${className || ''}`}
           {...remainingProps}>
           {content}
         </div>
@@ -194,8 +202,8 @@ const gutenbergBlocks = {
   },
   coreEmbed: {
     vimeo: function(props) {
-      let { innerHTML } = props
-      let content = reactHtmlParser(innerHTML)
+      let { originalContent } = props
+      let content = reactHtmlParser(originalContent)
       let wpFigure = content[0].props.children
       let vimeoUrl = wpFigure[0].props.children[0]
       let caption = null
@@ -216,8 +224,8 @@ const gutenbergBlocks = {
       )
     },
     instagram: function(props) {
-      let { innerHTML, blockName, className } = props
-      let content = reactHtmlParser(innerHTML)
+      let { originalContent, name, className } = props
+      let content = reactHtmlParser(originalContent)
       let div = content[0].props.children
 
       if (div) {
@@ -225,8 +233,7 @@ const gutenbergBlocks = {
 
         if (url) {
           return (
-            <figure
-              className={`${getBlockClass(blockName)} ${className || ''}`}>
+            <figure className={`${getBlockClass(name)} ${className || ''}`}>
               <EmbedInstagram
                 url={url}
                 maxWidth={768}
@@ -241,7 +248,7 @@ const gutenbergBlocks = {
       return (
         <div
           dangerouslySetInnerHTML={{
-            __html: innerHTML,
+            __html: originalContent,
           }}
         />
       )
@@ -276,14 +283,14 @@ const gutenbergBlocks = {
   },
   gravityforms: {
     form: function(props) {
-      let { attrs } = props
+      let { attributes } = props
       let matchingForm = {}
 
       // Get all forms, and then filter by id. We end up with data for all the
       // other forms that we don’t need.
       if (props.allGfForm && props.allGfForm.edges) {
         props.allGfForm.edges.some(({ node }) => {
-          if (node.formId.toString() === attrs.formId.toString()) {
+          if (node.formId.toString() === attributes.formId.toString()) {
             matchingForm = node
             return true
           }
@@ -302,9 +309,8 @@ const gutenbergBlocks = {
       )
     },
     iframe: function(props) {
-      let { attrs } = props
-
-      return <GravityFormIFrame formId={attrs.formId} />
+      let { attributes } = props
+      return <GravityFormIFrame formId={attributes.formId} />
     },
   },
 }

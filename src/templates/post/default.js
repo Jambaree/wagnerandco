@@ -48,6 +48,11 @@ export const pageQuery = graphql`
       blocks {
         name
         originalContent
+        ... on WpGravityformsFormBlock {
+          attributes {
+            formId
+          }
+        }
       }
     }
   }

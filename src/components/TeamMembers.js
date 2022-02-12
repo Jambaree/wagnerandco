@@ -27,7 +27,7 @@ const TeamMembers = props => {
                   <ImgSharp
                     {...member.image}
                     alt={
-                      member.image.alt_text || `Profile photo of ${member.name}`
+                      member.image.altText || `Profile photo of ${member.name}`
                     }
                   />
                 </div>

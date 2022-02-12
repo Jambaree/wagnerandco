@@ -25,7 +25,7 @@ const WPInfo = props => {
         <WhitespaceHeader marginBottom={5}>
           <Header showTitle title={pageNode.title} />
         </WhitespaceHeader>
-        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
+        <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
     </PageWrapper>
   )
@@ -50,7 +50,11 @@ export const pageQuery = graphql`
       blocks {
         originalContent
         name
-
+        ... on WpGravityformsFormBlock {
+          attributes {
+            formId
+          }
+        }
         # For Gravity Forms, probably other Gutenberg block type
         #  attrs {
         #    formId

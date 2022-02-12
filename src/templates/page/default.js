@@ -16,7 +16,6 @@ const WPPage = props => {
 
   // TODO Add placeholder schema page for Gutenberg
   //      blocks on generic pages
-  // <GutenbergBlocks blocks={pageNode.blocks} />
 
   return (
     <PageWrapper className="WPPage">
@@ -28,6 +27,7 @@ const WPPage = props => {
           subtitle={pageNode.template.acfPages.wcoPageSubtitle}
         />
         <div dangerouslySetInnerHTML={{ __html: pageNode.content }} />
+        <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
     </PageWrapper>
   )
@@ -50,10 +50,15 @@ export const pageQuery = graphql`
       title
       content
       # TODO
-      # blocks {
-      #   innerHTML
-      #   blockName
-      # }
+      blocks {
+        name
+        originalContent
+        ... on WpGravityformsFormBlock {
+          attributes {
+            formId
+          }
+        }
+      }
       template {
         ... on WpDefaultTemplate {
           templateName

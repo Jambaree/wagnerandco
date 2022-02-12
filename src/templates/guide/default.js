@@ -15,6 +15,7 @@ const WPGuide = props => {
   const data = props.data
   const pageNode = data.wpGuide
   let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
+  console.log(pageNode.blocks)
 
   if (!permittedSlug(pageNode.slug)) {
     return null
@@ -38,7 +39,7 @@ const WPGuide = props => {
       />
       <SidebarNav items={sidebarItems} />
       <Wrapper maxWidth={3}>
-        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
+        <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
     </PageWrapper>
   )
@@ -68,6 +69,11 @@ export const pageQuery = graphql`
       blocks {
         name
         originalContent
+        ... on WpGravityformsFormBlock {
+          attributes {
+            formId
+          }
+        }
       }
       # acf {
       #   wco_page_subtitle

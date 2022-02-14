@@ -57,36 +57,12 @@ let config = {
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    `gatsby-plugin-sitemap`,
   ],
 }
 
 if (isDev) {
   config.plugins.push('gatsby-plugin-accessibilityjs')
 }
-if (process.env.GATSBY_FRONTEND) {
-  config.plugins.push({
-    /**
-     * ? Create a sitemap for your Gatsby site.
-     * ? See https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/
-     */
-    resolve: `gatsby-plugin-sitemap`,
-    options: {
-      query: `{
-          site {
-            siteMetadata {
-              siteUrl
-            }
-          }
-          allSitePage(filter: {id: {ne: null}}) {
-            edges {
-              node {
-                path
-                  id
-              }
-            }
-          }
-      }`,
-    },
-  })
-}
+
 module.exports = config

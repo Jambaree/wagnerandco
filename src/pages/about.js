@@ -105,21 +105,6 @@ export const pageQuery = graphql`
           }
         }
       }
-      #   yoast_meta {
-      #     yoast_wpseo_title
-      #     yoast_wpseo_metadesc
-
-      #     # Facebook
-      #     yoast_wpseo_facebook_title
-      #     yoast_wpseo_facebook_description
-      #     yoast_wpseo_facebook_type
-      #     # yoast_wpseo_facebook_image
-
-      #     # Twitter
-      #     yoast_wpseo_twitter_title
-      #     yoast_wpseo_twitter_description
-      #     # yoast_wpseo_twitter_image
-      #   }
       template {
         ... on WpTemplate_AboutPage {
           templateName
@@ -173,61 +158,6 @@ export const pageQuery = graphql`
           }
         }
       }
-
-      #   acf {
-      #     wco_page_subtitle
-      #     wco_team_title
-      #     wco_team_members {
-      #       name
-      #       role
-      #       location
-      #       links {
-      #         link {
-      #           title
-      #           url
-      #           target
-      #         }
-      #       }
-      #       image {
-      #         alt_text
-      #         localFile {
-      #           childImageSharp {
-      #             id
-      #             fluid(maxWidth: 1200) {
-      #               aspectRatio
-      #               src
-      #               srcSet
-      #               sizes
-      #               # srcWebp
-      #               # srcSetWebp
-      #             }
-      #           }
-      #         }
-      #       }
-      #     }
-      #     wco_press_items {
-      #       date
-      #       link {
-      #         title
-      #         url
-      #       }
-      #     }
-      #     wco_press_logos {
-      #       title
-      #       id
-      #       alt_text
-      #       localFile {
-      #         childImageSharp {
-      #           id
-      #           fluid {
-      #             src
-      #             srcSet
-      #             aspectRatio
-      #           }
-      #         }
-      #       }
-      #     }
-      #   }
     }
     # allWordpressWpUsers
   }

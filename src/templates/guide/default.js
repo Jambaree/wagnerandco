@@ -15,7 +15,6 @@ const WPGuide = props => {
   const data = props.data
   const pageNode = data.wpGuide
   let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
-  console.log(pageNode.blocks)
 
   if (!permittedSlug(pageNode.slug)) {
     return null

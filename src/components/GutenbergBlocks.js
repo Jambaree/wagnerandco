@@ -88,9 +88,6 @@ const handleTransformVideo = function(node, index) {
   let child = node.children[0]
 
   if (child.type === 'tag' && child.name === 'video') {
-    {
-      console.log(child.attribs.src)
-    }
     return (
       <figure
         key={`VideoLoop_${index}`}

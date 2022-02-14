@@ -15,7 +15,6 @@ const WeddingsIndexPage = props => {
   let postEdges = data.allWpWedding.edges
   let slugPrefix = stripTrailingSlash(props.location.pathname)
   let title = 'Weddings'
-  console.log(data.allWpWedding.edges)
   return (
     <PageWrapper>
       {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}

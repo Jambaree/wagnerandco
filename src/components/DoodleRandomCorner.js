@@ -19,6 +19,7 @@ class DoodleRandomCorner extends React.Component {
         className={`absolute ${pos[0]}`}
         style={{
           transform: `translate(${pos[1]}, ${pos[2]})`,
+          zIndex: 1,
         }}>
         <Doodle {...props} />
       </div>

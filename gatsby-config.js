@@ -63,7 +63,7 @@ let config = {
 if (isDev) {
   config.plugins.push('gatsby-plugin-accessibilityjs')
 }
-if (isDev) {
+if (config.siteMetadata.siteUrl) {
   config.plugins.push({
     /**
      * ? Create a sitemap for your Gatsby site.

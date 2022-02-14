@@ -63,15 +63,15 @@ let config = {
 if (isDev) {
   config.plugins.push('gatsby-plugin-accessibilityjs')
 }
-
-config.plugins.push({
-  /**
-   * ? Create a sitemap for your Gatsby site.
-   * ? See https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/
-   */
-  resolve: `gatsby-plugin-sitemap`,
-  options: {
-    query: `{
+if (isDev) {
+  config.plugins.push({
+    /**
+     * ? Create a sitemap for your Gatsby site.
+     * ? See https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/
+     */
+    resolve: `gatsby-plugin-sitemap`,
+    options: {
+      query: `{
           site {
             siteMetadata {
               siteUrl
@@ -86,7 +86,7 @@ config.plugins.push({
             }
           }
       }`,
-  },
-})
-
+    },
+  })
+}
 module.exports = config

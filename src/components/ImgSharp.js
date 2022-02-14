@@ -14,7 +14,7 @@ const ImgSharp = props => {
 
   remainder.alt = remainder.alt || altText || ''
 
-  return <GatsbyImage image={image} alt={remainder.alt || ''} {...remainder} />
+  return <GatsbyImage image={image} alt={remainder.alt} {...remainder} />
 }
 
 ImgSharp.propTypes = {

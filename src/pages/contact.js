@@ -115,10 +115,7 @@ export const pageQuery = graphql`
         node {
           localFile {
             childImageSharp {
-              id
-              fluid(maxWidth: 1200) {
-                src
-              }
+              gatsbyImageData(quality: 90, width: 1200)
             }
           }
         }

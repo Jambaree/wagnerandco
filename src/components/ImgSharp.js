@@ -1,18 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const ImgSharp = props => {
   let { localFile, altText, ...remainder } = props
-  let sharp = localFile ? localFile.childImageSharp : false
+  // let sharp = localFile ? localFile.childImageSharp : false
+  const image = getImage(localFile)
 
-  if (sharp && sharp.fluid) {
-    remainder.src = sharp.fluid.src
-    remainder.srcSet = sharp.srcSet
-  }
+  // if (sharp && sharp.fluid) {
+  //   remainder.src = sharp.fluid.src
+  //   remainder.srcSet = sharp.srcSet
+  // }
 
   remainder.alt = remainder.alt || altText || ''
 
-  return <img alt={remainder.alt} {...remainder} />
+  return <GatsbyImage image={image} alt={remainder.alt} {...remainder} />
 }
 
 ImgSharp.propTypes = {

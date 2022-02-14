@@ -167,9 +167,7 @@ export const pageQuery = graphql`
           id
           localFile {
             childImageSharp {
-              fluid(maxWidth: 1200) {
-                src
-              }
+              gatsbyImageData(quality: 90, width: 1200, layout: CONSTRAINED)
             }
           }
         }
@@ -201,11 +199,7 @@ export const pageQuery = graphql`
           mediaItemUrl
           localFile {
             childImageSharp {
-              fluid {
-                src
-                srcSet
-                aspectRatio
-              }
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
             }
           }
         }

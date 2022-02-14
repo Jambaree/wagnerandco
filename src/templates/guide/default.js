@@ -84,12 +84,7 @@ export const pageQuery = graphql`
           altText
           localFile {
             childImageSharp {
-              id
-              fluid(maxWidth: 960) {
-                src
-                srcSet
-                sizes
-              }
+              gatsbyImageData(quality: 90, width: 960, layout: CONSTRAINED)
             }
           }
         }

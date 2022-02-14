@@ -29,7 +29,6 @@ const ContactPage = props => {
 
   return (
     <PageWrapper className="relative">
-      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <StylizedSayHello />
       <Wrapper maxWidth={3}>
         <div className="z2 relative mb4">

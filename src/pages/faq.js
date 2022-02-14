@@ -159,7 +159,6 @@ const Faq = props => {
 
   return (
     <PageWrapper className="relative">
-      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <StylizedFAQ right />
       <Header title={pageNode.title} />
       <Wrapper maxWidth={5}>

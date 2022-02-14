@@ -71,24 +71,8 @@ const HighlightTemplate = props => {
     )}. ${wpHighlight.acfHighlight.wcoHighlightLocation}.`,
   }
 
-  // Adds manual fix for constructing Highlights title, when it comes
-  // through as Not Found from Yoast SEO
-  // if (
-  //   wordpressWpHighlights &&
-  //   wordpressWpHighlights.yoast_meta &&
-  //   wordpressWpHighlights.yoast_meta.yoast_wpseo_title.includes('not found')
-  // ) {
-  //   wordpressWpHighlights.yoast_meta.yoast_wpseo_title = `${wordpressWpHighlights.title} • ${data.settings.title}`
-  // }
-
   return (
     <PageWrapper is="article">
-      {/* <YoastHelmet node={wpHighlight} url={data.wp.acfOptions.options.url}>
-        <meta name="robots" content="noindex" />
-        <meta name={og.description} content="og:description" />
-        <meta name={og.date} content="og:date" />
-        <meta name={og.location} content="og:location" />
-      </YoastHelmet> */}
       <WhitespaceHeaderCorners
         title={wpHighlight.title}
         date={wpHighlight.date}

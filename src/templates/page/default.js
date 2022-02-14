@@ -18,7 +18,6 @@ const WPPage = props => {
 
   return (
     <PageWrapper className="WPPage">
-      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <Wrapper maxWidth={3}>
         <Header
           showTitle

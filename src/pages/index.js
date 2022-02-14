@@ -19,7 +19,6 @@ const IndexPage = props => {
 
   return (
     <PageWrapper>
-      {/* <YoastHelmet url={data.wp.acfOptions.options.url} node={data.wpPage} /> */}
       <Wrapper padding>
         <WhitespaceHeader is="div" marginBottom={5}>
           <Header

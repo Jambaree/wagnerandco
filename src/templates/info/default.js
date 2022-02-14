@@ -20,7 +20,6 @@ const WPInfo = props => {
 
   return (
     <PageWrapper className="WPInfo pb4" is="article">
-      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <Wrapper maxWidth={3}>
         <WhitespaceHeader marginBottom={5}>
           <Header showTitle title={pageNode.title} />

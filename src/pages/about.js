@@ -28,7 +28,6 @@ const About = props => {
 
   return (
     <PageWrapper className="relative">
-      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <StylizedAbout />
       <Header
         title={pageNode.title}

@@ -17,7 +17,6 @@ const WeddingsIndexPage = props => {
   let title = 'Weddings'
   return (
     <PageWrapper>
-      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url} /> */}
       <Header title={title} />
       <Wrapper maxWidth={5} padding>
         <WeddingsListing

@@ -19,7 +19,6 @@ const PostTemplate = props => {
 
   return (
     <PageWrapper is="article" className="WPPost">
-      {/* <YoastHelmet url={data.wp.acfOptions.options.url} node={postNode} /> */}
       <Wrapper maxWidth={3}>
         <Header showTitle title={postNode.title} />
         <GutenbergBlocks blocks={postNode.blocks} />

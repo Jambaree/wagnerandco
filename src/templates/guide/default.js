@@ -27,9 +27,6 @@ const WPGuide = props => {
 
   return (
     <PageWrapper className="WPGuide pb4" is="article">
-      {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url}>
-        <meta name="robots" content="noindex" />
-      </YoastHelmet> */}
       <WhitespaceHeaderCorners
         title={pageNode.title}
         date={props.showDate ? pageNode.date : undefined}

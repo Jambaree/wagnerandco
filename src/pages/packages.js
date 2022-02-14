@@ -281,24 +281,6 @@ class PackagesPage extends React.Component {
         }}
         onSuccess="/packages">
         <PageWrapper>
-          {/* <YoastHelmet node={pageNode} url={data.wp.acfOptions.options.url}>
-            <meta name="robots" content="noindex" />
-          </YoastHelmet> */}
-          {/*
-          <div className="bg-red blue">
-            Country: {state.countryKey} {activeCountry.currencyCode}
-            <form onSubmit={e => e.preventDefault()}>
-              <select
-                value={state.countryKey}
-                onChange={this.handleOnChangeCountry}>
-                {Object.keys(props.countries).map((value, index) => {
-                  let country = props.countries[value]
-                  return <option value={value}>{country.label}</option>
-                })}
-              </select>
-            </form>
-          </div>
-          */}
           <div className="relative md-pb4">
             <StylizedInfo />
             <Header

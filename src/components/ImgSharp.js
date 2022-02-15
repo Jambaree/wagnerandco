@@ -6,7 +6,7 @@ const ImgSharp = props => {
   let { localFile, altText, ...remainder } = props
   // let sharp = localFile ? localFile.childImageSharp : false
   const image = getImage(localFile)
-
+  console.log(image)
   // if (sharp && sharp.fluid) {
   //   remainder.src = sharp.fluid.src
   //   remainder.srcSet = sharp.srcSet
@@ -14,7 +14,15 @@ const ImgSharp = props => {
 
   remainder.alt = remainder.alt || altText || ''
 
-  return <GatsbyImage image={image} alt={remainder.alt || ''} {...remainder} />
+  return (
+    <GatsbyImage
+      objectPosition="0"
+      objectFit={image.layout === 'constrained' ? 'contain' : 'cover'}
+      image={image}
+      alt={remainder.alt || ''}
+      {...remainder}
+    />
+  )
 }
 
 ImgSharp.propTypes = {

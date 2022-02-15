@@ -437,7 +437,7 @@ export const pageQuery = graphql`
           localFile {
             childImageSharp {
               id
-              gatsbyImageData(quality: 90, width: 1200, layout: CONSTRAINED)
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
             }
           }
         }

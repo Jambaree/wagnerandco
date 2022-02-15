@@ -6,25 +6,23 @@ import Header from '../components/Header'
 import PageWrapper from '../components/PageWrapper'
 import Wrapper from '../components/Wrapper'
 import WeddingsListing from '../components/WeddingsListing'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import { stripTrailingSlash } from '../utils/format'
 
 const WeddingsIndexPage = props => {
   const data = props.data
-  const pageNode = data.wordpressPage
-  let postEdges = data.allWordpressWpWeddings.edges
+  const pageNode = data.wpPage
+  let postEdges = data.allWpWedding.edges
   let slugPrefix = stripTrailingSlash(props.location.pathname)
   let title = 'Weddings'
-
   return (
     <PageWrapper>
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
       <Header title={title} />
       <Wrapper maxWidth={5} padding>
         <WeddingsListing
           edges={postEdges}
           slugPrefix={slugPrefix}
-          limit={data.settings.posts_per_page}
+          limit={data.wp.allSettings.readingSettingsPostsPerPage}
         />
       </Wrapper>
     </PageWrapper>
@@ -35,78 +33,64 @@ export default WeddingsIndexPage
 
 export const pageQuery = graphql`
   query WeddingsQuery {
-    settings: wordpressWpSettings {
-      title
-      posts_per_page
-    }
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      allSettings {
+        readingSettingsPostsPerPage
+      }
+      acfOptions {
+        options {
+          url
+        }
       }
     }
-    wordpressPage(slug: { eq: "weddings" }) {
+    wpPage(slug: { eq: "weddings" }) {
       id
-      wordpress_id
       slug
       title
-      acf {
-        wco_page_subtitle
+      template {
+        ... on WpTemplate_WeddingsPage {
+          templateName
+          acfPages {
+            wcoPageSubtitle
+          }
+        }
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image
-
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
-      }
-      featured_media {
-        localFile {
-          childImageSharp {
-            id
-            fluid(maxWidth: 1200) {
-              src
+      featuredImage {
+        node {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
             }
           }
         }
       }
     }
-    allWordpressWpWeddings {
+    allWpWedding {
       edges {
         node {
           id
-          wordpress_id
           slug
           title
-          template
           content
-          featured_media {
-            id
-            alt_text
-            localFile {
-              childImageSharp {
-                id
-                fluid(maxWidth: 960) {
-                  src
-                  srcSet
-                  sizes
+          featuredImage {
+            node {
+              id
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(quality: 90, layout: CONSTRAINED)
                 }
               }
             }
           }
-          acf {
-            wco_page_subtitle
-            featured_loop {
-              wordpress_id
-              source_url
+          acfFeaturedLoop {
+            featuredLoop {
+              mediaItemUrl
+              id
             }
+          }
+          acfPages {
+            wcoPageSubtitle
           }
         }
       }

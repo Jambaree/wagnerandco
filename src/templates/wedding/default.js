@@ -2,20 +2,20 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 // Ours
-import { subtitle } from '../utils/format'
-import permittedSlug from '../utils/permitted-slug'
-import PageWrapper from '../components/PageWrapper'
-import Wrapper from '../components/Wrapper'
-import Header from '../components/Header'
-import WeddingIntro from '../components/WeddingIntro'
-import WeddingCredits from '../components/WeddingCredits'
-import WeddingMore from '../components/WeddingMore'
-import Video from '../components/Video'
-import ImgSharp from '../components/ImgSharp'
-import YoastHelmet from '../components/YoastHelmet'
-import DoodleRandomCorner from '../components/DoodleRandomCorner'
-import WeddingFeaturedMedia from '../components/WeddingFeaturedMedia'
-import VideoLoop from '../components/VideoLoop'
+import { subtitle } from '../../utils/format'
+import permittedSlug from '../../utils/permitted-slug'
+import PageWrapper from '../../components/PageWrapper'
+import Wrapper from '../../components/Wrapper'
+import Header from '../../components/Header'
+import WeddingIntro from '../../components/WeddingIntro'
+import WeddingCredits from '../../components/WeddingCredits'
+import WeddingMore from '../../components/WeddingMore'
+import Video from '../../components/Video'
+import ImgSharp from '../../components/ImgSharp'
+// import YoastHelmet from '../../components/YoastHelmet'
+import DoodleRandomCorner from '../../components/DoodleRandomCorner'
+import WeddingFeaturedMedia from '../../components/WeddingFeaturedMedia'
+import VideoLoop from '../../components/VideoLoop'
 
 class WeddingTemplate extends React.Component {
   getRandomIntInclusive(min, max) {
@@ -44,16 +44,16 @@ class WeddingTemplate extends React.Component {
   render() {
     const props = this.props
     const data = props.data
-    const weddingEdges = data.allWordpressWpWeddings.edges
-    const weddingNode = data.wordpressWpWeddings
-    const stills = weddingNode.acf.wco_wedding_stills
+    const weddingEdges = data.allWpWedding.edges
+    const weddingNode = data.wpWedding
+    const stills = weddingNode.acfWedding.wcoWeddingStills
 
     if (!permittedSlug(weddingNode.slug)) {
       return null
     }
 
-    let vimeoProps = weddingNode.acf.wco_wedding_vimeo_id
-      ? { vimeoId: weddingNode.acf.wco_wedding_vimeo_id }
+    let vimeoProps = weddingNode.acfWedding.wcoWeddingVimeoId
+      ? { vimeoId: weddingNode.acfWedding.wcoWeddingVimeoId }
       : {}
 
     let prevFigDirClass = 'md-right'
@@ -66,13 +66,11 @@ class WeddingTemplate extends React.Component {
         let media = null
 
         if (
-          item.source_url &&
-          item.mime_type &&
-          (item.mime_type === 'video/webm' || item.mime_type === 'video/mp4')
+          item.mediaItemUrl &&
+          item.mimeType &&
+          (item.mimeType === 'video/webm' || item.mimeType === 'video/mp4')
         ) {
-          media = (
-            <VideoLoop src={`${process.env.GATSBY_WP_URL}${item.source_url}`} />
-          )
+          media = <VideoLoop src={`${item.mediaItemUrl}`} />
         } else {
           media = <ImgSharp {...item} />
         }
@@ -88,7 +86,10 @@ class WeddingTemplate extends React.Component {
     return (
       <React.Fragment>
         <PageWrapper is="article">
-          <YoastHelmet node={weddingNode} url={data.options.options.url} />
+          {/* <YoastHelmet
+            node={weddingNode}
+            url={data.wp.acfOptions.options.url}
+          /> */}
           <div className="md-flex flex-wrap mb4">
             <div className="mt4 md-mt0 order-last col-12">
               <Video {...vimeoProps} />
@@ -96,9 +97,9 @@ class WeddingTemplate extends React.Component {
             <div className="order-0 col-12">
               <Wrapper maxWidth={3} padding>
                 <Header
-                  title={weddingNode.acf.wco_wedding_couple}
+                  title={weddingNode.acfWedding.wcoWeddingCouple}
                   subtitle={subtitle(
-                    weddingNode.acf.wco_page_subtitle,
+                    weddingNode.acfPages.wcoPageSubtitle,
                     weddingNode.title,
                     { bold: true }
                   )}
@@ -122,7 +123,7 @@ class WeddingTemplate extends React.Component {
                   <div className="order-last md-order-last col-12 md-col-4 md-pl3 self-stretch md-flex">
                     <div className="sm-h5 md-h4 self-end">
                       <WeddingCredits
-                        items={weddingNode.acf.wco_wedding_credits}
+                        items={weddingNode.acfWedding.wcoWeddingCredits}
                       />
                     </div>
                   </div>
@@ -148,115 +149,71 @@ export default WeddingTemplate
 
 export const pageQuery = graphql`
   query WeddingById($id: String!) {
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      acfOptions {
+        options {
+          url
+        }
       }
     }
-    wordpressWpWeddings(id: { eq: $id }) {
+    wpWedding(id: { eq: $id }) {
       date
       slug
       title
       id
       content
-      featured_media {
-        id
-        localFile {
-          childImageSharp {
-            fluid(maxWidth: 1200) {
-              src
+      featuredImage {
+        node {
+          id
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, width: 1200, layout: CONSTRAINED)
             }
           }
         }
       }
-      acf {
-        featured_loop {
-          wordpress_id
-          source_url
+      acfFeaturedLoop {
+        featuredLoop {
+          mediaItemUrl
+          id
         }
-        wco_page_subtitle
-        wco_wedding_couple
-        wco_wedding_location
-        wco_wedding_vimeo_id
-        wco_wedding_credits {
-          label
-          label_custom
+      }
+      acfPages {
+        wcoPageSubtitle
+      }
+      acfWedding {
+        wcoWeddingCouple
+        wcoWeddingLocation
+        wcoWeddingVimeoId
+        wcoWeddingCredits {
           credit
+          label
+          labelCustom
           link
         }
-        wco_wedding_stills {
-          id
+        wcoWeddingStills {
+          altText
           slug
-          alt_text
-          mime_type
-          source_url
-          localFile {
-            childImageSharp {
-              id
-              fluid(maxWidth: 2000) {
-                src
-                srcSet
-                aspectRatio
-              }
-            }
-          }
-        }
-      }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-        # yoast_wpseo_canonical
-        # yoast_wpseo_social_url
-        # yoast_wpseo_company_or_person
-        # yoast_wpseo_person_name
-        # yoast_wpseo_company_name
-        # yoast_wpseo_website_name
-
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        yoast_wpseo_facebook_image {
           id
+          mimeType
+          mediaItemUrl
           localFile {
             childImageSharp {
-              id
-              fluid(maxWidth: 1200) {
-                aspectRatio
-                src
-              }
-            }
-          }
-        }
-
-        # yoast_wpseo_facebook_image
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        yoast_wpseo_twitter_image {
-          id
-          localFile {
-            childImageSharp {
-              id
-              fluid(maxWidth: 1200) {
-                aspectRatio
-                src
-              }
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
             }
           }
         }
       }
     }
-    allWordpressWpWeddings(limit: 8) {
+    allWpWedding(limit: 8) {
       edges {
         node {
           id
-          wordpress_id
           slug
           title
-          acf {
-            wco_wedding_location
-            wco_wedding_couple
+          acfWedding {
+            wcoWeddingLocation
+            wcoWeddingCouple
           }
         }
       }

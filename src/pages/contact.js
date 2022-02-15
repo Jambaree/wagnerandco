@@ -8,11 +8,11 @@ import Wrapper from '../components/Wrapper'
 import Header from '../components/Header'
 import GravityForms from '../components/GravityForms'
 import { StylizedSayHello } from '../components/HeadingsStylized'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 
 const ContactPage = props => {
   const data = props.data
-  const pageNode = data.wordpressPage
+  const pageNode = data.wpPage
 
   // eslint-disable-next-line
   const results = data.gfForm
@@ -29,13 +29,12 @@ const ContactPage = props => {
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
       <StylizedSayHello />
       <Wrapper maxWidth={3}>
         <div className="z2 relative mb4">
           <Header
             title={pageNode.title}
-            subtitle={pageNode.acf.wco_page_subtitle}
+            subtitle={pageNode.template.acfPages.wcoPageSubtitle}
           />
           <div dangerouslySetInnerHTML={{ __html: pageNode.content }} />
         </div>
@@ -55,9 +54,11 @@ export default ContactPage
 
 export const pageQuery = graphql`
   query ContactQuery {
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      acfOptions {
+        options {
+          url
+        }
       }
     }
     gfForm(formId: { eq: 1 }) {
@@ -95,51 +96,28 @@ export const pageQuery = graphql`
         message
       }
     }
-    wordpressPage(slug: { eq: "contact" }) {
+
+    wpPage(slug: { eq: "contact" }) {
       id
-      wordpress_id
       slug
       title
-      template
       content
-      acf {
-        wco_page_subtitle
-      }
-      featured_media {
-        localFile {
-          childImageSharp {
-            id
-            fluid(maxWidth: 1200) {
-              src
-            }
+      template {
+        ... on WpTemplate_ContactPage {
+          templateName
+          acfPages {
+            wcoPageSubtitle
           }
         }
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image {
-        #   id
-        #   localFile {
-        #     childImageSharp {
-        #       id
-        #       fluid(maxWidth: 1200) {
-        #         aspectRatio
-        #         src
-        #       }
-        #     }
-        #   }
-        # }
-
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
+      featuredImage {
+        node {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, width: 1200)
+            }
+          }
+        }
       }
     }
   }

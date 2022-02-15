@@ -27,7 +27,7 @@ class HighlightsIndexPage extends React.Component {
     }
 
     const data = this.props.data
-    let downloadEdges = data.allWordpressWpHighlights.edges
+    let downloadEdges = data.allWpHighlight.edges
 
     return (
       <div>
@@ -51,7 +51,7 @@ export default HighlightsIndexPage
 
 export const pageQuery = graphql`
   query HighlightsQuery {
-    allWordpressWpHighlights {
+    allWpHighlight {
       edges {
         node {
           title

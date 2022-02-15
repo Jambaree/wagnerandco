@@ -2,16 +2,16 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 // Ours
-import permittedSlug from '../utils/permitted-slug'
-import PageWrapper from '../components/PageWrapper'
-import Wrapper from '../components/Wrapper'
-import Header from '../components/Header'
-import YoastHelmet from '../components/YoastHelmet'
-import GutenbergBlocks from '../components/GutenbergBlocks'
+import permittedSlug from '../../utils/permitted-slug'
+import PageWrapper from '../../components/PageWrapper'
+import Wrapper from '../../components/Wrapper'
+import Header from '../../components/Header'
+// import YoastHelmet from '../../components/YoastHelmet'
+import GutenbergBlocks from '../../components/GutenbergBlocks'
 
 const PostTemplate = props => {
   const data = props.data
-  const postNode = data.wordpressPost
+  const postNode = data.wpPost
 
   if (!permittedSlug(postNode.slug)) {
     return null
@@ -19,7 +19,6 @@ const PostTemplate = props => {
 
   return (
     <PageWrapper is="article" className="WPPost">
-      <YoastHelmet url={data.options.options.url} node={postNode} />
       <Wrapper maxWidth={3}>
         <Header showTitle title={postNode.title} />
         <GutenbergBlocks blocks={postNode.blocks} />
@@ -32,20 +31,27 @@ export default PostTemplate
 
 export const pageQuery = graphql`
   query PostById($id: String!) {
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      acfOptions {
+        options {
+          url
+        }
       }
     }
-    wordpressPost(id: { eq: $id }) {
+    wpPost(id: { eq: $id }) {
       date
       slug
       title
       id
       # content
       blocks {
-        innerHTML
-        blockName
+        name
+        originalContent
+        ... on WpGravityformsFormBlock {
+          attributes {
+            formId
+          }
+        }
       }
     }
   }

@@ -11,7 +11,6 @@ import ImgSharp from '../components/ImgSharp'
 import { H1, H4 } from '../components/Headings'
 import { StylizedAbout } from '../components/HeadingsStylized'
 import WeddingIntro from '../components/WeddingIntro'
-import YoastHelmet from '../components/YoastHelmet'
 
 const AboutH2 = props => {
   return (
@@ -21,26 +20,25 @@ const AboutH2 = props => {
   )
 }
 
-const AboutPage = props => {
+const About = props => {
   const data = props.data
-  const pageNode = data.wordpressPage
-  const pressItemsEdges = pageNode.acf.wco_press_items
-  const pressLogoEdges = pageNode.acf.wco_press_logos
+  const pageNode = data.wpPage
+  const pressItemsEdges = pageNode.template.acfPress.wcoPressItems
+  const pressLogoEdges = pageNode.template.acfPress.wcoPressLogos
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
       <StylizedAbout />
       <Header
         title={pageNode.title}
-        subtitle={pageNode.acf.wco_page_subtitle}
+        subtitle={pageNode.template.acfPages.wcoPageSubtitle}
       />
       <Wrapper maxWidth={3}>
         <WeddingIntro>{pageNode.content}</WeddingIntro>
       </Wrapper>
       <Wrapper maxWidth={5}>
-        <AboutH2>{pageNode.acf.wco_team_title}</AboutH2>
-        <TeamMembers members={pageNode.acf.wco_team_members} />
+        <AboutH2>{pageNode.template.acfTeam.wcoTeamTitle}</AboutH2>
+        <TeamMembers members={pageNode.template.acfTeam.wcoTeamMembers} />
       </Wrapper>
       <AboutH2>Where we’ve been featured</AboutH2>
       <div className="sm-flex sm-mxn2">
@@ -81,96 +79,79 @@ const AboutPage = props => {
   )
 }
 
-export default AboutPage
+export default About
 
 export const pageQuery = graphql`
   query AboutQuery {
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      acfOptions {
+        options {
+          url
+        }
       }
     }
-    wordpressPage(slug: { eq: "about" }) {
+    wpPage(slug: { eq: "about" }) {
       id
-      wordpress_id
       slug
       title
-      template
       content
-      featured_media {
-        localFile {
-          childImageSharp {
-            id
-            fluid(maxWidth: 1200) {
-              src
+      featuredImage {
+        node {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, width: 1200, layout: CONSTRAINED)
             }
           }
         }
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image
-
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
-      }
-      acf {
-        wco_page_subtitle
-        wco_team_title
-        wco_team_members {
-          name
-          role
-          location
-          links {
-            link {
-              title
-              url
-              target
-            }
+      template {
+        ... on WpTemplate_AboutPage {
+          templateName
+          acfPages {
+            wcoPageSubtitle
           }
-          image {
-            alt_text
-            localFile {
-              childImageSharp {
-                id
-                fluid(maxWidth: 1200) {
-                  aspectRatio
-                  src
-                  srcSet
-                  sizes
-                  # srcWebp
-                  # srcSetWebp
+          acfTeam {
+            wcoTeamTitle
+            wcoTeamMembers {
+              role
+              name
+              location
+              links {
+                link {
+                  target
+                  title
+                  url
+                }
+              }
+              image {
+                altText
+                localFile {
+                  childImageSharp {
+                    id
+                    gatsbyImageData(quality: 90, layout: CONSTRAINED)
+                  }
                 }
               }
             }
           }
-        }
-        wco_press_items {
-          date
-          link {
-            title
-            url
-          }
-        }
-        wco_press_logos {
-          title
-          id
-          alt_text
-          localFile {
-            childImageSharp {
+          acfPress {
+            wcoPressItems {
+              date
+              link {
+                url
+                title
+                target
+              }
+            }
+            wcoPressLogos {
+              title
               id
-              fluid {
-                src
-                srcSet
-                aspectRatio
+              altText
+              localFile {
+                childImageSharp {
+                  id
+                  gatsbyImageData(quality: 90, layout: CONSTRAINED)
+                }
               }
             }
           }

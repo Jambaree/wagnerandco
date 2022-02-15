@@ -29,8 +29,8 @@ const HeadingDemo = props => (
 )
 
 const StyleguidePage = props => {
-  const site = props.data.site
-  let title = `${unesc(site.title)} Styleguide`
+  const site = props.data.wp.allSettings
+  let title = `${unesc(site.generalSettingsTitle)} Styleguide`
 
   return (
     <div
@@ -144,10 +144,12 @@ export default StyleguidePage
 
 export const pageQuery = graphql`
   query StyleguideQuery {
-    site: wordpressWpSettings {
-      title
-      description
-      url
+    wp {
+      allSettings {
+        generalSettingsTitle
+        generalSettingsUrl
+        generalSettingsDescription
+      }
     }
   }
 `

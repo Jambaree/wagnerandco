@@ -33,7 +33,7 @@ const WeddingCredits = props => {
     <ul className="m0 p0 list-style-none">
       {props.items
         ? props.items.map((obj, index) => {
-            let label = obj.label === 'Other' ? obj.label_custom : obj.label
+            let label = obj.label === 'Other' ? obj.labelCustom : obj.label
 
             return (
               <WeddingCredit

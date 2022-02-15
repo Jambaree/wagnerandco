@@ -3,22 +3,22 @@ import PropTypes from 'prop-types'
 import ImgSharp from './ImgSharp'
 import ImgFallback from './ImgFallback'
 import VideoLoop from './VideoLoop'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const WeddingFeaturedMedia = props => {
   const node = props.node
-  const img = node.featured_media
-  let sharp = img && img.localFile ? img.localFile.childImageSharp : false
+  const img = node.featuredImage.node
+  // let sharp = img && img.localFile ? img.localFile.childImageSharp : false
+  const image = getImage(img.localFile)
 
   return (
     <Fragment>
-      {node.acf.featured_loop ? (
+      {node.acfFeaturedLoop?.featuredLoop ? (
         <VideoLoop
-          poster={
-            img.localFile ? img.localFile.childImageSharp.fluid.src : null
-          }
-          src={`${process.env.GATSBY_WP_URL}${node.acf.featured_loop.source_url}`}
+          poster={img.localFile ? image : null}
+          src={`${node.acfFeaturedLoop.featuredLoop.mediaItemUrl}`}
         />
-      ) : img && sharp ? (
+      ) : img ? (
         <ImgSharp {...img} />
       ) : (
         <ImgFallback />

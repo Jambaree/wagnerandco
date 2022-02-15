@@ -5,10 +5,6 @@ require('dotenv').config({
   path: `.env.${isWPDev ? 'development' : 'production'}`,
 })
 
-let splitUrl = process.env.WP_URL.toString().split('://')
-let baseUrl = splitUrl[1]
-let protocol = splitUrl[0]
-
 let config = {
   siteMetadata: {
     title: 'Wagner & Co.',
@@ -18,73 +14,24 @@ let config = {
     'gatsby-plugin-layout',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
+    `gatsby-plugin-gatsby-cloud`,
+    {
+      resolve: `gatsby-theme-headless-wordpress`,
+      options: {
+        type: {
+          __all: {
+            // '__all' will override options for all post types
+            postsPerPage: 6, // overrides the postsPerPage option from WordPress reading settings
+          },
+        },
+      },
+    },
+    'gatsby-plugin-image',
     {
       resolve: 'gatsby-source-wordpress',
       options: {
         // The base URL of the Wordpress site without the trailingslash and the protocol.
-        baseUrl: baseUrl,
-
-        // The protocol. This can be http or https.
-        protocol: isWPDev ? 'http' : 'https',
-
-        // Indicates whether the site is hosted on wordpress.com.
-        hostingWPCOM: false,
-
-        // If useACF is true, then the source plugin will try to import the Wordpress ACF Plugin contents.
-        useACF: true,
-
-        auth: {
-          // If auth.user and auth.pass are filled, then the source plugin will be allowed
-          // to access endpoints that are protected with .htaccess.
-          htaccess_user: process.env.WP_USERNAME,
-          htaccess_pass: process.env.WP_PASSWORD,
-          htaccess_sendImmediately: false,
-          //
-          //   // If hostingWPCOM is true then you will need to communicate with wordpress.com API
-          //   // in order to do that you need to create an app (of type Web) at https://developer.wordpress.com/apps/
-          //   // then add your clientId, clientSecret, username, and password here
-          //   wpcom_app_clientSecret:
-          //     'NMPnXYFtj2gKas7V1kZyMxr7oLry9V5ZxIyBQGu2txjVHg0GhFz6RYcKopkHICYg',
-          //   wpcom_app_clientId: '54793',
-          //   wpcom_user: 'gatsbyjswpexample@gmail.com',
-          //   wpcom_pass: 'very-secured-password',
-        },
-
-        // Set verboseOutput to true to display a verbose output on `npm run develop` or `npm run build`
-        // It can help you debug specific API Endpoints problems.
-        verboseOutput: isDev,
-
-        // Set how many pages are retrieved per API request.
-        perPage: 30,
-        // perPage: 100,
-
-        // Search and Replace Urls across WordPress content.
-        searchAndReplaceContentUrls: {
-          // if def
-          sourceUrl: process.env.WP_URL,
-          replacementUrl: '',
-        },
-
-        // Set how many simultaneous requests are sent at once.
-        concurrentRequests: 10,
-
-        // Exclude specific routes using glob parameters
-        // See: https://github.com/isaacs/minimatch
-        // Example:  `["/*/*/comments", "/yoast/**"]` will exclude routes ending in `comments` and
-        // all routes that begin with `yoast` from fetch.
-        excludedRoutes: [
-          '/*/*/comments',
-          '/*/*/comments/*',
-          '/*/*/themes',
-          '/*/*/search',
-          '/*/*/taxonomies',
-          '/*/*/categories',
-          '/*/*/tags',
-          '/*/*/users',
-          '/*/*/users/me',
-          '/gf/**/entries',
-          '/gf/**/entries/**/*',
-        ],
+        url: `${process.env.WP_URL}/graphql`,
       },
     },
     {
@@ -110,48 +57,7 @@ let config = {
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-netlify',
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        exclude: [
-          '/home',
-          '/packages', // Packages are noindex
-          '/packages/*',
-          '/guides', // Packages are noindex
-          '/guides/*',
-          '/highlights', // Packages are noindex
-          '/highlights/*',
-          '/video-demo',
-          '/styleguide',
-          '/info',
-        ],
-        serialize: ({ site, allSitePage }) =>
-          allSitePage.edges.map(edge => {
-            let edgePath = edge.node.path
-            let priority = 0.7
-            let changefreq = 'weekly'
-
-            if (edgePath.includes('blog')) {
-              priority = 0.4
-            }
-
-            if (edgePath.includes('weddings')) {
-              priority = 0.8
-            }
-
-            if (edge.node.path === '' || edge.node.path === '/') {
-              priority = 1.0
-            }
-
-            return {
-              url: site.siteMetadata.siteUrl + edgePath,
-              changefreq: changefreq,
-              priority: priority,
-            }
-          }),
-      },
-    },
+    `gatsby-plugin-sitemap`,
   ],
 }
 

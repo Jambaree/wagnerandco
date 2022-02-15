@@ -10,7 +10,7 @@ import Header from '../components/Header'
 import { H4 } from '../components/Headings'
 import ImgSharp from '../components/ImgSharp'
 import { StylizedFAQ } from '../components/HeadingsStylized'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import DoodleRandomCorner from '../components/DoodleRandomCorner'
 
 const FAQImage = props => {
@@ -53,7 +53,7 @@ const FAQItemBlock = props => {
   if (
     itemOne &&
     itemTwo &&
-    itemOne.wco_faq_answer.length + itemTwo.wco_faq_answer.length > 1000
+    itemOne.wcoFaqAnswer.length + itemTwo.wcoFaqAnswer.length > 1000
   ) {
     long = true
   }
@@ -69,14 +69,14 @@ const FAQItemBlock = props => {
         }`}>
         {itemOne ? (
           <FAQItem
-            question={itemOne.wco_faq_question}
-            answer={itemOne.wco_faq_answer}
+            question={itemOne.wcoFaqQuestion}
+            answer={itemOne.wcoFaqAnswer}
           />
         ) : null}
         {itemTwo ? (
           <FAQItem
-            question={itemTwo.wco_faq_question}
-            answer={itemTwo.wco_faq_answer}
+            question={itemTwo.wcoFaqQuestion}
+            answer={itemTwo.wcoFaqAnswer}
           />
         ) : null}
       </div>
@@ -107,7 +107,7 @@ const FAQItems = props => {
 
   // Remove hidden items before handling layout
   items.forEach((item, index) => {
-    if (item.wco_show_on_faq_page === true) {
+    if (item.wcoShowOnFaqPage === true) {
       itemsToDisplay.push(item)
     }
   })
@@ -153,92 +153,69 @@ FAQItems.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
 }
 
-const FAQPage = props => {
+const Faq = props => {
   const data = props.data
-  const pageNode = data.wordpressPage
+  const pageNode = data.wpPage
 
   return (
     <PageWrapper className="relative">
-      <YoastHelmet node={pageNode} url={data.options.options.url} />
       <StylizedFAQ right />
       <Header title={pageNode.title} />
       <Wrapper maxWidth={5}>
         <FAQItems
-          items={pageNode.acf.wco_faq_item}
-          images={pageNode.acf.wco_faq_images}
+          items={pageNode.template.acfFaq.wcoFaqItem}
+          images={pageNode.template.acfFaq.wcoFaqImages}
         />
       </Wrapper>
     </PageWrapper>
   )
 }
 
-export default FAQPage
+export default Faq
 
 export const pageQuery = graphql`
   query FAQQuery {
-    settings: wordpressWpSettings {
-      title
-      url
-    }
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      acfOptions {
+        options {
+          url
+        }
       }
     }
-    wordpressPage(slug: { eq: "faq" }) {
+    wpPage(slug: { eq: "faq" }) {
       id
-      wordpress_id
       slug
       title
-      template
       content
-      featured_media {
-        localFile {
-          childImageSharp {
-            id
-            fluid(maxWidth: 1200) {
-              src
+      featuredImage {
+        node {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, width: 1200, layout: CONSTRAINED)
             }
           }
         }
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image
-
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
-      }
-      acf {
-        wco_page_subtitle
-        wco_faq_images {
-          title
-          id
-          alt_text
-          localFile {
-            childImageSharp {
+      template {
+        ... on WpTemplate_FAQPage {
+          templateName
+          acfFaq {
+            wcoFaqItem {
+              wcoShowOnFaqPage
+              wcoFaqQuestion
+              wcoFaqAnswer
+            }
+            wcoFaqImages {
+              altText
+              title
               id
-              fluid(maxWidth: 600) {
-                aspectRatio
-                src
-                srcSet
-                sizes
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(quality: 90, width: 600, layout: CONSTRAINED)
+                }
               }
             }
           }
-        }
-        wco_faq_item {
-          wco_faq_question
-          wco_faq_answer
-          wco_show_on_faq_page
         }
       }
     }

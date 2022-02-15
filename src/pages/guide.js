@@ -4,7 +4,7 @@ import { Link, graphql, navigate } from 'gatsby'
 // Ours
 import Header from '../components/Header'
 
-class GuidesIndexPage extends React.Component {
+class Guide extends React.Component {
   componentDidMount() {
     if (!process || !process.env || process.env.NODE_ENV !== 'development') {
       navigate('/404')
@@ -17,7 +17,7 @@ class GuidesIndexPage extends React.Component {
     }
 
     const data = this.props.data
-    let edges = data.allWordpressWpGuides.edges
+    let edges = data.allWpGuide.edges
 
     return (
       <div>
@@ -37,11 +37,11 @@ class GuidesIndexPage extends React.Component {
   }
 }
 
-export default GuidesIndexPage
+export default Guide
 
 export const pageQuery = graphql`
   query GuidesQuery {
-    allWordpressWpGuides {
+    allWpGuide {
       edges {
         node {
           title

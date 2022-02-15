@@ -43,8 +43,12 @@ const WeddingMore = props => {
                 title={node.title}
                 hover={index % 2 ? 'blue' : 'red'}
               />
-              <div className="red">{unesc(node.acf.wco_wedding_couple)}</div>
-              <div className="red">{unesc(node.acf.wco_wedding_location)}</div>
+              <div className="red">
+                {unesc(node.acfWedding.wcoWeddingCouple)}
+              </div>
+              <div className="red">
+                {unesc(node.acfWedding.wcoWeddingLocation)}
+              </div>
             </Link>
           </li>
         )

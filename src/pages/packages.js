@@ -24,7 +24,7 @@ import {
 } from '../components/HeadingsStylized'
 import ImgSharp from '../components/ImgSharp'
 import ScrollAnchor from '../components/ScrollAnchor'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import Doodle from '../components/Doodle'
 import { isLoggedIn, logout, getCurrentUser } from '../utils/auth'
 
@@ -60,8 +60,8 @@ const PackagesListItems = props => {
       }}>
       {props.items.map((item, j) => {
         let timestamp = format.timestampRange(
-          item.duration_short,
-          item.duration_long
+          item.durationShort,
+          item.durationLong
         )
 
         return (
@@ -112,7 +112,7 @@ const PackagesList = props => {
         let keyStr = `Package_${slug}_${index}`
 
         let price = null
-        let hasExampleLink = pkg.example_link
+        let hasExampleLink = pkg.exampleLink
 
         if (pkg.prices && props.country) {
           price = format.price(
@@ -133,10 +133,10 @@ const PackagesList = props => {
                   View:
                   <br />
                   <Link
-                    title={hasExampleLink ? pkg.example_link.title : undefined}
+                    title={hasExampleLink ? pkg.exampleLink.title : undefined}
                     to={
                       hasExampleLink
-                        ? pkg.example_link.url
+                        ? pkg.exampleLink.url
                         : `/highlights/${slug}-example`
                     }>
                     Example of {pkg.title}
@@ -242,13 +242,13 @@ class PackagesPage extends React.Component {
     const props = this.props
     const state = this.state
     const data = props.data
-    const pageNode = data.wordpressPage
-    const acf = pageNode.acf
+    const pageNode = data.wpPage
+    const acf = pageNode.template.acfPackages
 
     let itemsToDisplay = []
 
-    data.faq.acf.wco_faq_item.forEach(function(item) {
-      if (item.wco_show_on_packages_page === true) {
+    data.faq.template.acfFaq.wcoFaqItem.forEach(function(item) {
+      if (item.wcoShowOnPackagesPage === true) {
         itemsToDisplay.push(item)
       }
     })
@@ -257,21 +257,21 @@ class PackagesPage extends React.Component {
     let activeCountryNote = null
 
     if (
-      acf.wco_packages_notes &&
-      typeof acf.wco_packages_notes[`wco_packages_note_${state.countryKey}`] !==
+      acf.wcoPackagesNotes &&
+      typeof acf.wcoPackagesNotes[`wcoPackagesNote${state.countryKey}`] !==
         'undefined'
     ) {
       activeCountryNote = (
-        <p>{acf.wco_packages_notes[`wco_packages_note_${state.countryKey}`]}</p>
+        <p>{acf.wcoPackagesNotes[`wcoPackagesNote${state.countryKey}`]}</p>
       )
     }
 
     return (
       <PrivateRoute
         parentNode={pageNode}
-        title={acf.wco_packages_protected.title}
-        submitLabel={acf.wco_packages_protected.button_label}
-        subtitle={acf.wco_packages_protected.subtitle}
+        title={acf.wcoPackagesProtected.title}
+        submitLabel={acf.wcoPackagesProtected.button_label}
+        subtitle={acf.wcoPackagesProtected.subtitle}
         location={props.location}
         countryKey={state.countryKey}
         handleOnChangeCountry={e => {
@@ -281,27 +281,12 @@ class PackagesPage extends React.Component {
         }}
         onSuccess="/packages">
         <PageWrapper>
-          <YoastHelmet node={pageNode} url={data.options.options.url}>
-            <meta name="robots" content="noindex" />
-          </YoastHelmet>
-          {/*
-          <div className="bg-red blue">
-            Country: {state.countryKey} {activeCountry.currencyCode}
-            <form onSubmit={e => e.preventDefault()}>
-              <select
-                value={state.countryKey}
-                onChange={this.handleOnChangeCountry}>
-                {Object.keys(props.countries).map((value, index) => {
-                  let country = props.countries[value]
-                  return <option value={value}>{country.label}</option>
-                })}
-              </select>
-            </form>
-          </div>
-          */}
           <div className="relative md-pb4">
             <StylizedInfo />
-            <Header title={pageNode.title} subtitle={acf.wco_page_subtitle} />
+            <Header
+              title={pageNode.title}
+              subtitle={pageNode.template.acfPages.wcoPageSubtitle}
+            />
             <div className="z2 relative">
               <Wrapper maxWidth={3}>
                 <div className="md-flex flex-wrap md3 md-mb4">
@@ -312,7 +297,7 @@ class PackagesPage extends React.Component {
                   </div>
                   <div className="col-12 md-col-4 md-pl3">
                     <div className="WPWeddingIntro-img md-max-width-1">
-                      <ImgSharp {...acf.wco_packages_intro_image} />
+                      <ImgSharp {...acf.wcoPackagesIntroImage} />
                     </div>
                     <div className="WPWeddingIntro-doodle">
                       <Doodle name="zag" color="blue" />
@@ -328,13 +313,13 @@ class PackagesPage extends React.Component {
                 <StylizedCinematography />
 
                 <header className="max-width-2 mx-auto">
-                  <H1>{acf.wco_packages_title}</H1>
+                  <H1>{acf.wcoPackagesTitle}</H1>
                 </header>
                 <div className="md-mb4 lg-pb4">
                   <Section>
                     <H4>All packages include:</H4>
                     <ul className="m0 pl2 relative z2">
-                      {acf.wco_packages_all.map((obj, index) => {
+                      {acf.wcoPackagesAll.map((obj, index) => {
                         return <li key={`Package_All_${index}`}>{obj.item}</li>
                       })}
                     </ul>
@@ -342,18 +327,18 @@ class PackagesPage extends React.Component {
                 </div>
                 <Section>
                   <PackagesList
-                    items={acf.wco_packages}
+                    items={acf.wcoPackages}
                     country={activeCountry}
                   />
                 </Section>
-                {acf.wco_packages_addons ? (
+                {acf.wcoPackagesAddons ? (
                   <Section id="add-ons">
                     <ScrollAnchor href="#add-ons">
                       <H1>Add-ons</H1>
                     </ScrollAnchor>
                     <PackagesListItems
                       country={activeCountry}
-                      items={acf.wco_packages_addons}
+                      items={acf.wcoPackagesAddons}
                     />
                   </Section>
                 ) : null}
@@ -389,13 +374,13 @@ class PackagesPage extends React.Component {
                                 style={{ paddingBottom: '0.2em' }}>
                                 <H4 is="span" underline>
                                   <span className="border-bottom border-blue border-medium">
-                                    {item.wco_faq_question}
+                                    {item.wcoFaqQuestion}
                                   </span>
                                 </H4>
                               </summary>
                               <div
                                 dangerouslySetInnerHTML={{
-                                  __html: item.wco_faq_answer,
+                                  __html: item.wcoFaqAnswer,
                                 }}
                               />
                             </details>
@@ -408,7 +393,7 @@ class PackagesPage extends React.Component {
                 <PackagesCallToAction />
               </article>
             </Wrapper>
-            <Video vimeoId={acf.wco_packages_vimeo_id} />
+            <Video vimeoId={acf.wcoPackagesVimeoId} />
             <WhitespaceHeader
               is="div"
               minHeight={350}
@@ -435,125 +420,116 @@ PackagesPage.defaultProps = {
 
 export const pageQuery = graphql`
   query PackagesQuery {
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      acfOptions {
+        options {
+          url
+        }
       }
     }
-    wordpressPage(slug: { eq: "packages" }) {
+    wpPage(slug: { eq: "packages" }) {
       id
-      wordpress_id
       slug
       title
       content
-      featured_media {
-        localFile {
-          childImageSharp {
-            id
-            fluid(maxWidth: 1200) {
-              src
-            }
-          }
-        }
-      }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image
-
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
-      }
-      acf {
-        wco_page_subtitle
-        wco_packages_title
-        wco_packages_intro_image {
-          id
-          alt_text
+      featuredImage {
+        node {
           localFile {
             childImageSharp {
-              fluid {
-                src
-                srcSet
-              }
+              id
+              gatsbyImageData(quality: 90, width: 1200, layout: CONSTRAINED)
             }
           }
         }
-        wco_packages_all {
-          item
-        }
-        wco_packages {
-          title
-          example_link {
-            title
-            url
-          }
-          prices {
-            price_ca
-            price_us
-            price_other
-          }
-          items {
-            name
-            description
-            duration_short
-            duration_long
-          }
-          image {
-            id
-            alt_text
-            source_url
-            localFile {
-              childImageSharp {
-                fluid {
-                  src
-                  srcSet
+      }
+      template {
+        ... on WpTemplate_PackagesPage {
+          templateName
+          acfPackages {
+            fieldGroupName
+            wcoPackagesTitle
+            wcoPackagesIntroImage {
+              altText
+              id
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(quality: 90, layout: CONSTRAINED)
                 }
               }
             }
+            wcoPackagesAll {
+              item
+            }
+            wcoPackages {
+              title
+              exampleLink {
+                title
+                target
+                url
+              }
+              prices {
+                priceCa
+                priceOther
+                priceUs
+              }
+              items {
+                description
+                durationLong
+                durationShort
+                name
+              }
+              image {
+                altText
+                id
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(quality: 90, layout: CONSTRAINED)
+                  }
+                }
+              }
+            }
+            wcoPackagesAddons {
+              name
+              price
+              prices {
+                priceCa
+                priceOther
+                priceUs
+              }
+            }
+            wcoPackagesNotes {
+              wcoPackagesNoteCa
+              wcoPackagesNoteOther
+              wcoPackagesNoteUs
+            }
+            wcoPackagesVimeoId
+            wcoPackagesProtected {
+              buttonLabel
+              subtitle
+              title
+            }
           }
-        }
-        wco_packages_addons {
-          name
-          description
-          price
-          prices {
-            price_ca
-            price_us
-            price_other
+          acfPages {
+            wcoPageSubtitle
           }
-          duration_short
-          duration_long
-        }
-        wco_packages_notes {
-          wco_packages_note_ca
-          wco_packages_note_us
-          wco_packages_note_other
-        }
-        wco_packages_vimeo_id
-        wco_packages_protected {
-          title
-          subtitle
-          button_label
         }
       }
     }
-    faq: wordpressPage(slug: { eq: "faq" }) {
-      title
-      acf {
-        wco_faq_item {
-          wco_faq_question
-          wco_faq_answer
-          wco_show_on_packages_page
+    faq: wpPage(slug: { eq: "faq" }) {
+      template {
+        ... on WpTemplate_FAQPage {
+          templateName
+          acfFaq {
+            wcoFaqItem {
+              wcoShowOnPackagesPage
+              wcoFaqQuestion
+              wcoFaqAnswer
+              wcoShowOnFaqPage
+            }
+          }
         }
       }
+      title
     }
     # allWordpressAcfOptions
   }

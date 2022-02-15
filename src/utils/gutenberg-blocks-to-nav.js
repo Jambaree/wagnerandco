@@ -7,8 +7,8 @@ const gutenbergBlocksToNav = function(blocks, allowedBlockName) {
 
   if (blocks && blocks.length >= 1) {
     blocks.forEach(function(block) {
-      if (block.blockName === allowedBlockName) {
-        let content = reactHtmlParser(block.innerHTML)
+      if (block.name === allowedBlockName) {
+        let content = reactHtmlParser(block.originalContent)
         let label = content[0].props.children[0]
 
         // If the label isn’t a string by this point,

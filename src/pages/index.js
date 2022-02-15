@@ -9,24 +9,23 @@ import WeddingsListing from '../components/WeddingsListing'
 import Header from '../components/Header'
 import WhitespaceHeader from '../components/WhitespaceHeader'
 import { H1, Intro } from '../components/Headings'
-import YoastHelmet from '../components/YoastHelmet'
+// import YoastHelmet from '../components/YoastHelmet'
 import Doodle from '../components/Doodle'
 
 const IndexPage = props => {
   const data = props.data
-  const pageAcf = data.wordpressPage.acf
-  const weddingEdges = data.allWordpressWpWeddings.edges
+  const pageAcf = data.wpPage.acfFrontPage
+  const weddingEdges = data.allWpWedding.edges
 
   return (
     <PageWrapper>
-      <YoastHelmet url={data.options.options.url} node={data.wordpressPage} />
       <Wrapper padding>
         <WhitespaceHeader is="div" marginBottom={5}>
           <Header
             className="mt3"
             showTitle
-            title={data.wordpressPage.title}
-            subtitle={pageAcf.wco_page_subtitle}
+            title={data.wpPage.title}
+            subtitle={pageAcf.wcoFrontpageWeddingsSubtitle}
           />
         </WhitespaceHeader>
       </Wrapper>
@@ -35,11 +34,11 @@ const IndexPage = props => {
           <Doodle name="wave" color="red" />
         </div>
       </div>
-      <Video vimeoId={pageAcf.wco_frontpage_vimeo_id} />
+      <Video vimeoId={pageAcf.wcoFrontpageVimeoId} />
       <Wrapper padding>
         <div className="center py2 sm-py3 mb3 md-py4 mb4">
-          <H1 is="h2">{pageAcf.wco_frontpage_weddings_title}</H1>
-          <Intro>{pageAcf.wco_frontpage_weddings_subtitle}</Intro>
+          <H1 is="h2">{pageAcf.wcoFrontpageWeddingsTitle}</H1>
+          <Intro>{pageAcf.wcoFrontpageWeddingsSubtitle}</Intro>
         </div>
         <WeddingsListing edges={weddingEdges} limit={4} showMore={false} />
         <WhitespaceHeader
@@ -49,7 +48,7 @@ const IndexPage = props => {
           marginTop={0}
           marginBottom={0}>
           <div className="max-width-2 mx-auto h3 line-height-4 center">
-            {pageAcf.wco_frontpage_weddings_footer}
+            {pageAcf.wcoFrontpageWeddingsFooter}
           </div>
         </WhitespaceHeader>
       </Wrapper>
@@ -61,73 +60,55 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query IndexQuery {
-    options: wordpressAcfOptions {
-      options {
-        url
+    wp {
+      acfOptions {
+        options {
+          url
+        }
       }
     }
-    wordpressPage(slug: { eq: "home" }) {
+
+    wpPage(slug: { eq: "home" }) {
       id
       slug
       title
-      acf {
-        wco_page_subtitle
-        wco_frontpage_weddings_title
-        wco_frontpage_weddings_subtitle
-        wco_frontpage_vimeo_id
-        wco_frontpage_weddings_footer
+      acfFrontPage {
+        fieldGroupName
+        wcoFrontpageVimeoId
+        wcoFrontpageWeddingsFooter
+        wcoFrontpageWeddingsSubtitle
+        wcoFrontpageWeddingsTitle
       }
-      featured_media {
-        localFile {
-          childImageSharp {
-            id
-            fluid(maxWidth: 1200) {
-              src
+      featuredImage {
+        node {
+          localFile {
+            childImageSharp {
+              gatsbyImageData(width: 1200, layout: CONSTRAINED)
             }
           }
         }
       }
-      yoast_meta {
-        yoast_wpseo_title
-        yoast_wpseo_metadesc
-
-        # Facebook
-        yoast_wpseo_facebook_title
-        yoast_wpseo_facebook_description
-        yoast_wpseo_facebook_type
-        # yoast_wpseo_facebook_image
-
-        # Twitter
-        yoast_wpseo_twitter_title
-        yoast_wpseo_twitter_description
-        # yoast_wpseo_twitter_image
-      }
     }
-    allWordpressWpWeddings {
+    allWpWedding {
       edges {
         node {
           id
-          wordpress_id
           slug
           title
-          template
           content
-          featured_media {
-            id
-            alt_text
-            localFile {
-              childImageSharp {
-                id
-                fluid {
-                  src
-                  srcSet
-                  sizes
+          featuredImage {
+            node {
+              id
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(quality: 90, layout: CONSTRAINED)
                 }
               }
             }
           }
-          acf {
-            wco_page_subtitle
+          acfPages {
+            wcoPageSubtitle
           }
         }
       }

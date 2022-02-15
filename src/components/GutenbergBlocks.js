@@ -64,10 +64,13 @@ const handleTransformImage = function(node) {
         // because Gutenberg blocks are all innerHTML)
         //   The only obvious alternative to me is to use ACF blocks
         // instead of Gutenberg blocks.
-        node.attribs.src = `${node.attribs['data-src']}`
-        node.attribs.style = `${node.attribs['style']}`
-        node.attribs.class += ' block col-12'
-        break
+        if (node.attribs['data-src']) {
+          node.attribs.src = `${node.attribs['data-src']}`
+          node.attribs.style = `${node.attribs['style']}`
+          node.attribs.class += ' block col-12'
+          break
+        }
+
       // case 'figure':
       //   node.attribs.class += ' lg-mxn4'
       //   break

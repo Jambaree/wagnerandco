@@ -7,15 +7,7 @@ const ImgSharp = props => {
   const image = getImage(localFile)
   remainder.alt = remainder.alt || altText || ''
 
-  return (
-    <GatsbyImage
-      objectPosition="0"
-      objectFit={image.layout === 'constrained' ? 'contain' : 'cover'}
-      image={image}
-      alt={remainder.alt || ''}
-      {...remainder}
-    />
-  )
+  return <GatsbyImage image={image} alt={remainder.alt || ''} {...remainder} />
 }
 
 ImgSharp.propTypes = {

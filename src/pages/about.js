@@ -99,7 +99,12 @@ export const pageQuery = graphql`
         node {
           localFile {
             childImageSharp {
-              gatsbyImageData(quality: 90, width: 1200, layout: CONSTRAINED)
+              gatsbyImageData(
+                quality: 90
+                width: 1200
+                layout: CONSTRAINED
+                placeholder: BLURRED
+              )
             }
           }
         }
@@ -128,7 +133,11 @@ export const pageQuery = graphql`
                 localFile {
                   childImageSharp {
                     id
-                    gatsbyImageData(quality: 90, layout: CONSTRAINED)
+                    gatsbyImageData(
+                      quality: 90
+                      layout: CONSTRAINED
+                      placeholder: BLURRED
+                    )
                   }
                 }
               }
@@ -150,7 +159,11 @@ export const pageQuery = graphql`
               localFile {
                 childImageSharp {
                   id
-                  gatsbyImageData(quality: 90, layout: CONSTRAINED)
+                  gatsbyImageData(
+                    quality: 90
+                    layout: CONSTRAINED
+                    placeholder: BLURRED
+                  )
                 }
               }
             }

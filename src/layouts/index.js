@@ -47,7 +47,7 @@ const Layout = props => {
             slug
             localFile {
               childImageSharp {
-                fluid {
+                resize {
                   src
                 }
               }
@@ -79,7 +79,7 @@ const Layout = props => {
       props,
       'data.home.featuredImage.node.localFile.childImageSharp.sizes.src'
     )
-      ? `${options.url}${data.home.featuredImage.node.localFile.childImageSharp.sizes.src}`
+      ? `${options.url}${data.home.featuredImage.node.localFile.childImageSharp.resize.src}`
       : null,
   }
 

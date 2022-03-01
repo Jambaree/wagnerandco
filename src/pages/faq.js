@@ -12,6 +12,7 @@ import ImgSharp from '../components/ImgSharp'
 import { StylizedFAQ } from '../components/HeadingsStylized'
 // import YoastHelmet from '../components/YoastHelmet'
 import DoodleRandomCorner from '../components/DoodleRandomCorner'
+import Seo from '../components/Seo'
 
 const FAQImage = props => {
   return (
@@ -156,9 +157,11 @@ FAQItems.propTypes = {
 const Faq = props => {
   const data = props.data
   const pageNode = data.wpPage
+  const seoData = data.wpPage.seo
 
   return (
     <PageWrapper className="relative">
+      <Seo {...seoData} />
       <StylizedFAQ right />
       <Header title={pageNode.title} />
       <Wrapper maxWidth={5}>
@@ -183,6 +186,21 @@ export const pageQuery = graphql`
       }
     }
     wpPage(slug: { eq: "faq" }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       id
       slug
       title

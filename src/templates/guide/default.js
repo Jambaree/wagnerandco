@@ -10,11 +10,13 @@ import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
 import GutenbergBlocks from '../../components/GutenbergBlocks'
 import SidebarNav from '../../components/SidebarNav'
 import gutenbergBlocksToNav from '../../utils/gutenberg-blocks-to-nav'
+import Seo from '../../components/Seo'
 
 const WPGuide = props => {
   const data = props.data
   const pageNode = data.wpGuide
   let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
+  const seoData = data.wpGuide.seo
 
   if (!permittedSlug(pageNode.slug)) {
     return null
@@ -27,6 +29,7 @@ const WPGuide = props => {
 
   return (
     <PageWrapper className="WPGuide pb4" is="article">
+      <Seo {...seoData} />
       <WhitespaceHeaderCorners
         title={pageNode.title}
         date={props.showDate ? pageNode.date : undefined}
@@ -57,6 +60,21 @@ export const pageQuery = graphql`
       }
     }
     wpGuide(id: { eq: $id }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       id
       slug
       title

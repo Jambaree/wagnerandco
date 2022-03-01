@@ -11,6 +11,7 @@ import ImgSharp from '../components/ImgSharp'
 import { H1, H4 } from '../components/Headings'
 import { StylizedAbout } from '../components/HeadingsStylized'
 import WeddingIntro from '../components/WeddingIntro'
+import Seo from '../components/Seo'
 
 const AboutH2 = props => {
   return (
@@ -23,11 +24,13 @@ const AboutH2 = props => {
 const About = props => {
   const data = props.data
   const pageNode = data.wpPage
+  const seoData = data.wpPage.seo
   const pressItemsEdges = pageNode.template.acfPress.wcoPressItems
   const pressLogoEdges = pageNode.template.acfPress.wcoPressLogos
 
   return (
     <PageWrapper className="relative">
+      <Seo {...seoData} />
       <StylizedAbout />
       <Header
         title={pageNode.title}
@@ -91,6 +94,21 @@ export const pageQuery = graphql`
       }
     }
     wpPage(slug: { eq: "about" }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       id
       slug
       title

@@ -11,14 +11,18 @@ import WhitespaceHeader from '../components/WhitespaceHeader'
 import { H1, Intro } from '../components/Headings'
 // import YoastHelmet from '../components/YoastHelmet'
 import Doodle from '../components/Doodle'
+import Seo from '../components/Seo'
 
 const IndexPage = props => {
   const data = props.data
   const pageAcf = data.wpPage.acfFrontPage
   const weddingEdges = data.allWpWedding.edges
+  const seoData = data.wpPage.seo
 
   return (
     <PageWrapper>
+      <Seo {...seoData} />
+
       <Wrapper padding>
         <WhitespaceHeader is="div" marginBottom={5}>
           <Header
@@ -69,6 +73,21 @@ export const pageQuery = graphql`
     }
 
     wpPage(slug: { eq: "home" }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       id
       slug
       title

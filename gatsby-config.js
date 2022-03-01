@@ -16,6 +16,18 @@ let config = {
     'gatsby-plugin-react-helmet',
     `gatsby-plugin-gatsby-cloud`,
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Wagner & Co.`,
+        short_name: `W & Co.`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#0074d9`,
+        display: `standalone`,
+        icon: `./favicon.png`,
+      },
+    },
+    {
       resolve: `gatsby-theme-headless-wordpress`,
       options: {
         type: {

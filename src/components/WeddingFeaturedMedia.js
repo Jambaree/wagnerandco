@@ -1,9 +1,11 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, lazy, Suspense } from 'react'
 import PropTypes from 'prop-types'
-import ImgSharp from './ImgSharp'
-import ImgFallback from './ImgFallback'
-import VideoLoop from './VideoLoop'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
+//import as lazy
+export const VideoLoop = lazy(() => import('./VideoLoop'))
+export const ImgSharp = lazy(() => import('./ImgSharp'))
+export const ImgFallback = lazy(() => import('./ImgFallback'))
 
 const WeddingFeaturedMedia = props => {
   const node = props.node
@@ -13,16 +15,18 @@ const WeddingFeaturedMedia = props => {
 
   return (
     <Fragment>
-      {node.acfFeaturedLoop?.featuredLoop ? (
-        <VideoLoop
-          poster={img.localFile ? image : null}
-          src={`${node.acfFeaturedLoop.featuredLoop.mediaItemUrl}`}
-        />
-      ) : img ? (
-        <ImgSharp {...img} />
-      ) : (
-        <ImgFallback />
-      )}
+      <Suspense fallback={false}>
+        {node.acfFeaturedLoop?.featuredLoop ? (
+          <VideoLoop
+            poster={img.localFile ? image : null}
+            src={`${node.acfFeaturedLoop.featuredLoop.mediaItemUrl}`}
+          />
+        ) : img ? (
+          <ImgSharp {...img} />
+        ) : (
+          <ImgFallback />
+        )}
+      </Suspense>
     </Fragment>
   )
 }

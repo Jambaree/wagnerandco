@@ -8,11 +8,13 @@ import Wrapper from '../components/Wrapper'
 import Header from '../components/Header'
 import GravityForms from '../components/GravityForms'
 import { StylizedSayHello } from '../components/HeadingsStylized'
+import Seo from '../components/Seo'
 // import YoastHelmet from '../components/YoastHelmet'
 
 const ContactPage = props => {
   const data = props.data
   const pageNode = data.wpPage
+  const seoData = data.wpPage.seo
 
   // eslint-disable-next-line
   const results = data.gfForm
@@ -29,6 +31,7 @@ const ContactPage = props => {
 
   return (
     <PageWrapper className="relative">
+      <Seo {...seoData} />
       <StylizedSayHello />
       <Wrapper maxWidth={3}>
         <div className="z2 relative mb4">
@@ -98,6 +101,21 @@ export const pageQuery = graphql`
     }
 
     wpPage(slug: { eq: "contact" }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       id
       slug
       title

@@ -16,6 +16,7 @@ import ImgSharp from '../../components/ImgSharp'
 import DoodleRandomCorner from '../../components/DoodleRandomCorner'
 import WeddingFeaturedMedia from '../../components/WeddingFeaturedMedia'
 import VideoLoop from '../../components/VideoLoop'
+import Seo from '../../components/Seo'
 
 class WeddingTemplate extends React.Component {
   getRandomIntInclusive(min, max) {
@@ -46,6 +47,7 @@ class WeddingTemplate extends React.Component {
     const data = props.data
     const weddingEdges = data.allWpWedding.edges
     const weddingNode = data.wpWedding
+    const seoData = data.wpWedding.seo
     const stills = weddingNode.acfWedding.wcoWeddingStills
 
     if (!permittedSlug(weddingNode.slug)) {
@@ -86,10 +88,8 @@ class WeddingTemplate extends React.Component {
     return (
       <React.Fragment>
         <PageWrapper is="article">
-          {/* <YoastHelmet
-            node={weddingNode}
-            url={data.wp.acfOptions.options.url}
-          /> */}
+          <Seo {...seoData} />
+
           <div className="md-flex flex-wrap mb4">
             <div className="mt4 md-mt0 order-last col-12">
               <Video {...vimeoProps} />
@@ -157,6 +157,21 @@ export const pageQuery = graphql`
       }
     }
     wpWedding(id: { eq: $id }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       date
       slug
       title

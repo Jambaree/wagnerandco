@@ -106,6 +106,9 @@ export const pageQuery = graphql`
                     layout: CONSTRAINED
                     placeholder: BLURRED
                   )
+                  fluid {
+                    src
+                  }
                 }
               }
             }

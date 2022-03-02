@@ -8,6 +8,7 @@ import Wrapper from '../components/Wrapper'
 import WeddingsListing from '../components/WeddingsListing'
 // import YoastHelmet from '../components/YoastHelmet'
 import { stripTrailingSlash } from '../utils/format'
+import Seo from '../components/Seo'
 
 const WeddingsIndexPage = props => {
   const data = props.data
@@ -15,8 +16,11 @@ const WeddingsIndexPage = props => {
   let postEdges = data.allWpWedding.edges
   let slugPrefix = stripTrailingSlash(props.location.pathname)
   let title = 'Weddings'
+  const seoData = data.wpPage.seo
+
   return (
     <PageWrapper>
+      <Seo {...seoData} />
       <Header title={title} />
       <Wrapper maxWidth={5} padding>
         <WeddingsListing
@@ -44,6 +48,21 @@ export const pageQuery = graphql`
       }
     }
     wpPage(slug: { eq: "weddings" }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       id
       slug
       title

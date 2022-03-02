@@ -13,6 +13,7 @@ import slugify from 'slugify'
 import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
 // import YoastHelmet from '../../components/YoastHelmet'
 import SidebarNav from '../../components/SidebarNav'
+import Seo from '../../components/Seo'
 
 const ButtonDownload = props => {
   return (
@@ -34,6 +35,7 @@ const HighlightTemplate = props => {
   const data = props.data
   const wpHighlight = data.wpHighlight
   const videos = wpHighlight.acfHighlight.wcoHighlightVideos
+  const seoData = data.wpHighlight.seo
 
   if (!permittedSlug(wpHighlight.slug)) {
     return null
@@ -73,6 +75,7 @@ const HighlightTemplate = props => {
 
   return (
     <PageWrapper is="article">
+      <Seo {...seoData} />
       <WhitespaceHeaderCorners
         title={wpHighlight.title}
         date={wpHighlight.date}
@@ -136,6 +139,21 @@ export const pageQuery = graphql`
       }
     }
     wpHighlight(id: { eq: $id }) {
+      seo {
+        title
+        metaDesc
+        opengraphTitle
+        opengraphDescription
+        opengraphImage {
+          altText
+          sourceUrl
+          localFile {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+            }
+          }
+        }
+      }
       date
       slug
       title

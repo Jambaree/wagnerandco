@@ -10,7 +10,6 @@ const WeddingFeaturedMedia = props => {
   const img = node.featuredImage.node
   // let sharp = img && img.localFile ? img.localFile.childImageSharp : false
   const image = getImage(img.localFile)
-  console.log(props)
   return (
     <Fragment>
       {node.acfFeaturedLoop?.featuredLoop ? (

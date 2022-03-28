@@ -28,7 +28,7 @@ const WPPage = props => {
           subtitle={pageNode.template.acfPages.wcoPageSubtitle}
         />
         <div dangerouslySetInnerHTML={{ __html: pageNode.content }} />
-        <GutenbergBlocks blocks={pageNode.blocks} />
+        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
       </Wrapper>
     </PageWrapper>
   )

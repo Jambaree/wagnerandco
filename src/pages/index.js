@@ -18,7 +18,7 @@ const IndexPage = props => {
   const pageAcf = data.wpPage.acfFrontPage
   const weddingEdges = data.allWpWedding.edges
   const seoData = data.wpPage.seo
-
+  console.log(props)
   return (
     <PageWrapper>
       <Seo {...seoData} />
@@ -29,7 +29,7 @@ const IndexPage = props => {
             className="mt3"
             showTitle
             title={data.wpPage.title}
-            subtitle={pageAcf.wcoFrontpageWeddingsSubtitle}
+            subtitle={data.wpPage.template.acfPages.wcoPageSubtitle}
           />
         </WhitespaceHeader>
       </Wrapper>
@@ -85,6 +85,14 @@ export const pageQuery = graphql`
             childImageSharp {
               gatsbyImageData(quality: 90, layout: CONSTRAINED)
             }
+          }
+        }
+      }
+      template {
+        ... on WpDefaultTemplate {
+          templateName
+          acfPages {
+            wcoPageSubtitle
           }
         }
       }

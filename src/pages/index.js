@@ -29,7 +29,7 @@ const IndexPage = props => {
             className="mt3"
             showTitle
             title={data.wpPage.title}
-            subtitle={data.wpPage.title}
+            subtitle={data.wpPage.template.acfPages.wcoPageSubtitle}
           />
         </WhitespaceHeader>
       </Wrapper>
@@ -112,6 +112,14 @@ export const pageQuery = graphql`
             childImageSharp {
               gatsbyImageData(quality: 90, layout: CONSTRAINED)
             }
+          }
+        }
+      }
+      template {
+        ... on WpTemplate_HomePage {
+          templateName
+          acfPages {
+            wcoPageSubtitle
           }
         }
       }

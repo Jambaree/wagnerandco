@@ -8,7 +8,7 @@ import Wrapper from '../../components/Wrapper'
 import Header from '../../components/Header'
 import Seo from '../../components/Seo'
 // import YoastHelmet from '../../components/YoastHelmet'
-// import GutenbergBlocks from '../components/GutenbergBlocks'
+import GutenbergBlocks from '../../components/GutenbergBlocks'
 
 const WPPage = props => {
   const data = props.data
@@ -28,7 +28,7 @@ const WPPage = props => {
           subtitle={pageNode.template.acfPages.wcoPageSubtitle}
         />
         <div dangerouslySetInnerHTML={{ __html: pageNode.content }} />
-        {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
+        <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
     </PageWrapper>
   )

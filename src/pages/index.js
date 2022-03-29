@@ -71,7 +71,34 @@ export const pageQuery = graphql`
         }
       }
     }
-
+    allWpWedding {
+      edges {
+        node {
+          id
+          slug
+          title
+          content
+          featuredImage {
+            node {
+              id
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    quality: 90
+                    layout: CONSTRAINED
+                    placeholder: BLURRED
+                  )
+                }
+              }
+            }
+          }
+          acfPages {
+            wcoPageSubtitle
+          }
+        }
+      }
+    }
     wpPage(slug: { eq: "home" }) {
       seo {
         title
@@ -116,34 +143,6 @@ export const pageQuery = graphql`
                 placeholder: BLURRED
               )
             }
-          }
-        }
-      }
-    }
-    allWpWedding {
-      edges {
-        node {
-          id
-          slug
-          title
-          content
-          featuredImage {
-            node {
-              id
-              altText
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(
-                    quality: 90
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                  )
-                }
-              }
-            }
-          }
-          acfPages {
-            wcoPageSubtitle
           }
         }
       }

@@ -8,7 +8,9 @@ const unesc = function(str) {
     str = str.replace('&bull;', '•')
     str = _unescape(str)
   } else {
-    console.log('bad str', str)
+    if (process.env.NODE_ENV === 'development') {
+      console.log('bad str', str)
+    }
   }
   return str
 }

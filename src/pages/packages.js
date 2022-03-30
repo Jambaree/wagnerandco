@@ -75,7 +75,10 @@ const PackagesListItems = props => {
               {item.prices && props.country ? (
                 <div>
                   {format.price(
-                    item.prices[`price_${props.country.value}`],
+                    item.prices[
+                      `price${props.country.value[0].toUpperCase() +
+                        props.country.value.slice(1)}`
+                    ],
                     props.country.currencyCode
                   )}
                 </div>
@@ -117,7 +120,10 @@ const PackagesList = props => {
 
         if (pkg.prices && props.country) {
           price = format.price(
-            pkg.prices[`price_${props.country.value}`],
+            pkg.prices[
+              `price${props.country.value[0].toUpperCase() +
+                props.country.value.slice(1)}`
+            ],
             props.country.currencyCode
           )
         }

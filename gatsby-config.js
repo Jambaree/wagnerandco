@@ -38,13 +38,8 @@ let config = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-image`,
-      options: {
-        placeholder: 'dominantColor',
-        formats: ['auto', 'webp', 'avif'],
-      },
-    },
+    `gatsby-plugin-image`,
+
     {
       resolve: 'gatsby-source-wordpress',
       options: {

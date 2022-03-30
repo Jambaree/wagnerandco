@@ -43,7 +43,6 @@ let config = {
       options: {
         placeholder: 'dominantColor',
         formats: ['auto', 'webp', 'avif'],
-        quality: 80,
       },
     },
     {

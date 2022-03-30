@@ -23,12 +23,15 @@
     "jsxBracketSameLine": true
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production gatsby build",
-    "start": "NODE_ENV=development gatsby develop",
-    "prestage": "npm run build; echo 'wagner:super8' > ./public/AUTH",
-    "stage": "npx surge ./public wagnerandco.kennethormandy.com",
-    "deploy": "echo \"Error: See deployment instructions in README.md\" && exit 1"
+    "start": "yarn dev",
+    "dev": "code . && yarn && gatsby develop --open",
+    "clean": "rimraf .cache public",
+    "build": "gatsby build",
+    "develop": "npm run clean && gatsby develop",
+    "code": "code . && yarn dev",
+    "serve": "npm run clean && gatsby serve",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@vimeo/player": "2.10.0",

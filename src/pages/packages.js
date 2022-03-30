@@ -528,6 +528,8 @@ export const pageQuery = graphql`
             wcoPackagesAddons {
               name
               price
+              durationLong
+              durationShort
               prices {
                 priceCa
                 priceOther

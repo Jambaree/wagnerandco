@@ -231,7 +231,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allWpWedding(limit: 8) {
+    allWpWedding(limit: 8, sort: { fields: [date], order: DESC }) {
       edges {
         node {
           id

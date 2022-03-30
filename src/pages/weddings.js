@@ -88,7 +88,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allWpWedding {
+    allWpWedding(sort: { fields: [date], order: DESC }) {
       edges {
         node {
           id

@@ -44,6 +44,9 @@ let config = {
       options: {
         // The base URL of the Wordpress site without the trailingslash and the protocol.
         url: `${process.env.WP_URL}/graphql`,
+        type: {
+          BlockEditorContentNode: { exclude: true },
+        },
       },
     },
     {

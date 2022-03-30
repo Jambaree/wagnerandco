@@ -532,6 +532,7 @@ export const pageQuery = graphql`
               price
               durationLong
               durationShort
+              description
               prices {
                 priceCa
                 priceOther

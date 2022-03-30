@@ -88,7 +88,9 @@ const PackagesListItems = props => {
 
             <div>
               <p>{item.description}</p>
-              {timestamp ? <p>Length: {timestamp}</p> : null}
+              {timestamp && !timestamp.includes(null) ? (
+                <p>Length: {timestamp}</p>
+              ) : null}
             </div>
           </li>
         )
@@ -100,10 +102,10 @@ const PackagesListItems = props => {
 PackagesListItems.propTypes = {
   items: PropTypes.array.isRequired,
   country: PropTypes.object,
-  // name: PropTypes.string.isRequired,
-  // description: PropTypes.string,
-  // duration_short: PropTypes.string,
-  // duration_long: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  durationShort: PropTypes.string,
+  durationLong: PropTypes.string,
 }
 
 PackagesListItems.defaultProps = {}

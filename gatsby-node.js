@@ -1,6 +1,13 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    plugins: [new CaseSensitivePathsPlugin()],
+  })
+}
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
@@ -9,14 +16,6 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
   `
   createTypes(typeDefs)
-}
-
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    plugins: [new CaseSensitivePathsPlugin()],
-  })
 }
 
 // const path = require(`path`)

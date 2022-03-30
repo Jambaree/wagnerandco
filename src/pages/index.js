@@ -18,7 +18,6 @@ const IndexPage = props => {
   const pageAcf = data.wpPage.acfFrontPage
   const weddingEdges = data.allWpWedding.edges
   const seoData = data.wpPage.seo
-  console.log(props)
   return (
     <PageWrapper>
       <Seo {...seoData} />

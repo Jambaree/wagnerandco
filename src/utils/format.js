@@ -21,37 +21,41 @@ const timestamp = function(str, showUnit = true) {
   let largestUnitIndex = 1
   let plural = false
 
-  let result = str.split(':')
-  result = result.map((num, index) => {
-    if (index === 2) {
-      return num
-    }
-
-    num = parseInt(num, 10)
-    if (num > 0) {
-      // largestUnitIndex = Math.min(largestUnitIndex, index)
-
-      // Turn minutes into hours
-      if (index === 0) {
-        num = num * 60
+  let result = (str && str.includes(':') && str.split(':')) || null
+  result =
+    result &&
+    result.map((num, index) => {
+      if (index === 2) {
+        return num
       }
 
-      if (num > 1) {
-        plural = true
+      num = parseInt(num, 10)
+      if (num > 0) {
+        // largestUnitIndex = Math.min(largestUnitIndex, index)
+
+        // Turn minutes into hours
+        if (index === 0) {
+          num = num * 60
+        }
+
+        if (num > 1) {
+          plural = true
+        }
+        return num
       }
-      return num
-    }
 
-    return ''
-  })
+      return ''
+    })
 
-  result = result
-    .join(' ')
-    .trim()
-    .split(' ')
-    .join(':')
-    .replace('::', ':')
-    .replace(':00', '')
+  result =
+    result &&
+    result
+      .join(' ')
+      .trim()
+      .split(' ')
+      .join(':')
+      .replace('::', ':')
+      .replace(':00', '')
 
   if (result === '') {
     return ''

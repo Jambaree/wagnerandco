@@ -265,22 +265,14 @@ class PackagesPage extends React.Component {
 
     let activeCountry = props.countries[state.countryKey]
     let activeCountryNote = null
+
     if (
       acf.wcoPackagesNotes &&
-      typeof acf.wcoPackagesNotes[
-        `wcoPackagesNote${state.countryKey[0].toUpperCase() +
-          state.countryKey.slice(1)}`
-      ] !== 'undefined'
+      typeof acf.wcoPackagesNotes[`wcoPackagesNote${state.countryKey}`] !==
+        'undefined'
     ) {
       activeCountryNote = (
-        <p>
-          {
-            acf.wcoPackagesNotes[
-              `wcoPackagesNote${state.countryKey[0].toUpperCase() +
-                state.countryKey.slice(1)}`
-            ]
-          }
-        </p>
+        <p>{acf.wcoPackagesNotes[`wcoPackagesNote${state.countryKey}`]}</p>
       )
     }
 

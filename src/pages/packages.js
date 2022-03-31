@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql, navigate } from 'gatsby'
 import slugify from 'slugify'
@@ -191,21 +191,26 @@ const PackagesCallToAction = props => (
 
 const Section = props => <section className="pb4" {...props} />
 
-const PackagesPage = props => {
-  const { data } = props
-  const pageNode = data.wpPage
-  const acf = pageNode.template.acfPackages
-  const seoData = data.wpPage.seo
-  let itemsToDisplay = []
-  const [countryKey, setCountryKey] = useState('')
+class PackagesPage extends React.Component {
+  constructor(props) {
+    super(props)
 
-  const handleOnChangeCountry = e => {
+    this.state = {
+      countryKey: this.handleCountryFromQueryString(),
+    }
+
+    this.handleOnChangeCountry = this.handleOnChangeCountry.bind(this)
+  }
+
+  handleOnChangeCountry(e) {
     if (e && e.target && e.target.value) {
       this.setState({ countryKey: e.target.value })
     }
   }
 
-  const handleCountryFromQueryString = () => {
+  handleCountryFromQueryString() {
+    const props = this.props
+
     if (props.location && props.location.search) {
       let str = props.location.search.replace('?', '')
       let parsed = queryString.parse(str)
@@ -236,182 +241,199 @@ const PackagesPage = props => {
     return null
   }
 
-  useEffect(() => {
-    setCountryKey(handleCountryFromQueryString())
-  })
-
-  data.faq.template.acfFaq.wcoFaqItem.forEach(function(item) {
-    if (item.wcoShowOnPackagesPage === true) {
-      itemsToDisplay.push(item)
-    }
-  })
-
-  let activeCountry = props.countries[countryKey]
-  let activeCountryNote = null
-
-  if (
-    countryKey !== '' &&
-    acf.wcoPackagesNotes &&
-    typeof acf?.wcoPackagesNotes[
-      `wcoPackagesNote${countryKey[0].toUpperCase() + countryKey.slice(1)}`
-    ] !== 'undefined'
-  ) {
-    activeCountryNote = (
-      <p>
-        {
-          acf?.wcoPackagesNotes[
-            `wcoPackagesNote${countryKey[0].toUpperCase() +
-              countryKey.slice(1)}`
-          ]
-        }
-      </p>
-    )
+  componentDidMount() {
+    this.setState({
+      countryKey: this.handleCountryFromQueryString(),
+    })
   }
 
-  return (
-    <PrivateRoute
-      parentNode={pageNode}
-      title={acf.wcoPackagesProtected.title}
-      submitLabel={acf.wcoPackagesProtected.button_label}
-      subtitle={acf.wcoPackagesProtected.subtitle}
-      location={props.location}
-      countryKey={countryKey}
-      handleOnChangeCountry={e => {
-        if (e && e.target && e.target.value) {
-          this.setState({ countryKey: e.target.value })
-        }
-      }}
-      onSuccess="/packages">
-      <PageWrapper>
-        <Seo {...seoData} />
+  render() {
+    const props = this.props
+    const state = this.state
+    const data = props.data
+    const pageNode = data.wpPage
+    const acf = pageNode.template.acfPackages
+    const seoData = data.wpPage.seo
 
-        <div className="relative md-pb4">
-          <StylizedInfo />
-          <Header
-            title={pageNode.title}
-            subtitle={pageNode.template.acfPages.wcoPageSubtitle}
-          />
-          <div className="z2 relative">
-            <Wrapper maxWidth={3}>
-              <div className="md-flex flex-wrap md3 md-mb4">
-                <div className="col-12 md-col-8">
-                  <WeddingIntro favorColumn="first">
-                    {pageNode.content}
-                  </WeddingIntro>
-                </div>
-                <div className="col-12 md-col-4 md-pl3">
-                  <div className="WPWeddingIntro-img md-max-width-1">
-                    <ImgSharp {...acf.wcoPackagesIntroImage} />
+    let itemsToDisplay = []
+
+    data.faq.template.acfFaq.wcoFaqItem.forEach(function(item) {
+      if (item.wcoShowOnPackagesPage === true) {
+        itemsToDisplay.push(item)
+      }
+    })
+
+    let activeCountry = props.countries[state.countryKey]
+    let activeCountryNote = null
+
+    if (
+      state.countryKey !== null &&
+      acf.wcoPackagesNotes &&
+      typeof acf?.wcoPackagesNotes[
+        `wcoPackagesNote${state.countryKey[0].toUpperCase() +
+          state.countryKey.slice(1)}`
+      ] !== 'undefined'
+    ) {
+      activeCountryNote = (
+        <p>
+          {
+            acf?.wcoPackagesNotes[
+              `wcoPackagesNote${state.countryKey[0].toUpperCase() +
+                state.countryKey.slice(1)}`
+            ]
+          }
+        </p>
+      )
+    }
+
+    return (
+      <PrivateRoute
+        parentNode={pageNode}
+        title={acf.wcoPackagesProtected.title}
+        submitLabel={acf.wcoPackagesProtected.button_label}
+        subtitle={acf.wcoPackagesProtected.subtitle}
+        location={props.location}
+        countryKey={state.countryKey}
+        handleOnChangeCountry={e => {
+          if (e && e.target && e.target.value) {
+            this.setState({ countryKey: e.target.value })
+          }
+        }}
+        onSuccess="/packages">
+        <PageWrapper>
+          <Seo {...seoData} />
+
+          <div className="relative md-pb4">
+            <StylizedInfo />
+            <Header
+              title={pageNode.title}
+              subtitle={pageNode.template.acfPages.wcoPageSubtitle}
+            />
+            <div className="z2 relative">
+              <Wrapper maxWidth={3}>
+                <div className="md-flex flex-wrap md3 md-mb4">
+                  <div className="col-12 md-col-8">
+                    <WeddingIntro favorColumn="first">
+                      {pageNode.content}
+                    </WeddingIntro>
                   </div>
-                  <div className="WPWeddingIntro-doodle">
-                    <Doodle name="zag" color="blue" />
+                  <div className="col-12 md-col-4 md-pl3">
+                    <div className="WPWeddingIntro-img md-max-width-1">
+                      <ImgSharp {...acf.wcoPackagesIntroImage} />
+                    </div>
+                    <div className="WPWeddingIntro-doodle">
+                      <Doodle name="zag" color="blue" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Wrapper>
+              </Wrapper>
+            </div>
           </div>
-        </div>
-        <div className="relative">
-          <Wrapper maxWidth={3}>
-            <article className="relative z2">
-              <StylizedCinematography />
+          <div className="relative">
+            <Wrapper maxWidth={3}>
+              <article className="relative z2">
+                <StylizedCinematography />
 
-              <header className="max-width-2 mx-auto">
-                <H1>{acf.wcoPackagesTitle}</H1>
-              </header>
-              <div className="md-mb4 lg-pb4">
+                <header className="max-width-2 mx-auto">
+                  <H1>{acf.wcoPackagesTitle}</H1>
+                </header>
+                <div className="md-mb4 lg-pb4">
+                  <Section>
+                    <H4>All packages include:</H4>
+                    <ul className="m0 pl2 relative z2">
+                      {acf.wcoPackagesAll.map((obj, index) => {
+                        return <li key={`Package_All_${index}`}>{obj.item}</li>
+                      })}
+                    </ul>
+                  </Section>
+                </div>
                 <Section>
-                  <H4>All packages include:</H4>
-                  <ul className="m0 pl2 relative z2">
-                    {acf.wcoPackagesAll.map((obj, index) => {
-                      return <li key={`Package_All_${index}`}>{obj.item}</li>
-                    })}
-                  </ul>
-                </Section>
-              </div>
-              <Section>
-                <PackagesList items={acf.wcoPackages} country={activeCountry} />
-              </Section>
-              {acf.wcoPackagesAddons ? (
-                <Section id="add-ons">
-                  <ScrollAnchor href="#add-ons">
-                    <H1>Add-ons</H1>
-                  </ScrollAnchor>
-                  <PackagesListItems
+                  <PackagesList
+                    items={acf.wcoPackages}
                     country={activeCountry}
-                    items={acf.wcoPackagesAddons}
                   />
                 </Section>
-              ) : null}
-              {activeCountryNote ? (
-                <Section id="notes">
-                  <small className="h4 block mb4" id="notes">
-                    <ScrollAnchor href="#notes">
-                      <H4>Notes</H4>
+                {acf.wcoPackagesAddons ? (
+                  <Section id="add-ons">
+                    <ScrollAnchor href="#add-ons">
+                      <H1>Add-ons</H1>
                     </ScrollAnchor>
-                    {activeCountryNote}
-                  </small>
+                    <PackagesListItems
+                      country={activeCountry}
+                      items={acf.wcoPackagesAddons}
+                    />
+                  </Section>
+                ) : null}
+                {activeCountryNote ? (
+                  <Section id="notes">
+                    <small className="h4 block mb4" id="notes">
+                      <ScrollAnchor href="#notes">
+                        <H4>Notes</H4>
+                      </ScrollAnchor>
+                      {activeCountryNote}
+                    </small>
+                  </Section>
+                ) : null}
+
+                <div className="doodle-outer right-0">
+                  <Doodle name="zag" color="blue" />
+                </div>
+
+                <Section>
+                  <div className="relative">
+                    <StylizedFAQLeft />
+                  </div>
+                  <div className="z1">
+                    <List>
+                      {itemsToDisplay.map((item, index) => {
+                        return (
+                          <li
+                            className="md-mxn2 md-pr2 mb2"
+                            key={`PackagesFAQItem_${index}`}>
+                            <details className="m0 p0">
+                              <summary
+                                className="cursor-pointer"
+                                style={{ paddingBottom: '0.2em' }}>
+                                <H4 is="span" underline>
+                                  <span className="border-bottom border-blue border-medium">
+                                    {item.wcoFaqQuestion}
+                                  </span>
+                                </H4>
+                              </summary>
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: item.wcoFaqAnswer,
+                                }}
+                              />
+                            </details>
+                          </li>
+                        )
+                      })}
+                    </List>
+                  </div>
                 </Section>
-              ) : null}
-
-              <div className="doodle-outer right-0">
-                <Doodle name="zag" color="blue" />
+                <PackagesCallToAction />
+              </article>
+            </Wrapper>
+            <Video vimeoId={acf.wcoPackagesVimeoId} />
+            <WhitespaceHeader
+              is="div"
+              minHeight={350}
+              height={25 + WhitespaceHeader.defaultProps.marginBottom}
+              marginTop={0}
+              marginBottom={0}>
+              <div className="max-width-2 mx-auto h3 line-height-4 center">
+                <Intro>
+                  This is you in the moment, living your best life, surrounded
+                  by the people who hold you up.
+                </Intro>
               </div>
-
-              <Section>
-                <div className="relative">
-                  <StylizedFAQLeft />
-                </div>
-                <div className="z1">
-                  <List>
-                    {itemsToDisplay.map((item, index) => {
-                      return (
-                        <li
-                          className="md-mxn2 md-pr2 mb2"
-                          key={`PackagesFAQItem_${index}`}>
-                          <details className="m0 p0">
-                            <summary
-                              className="cursor-pointer"
-                              style={{ paddingBottom: '0.2em' }}>
-                              <H4 is="span" underline>
-                                <span className="border-bottom border-blue border-medium">
-                                  {item.wcoFaqQuestion}
-                                </span>
-                              </H4>
-                            </summary>
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: item.wcoFaqAnswer,
-                              }}
-                            />
-                          </details>
-                        </li>
-                      )
-                    })}
-                  </List>
-                </div>
-              </Section>
-              <PackagesCallToAction />
-            </article>
-          </Wrapper>
-          <Video vimeoId={acf.wcoPackagesVimeoId} />
-          <WhitespaceHeader
-            is="div"
-            minHeight={350}
-            height={25 + WhitespaceHeader.defaultProps.marginBottom}
-            marginTop={0}
-            marginBottom={0}>
-            <div className="max-width-2 mx-auto h3 line-height-4 center">
-              <Intro>
-                This is you in the moment, living your best life, surrounded by
-                the people who hold you up.
-              </Intro>
-            </div>
-          </WhitespaceHeader>
-        </div>
-      </PageWrapper>
-    </PrivateRoute>
-  )
+            </WhitespaceHeader>
+          </div>
+        </PageWrapper>
+      </PrivateRoute>
+    )
+  }
 }
 
 PackagesPage.defaultProps = {

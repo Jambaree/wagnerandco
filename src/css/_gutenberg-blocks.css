@@ -177,6 +177,7 @@
   width: 100%;
   opacity: 1;
   filter: blur(0);
+  height: 100%;
 }
 
 .wp-block-image .gatsby-image-wrapper {

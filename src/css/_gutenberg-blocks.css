@@ -173,6 +173,12 @@
   width: 100%;
 }
 
+.wp-block-image > * {
+  width: 100%;
+  opacity: 1;
+  filter: blur(0);
+}
+
 .wp-block-image .gatsby-image-wrapper {
   min-height: 200px;
   width: 100%;

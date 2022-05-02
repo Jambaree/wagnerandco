@@ -70,7 +70,7 @@ export const pageQuery = graphql`
           sourceUrl
           localFile {
             childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
             }
           }
         }
@@ -103,6 +103,7 @@ export const pageQuery = graphql`
                 width: 960
                 layout: CONSTRAINED
                 placeholder: BLURRED
+                formats: AUTO
               )
             }
           }

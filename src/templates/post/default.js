@@ -13,8 +13,7 @@ import Seo from '../../components/Seo'
 const PostTemplate = props => {
   const data = props.data
   const postNode = data.wpPost
-    const seoData = data.wpPost.seo
-
+  const seoData = data.wpPost.seo
 
   if (!permittedSlug(postNode.slug)) {
     return null
@@ -53,7 +52,7 @@ export const pageQuery = graphql`
           sourceUrl
           localFile {
             childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED)
+              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
             }
           }
         }

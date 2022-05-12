@@ -83,6 +83,8 @@ let config = {
           `/packages`,
           `/highlight`,
           `/guide`,
+          `/video-demo`,
+          `/styleguide`,
         ],
         query: `{
           site {

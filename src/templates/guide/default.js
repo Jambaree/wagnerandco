@@ -7,7 +7,6 @@ import PageWrapper from '../../components/PageWrapper'
 import Wrapper from '../../components/Wrapper'
 import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
 // import YoastHelmet from '../../components/YoastHelmet'
-import GutenbergBlocks from '../../components/GutenbergBlocks'
 import SidebarNav from '../../components/SidebarNav'
 import headlineBlocksToNav from '../../utils/headline-blocks-to-nav'
 import Seo from '../../components/Seo'
@@ -34,7 +33,7 @@ const WPGuide = (props) => {
     <PageWrapper className="WPGuide pb4" is="article">
       <Seo {...seoData} />
       <WhitespaceHeaderCorners
-        title={pageNode.title}
+        title={props?.data?.wpGuide?.acfTextImageBlocks?.wcoBlockTitle}
         date={props.showDate ? pageNode.date : undefined}
         location=""
         reverse={true}
@@ -51,7 +50,7 @@ const WPGuide = (props) => {
           />
         )}
       </Wrapper>
-      {/* {console.log(props?.data?.wpGuide?.acfTextImageBlocks?.modules)}
+      {/* {console.log(props?.data?.wpGuide?.acfTextImageBlocks?.wcoBlockTitle)}
       {console.log(pageNode.blocks)} */}
     </PageWrapper>
   )
@@ -94,15 +93,6 @@ export const pageQuery = graphql`
       date
       uri
       # content
-      blocks {
-        name
-        originalContent
-        ... on WpGravityformsFormBlock {
-          attributes {
-            formId
-          }
-        }
-      }
       # acf {
       #   wco_page_subtitle
       # }

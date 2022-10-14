@@ -41,19 +41,18 @@ const WPGuide = (props) => {
       />
       <SidebarNav items={sidebarItems} />
       <Wrapper maxWidth={3}>
-        <GutenbergBlocks blocks={pageNode.blocks} />
+        {!!props?.data?.wpGuide?.acfTextImageBlocks?.modules && (
+          <FlexibleContent
+            rows={props?.data?.wpGuide?.acfTextImageBlocks?.modules}
+            data={{
+              titl: props?.data?.wpGuide?.title,
+              uri: props?.data?.wpGuide?.uri,
+            }}
+          />
+        )}
       </Wrapper>
-      {console.log(props?.data?.wpGuide?.acfTextImageBlocks?.modules)}
-      {console.log(pageNode.blocks)}
-      {!!props?.data?.wpGuide?.acfTextImageBlocks?.modules && (
-        <FlexibleContent
-          rows={props?.data?.wpGuide?.acfTextImageBlocks?.modules}
-          data={{
-            titl: props?.data?.wpGuide?.title,
-            uri: props?.data?.wpGuide?.uri,
-          }}
-        />
-      )}
+      {/* {console.log(props?.data?.wpGuide?.acfTextImageBlocks?.modules)}
+      {console.log(pageNode.blocks)} */}
     </PageWrapper>
   )
 }

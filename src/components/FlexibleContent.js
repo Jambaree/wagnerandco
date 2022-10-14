@@ -33,7 +33,7 @@ const FlexibleContent = (props) => {
 
         return (
           Component && (
-            <Container key={index} className="max-width-3 mx-auto">
+            <Container key={index}>
               <Component {...rowData} {...data} />
             </Container>
           )
@@ -47,6 +47,4 @@ export default FlexibleContent
 const Container = styled.div`
   margin-top: 5%;
   margin-bottom: 5%;
-  margin-left: auto;
-  margin-right: auto;
 `

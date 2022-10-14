@@ -9,14 +9,16 @@ import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
 // import YoastHelmet from '../../components/YoastHelmet'
 import GutenbergBlocks from '../../components/GutenbergBlocks'
 import SidebarNav from '../../components/SidebarNav'
-import gutenbergBlocksToNav from '../../utils/gutenberg-blocks-to-nav'
+import headlineBlocksToNav from '../../utils/headline-blocks-to-nav'
 import Seo from '../../components/Seo'
 import FlexibleContent from '../../components/FlexibleContent'
 
 const WPGuide = (props) => {
   const data = props.data
   const pageNode = data.wpGuide
-  let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
+  let sidebarItems = headlineBlocksToNav(
+    props?.data?.wpGuide?.acfTextImageBlocks?.modules
+  )
   const seoData = data.wpGuide.seo
 
   if (!permittedSlug(pageNode.slug)) {

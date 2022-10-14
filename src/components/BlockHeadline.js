@@ -4,7 +4,7 @@ import slugify from 'slugify'
 
 const BlockHeadline = (props) => {
   const { heading } = props
-  return <h2 id={`#${slugify(heading.toLowerCase())}`}>{Parser(heading)}</h2>
+  return <h2 id={`${slugify(heading.toLowerCase())}`}>{Parser(heading)}</h2>
 }
 
 export default BlockHeadline

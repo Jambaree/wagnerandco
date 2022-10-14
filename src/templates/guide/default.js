@@ -42,6 +42,7 @@ const WPGuide = (props) => {
         <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
       {console.log(props?.data?.wpGuide?.acfTextImageBlocks?.modules)}
+      {console.log(pageNode.blocks)}
       {!!props?.data?.wpGuide?.acfTextImageBlocks?.modules && (
         <FlexibleContent
           rows={props?.data?.wpGuide?.acfTextImageBlocks?.modules}
@@ -125,6 +126,10 @@ export const pageQuery = graphql`
           ... on WpGuide_Acftextimageblocks_Modules_BlockForm {
             fieldGroupName
             formId
+          }
+          ... on WpGuide_Acftextimageblocks_Modules_BlockVideo {
+            fieldGroupName
+            vimeoId
           }
         }
       }

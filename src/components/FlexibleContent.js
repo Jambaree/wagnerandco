@@ -5,11 +5,15 @@ import styled from '@emotion/styled'
 import BlockTextarea from './BlockTextarea'
 import BlockGifVideo from './VideoLoop'
 import BlockForm from './GravityFormIFrame'
+import BlockVideo from './Video'
+import BlockHeadline from './BlockHeadline'
 
 const components = {
   BlockTextarea,
   BlockGifVideo,
   BlockForm,
+  BlockVideo,
+  BlockHeadline,
 }
 
 const FlexibleContent = (props) => {
@@ -26,10 +30,6 @@ const FlexibleContent = (props) => {
         const type = fieldGroupName.split('_').slice(-1)[0]
 
         const Component = components[type]
-
-        // {
-        //   console.log(type, Component)
-        // }
 
         return (
           Component && (

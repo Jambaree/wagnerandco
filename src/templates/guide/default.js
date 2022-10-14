@@ -11,8 +11,9 @@ import GutenbergBlocks from '../../components/GutenbergBlocks'
 import SidebarNav from '../../components/SidebarNav'
 import gutenbergBlocksToNav from '../../utils/gutenberg-blocks-to-nav'
 import Seo from '../../components/Seo'
+import FlexibleContent from '../../components/FlexibleContent'
 
-const WPGuide = props => {
+const WPGuide = (props) => {
   const data = props.data
   const pageNode = data.wpGuide
   let sidebarItems = gutenbergBlocksToNav(pageNode.blocks)
@@ -40,6 +41,16 @@ const WPGuide = props => {
       <Wrapper maxWidth={3}>
         <GutenbergBlocks blocks={pageNode.blocks} />
       </Wrapper>
+      {console.log(props?.data?.wpGuide?.acfTextImageBlocks?.modules)}
+      {!!props?.data?.wpGuide?.acfTextImageBlocks?.modules && (
+        <FlexibleContent
+          rows={props?.data?.wpGuide?.acfTextImageBlocks?.modules}
+          data={{
+            titl: props?.data?.wpGuide?.title,
+            uri: props?.data?.wpGuide?.uri,
+          }}
+        />
+      )}
     </PageWrapper>
   )
 }
@@ -79,6 +90,7 @@ export const pageQuery = graphql`
       slug
       title
       date
+      uri
       # content
       blocks {
         name
@@ -92,6 +104,26 @@ export const pageQuery = graphql`
       # acf {
       #   wco_page_subtitle
       # }
+      acfTextImageBlocks {
+        wcoBlockTitle
+        fieldGroupName
+        modules {
+          ... on WpGuide_Acftextimageblocks_Modules_BlockHeadline {
+            fieldGroupName
+            heading
+          }
+          ... on WpGuide_Acftextimageblocks_Modules_BlockTextarea {
+            fieldGroupName
+            content
+          }
+          ... on WpGuide_Acftextimageblocks_Modules_BlockGifVideo {
+            fieldGroupName
+            video {
+              publicUrl
+            }
+          }
+        }
+      }
       featuredImage {
         node {
           id

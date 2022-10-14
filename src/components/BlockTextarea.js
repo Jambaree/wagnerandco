@@ -1,8 +1,8 @@
 import React from 'react'
-import parse from 'html-react-parser'
+import Parser from 'html-react-parser'
 import styled from '@emotion/styled'
 
-const Wysiwyg = (props) => {
+const BlockTextarea = (props) => {
   const { content } = props
 
   let contentString
@@ -11,8 +11,7 @@ const Wysiwyg = (props) => {
 
     return (
       <Container className="wysiwyg relative z-10 font-sans md:inline-block ">
-        {parse(contentString)}
-        {console.log(parse(contentString))}
+        {Parser(contentString)}
       </Container>
     )
   } else {
@@ -20,7 +19,7 @@ const Wysiwyg = (props) => {
   }
 }
 
-export default Wysiwyg
+export default BlockTextarea
 const Container = styled.div`
   position: relative;
   z-index: 10;

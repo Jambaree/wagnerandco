@@ -28,7 +28,7 @@ const IndexPage = (props) => {
             className="mt3"
             showTitle
             title={data.wpPage.title}
-            subtitle={data.wpPage.template.acfPages.wcoPageSubtitle}
+            subtitle={data?.wpPage?.template?.acfPages?.wcoPageSubtitle}
           />
         </WhitespaceHeader>
       </Wrapper>

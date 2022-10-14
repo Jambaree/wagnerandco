@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const VideoLoop = props => {
-  let src = props.src
+const VideoLoop = (props) => {
+  let src = props.src || props?.video?.publicUrl
   let extSplit = src.toString().split('.')
   let ext = extSplit[extSplit.length - 1]
   let extSecondary = 'mp4'
@@ -28,7 +28,7 @@ const VideoLoop = props => {
       poster={props.poster}>
       <source src={props.src} type={`video/${ext}`} />
       <source
-        src={props.src.toString().replace(ext, extSecondary)}
+        src={src.toString().replace(ext, extSecondary)}
         type={`video/${extSecondary}`}
       />
     </video>

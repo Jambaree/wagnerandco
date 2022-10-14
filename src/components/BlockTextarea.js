@@ -7,9 +7,31 @@ const BlockTextarea = (props) => {
 
   let contentString
   if (typeof content === 'string' || content instanceof String) {
-    contentString = content.toString().replace('data-srcset', 'srcset')
+    let contentString = content
+      .toString()
+      .trim()
+      // remove default html tags, inserted by cherio js
+      .replace('<html>', '')
+      .replace('</html>', '')
+      .replace('<head>', '')
+      .replace('</head>', '')
+      .replace('<body>', '')
+      .replace('</body>', '')
+      // remove line breaks to fix table errors
+      .replace(/(\r\n|\n|\r)/gm, '')
+      // wrap table into div to make it responsive
+      .replace(/<table/g, "<div class='table-wrapper'><table")
+      .replace(/\/table>/g, '/table></div>')
+      .replace(/<iframe/g, "<div class='iframe-wrapper'><iframe")
+      .replace(/\/iframe>/g, '/iframe></div>')
 
-    return <Container>{Parser(contentString)}</Container>
+    return (
+      <Container>
+        {Parser(contentString)}
+
+        {console.log(Parser(contentString))}
+      </Container>
+    )
   } else {
     return null
   }

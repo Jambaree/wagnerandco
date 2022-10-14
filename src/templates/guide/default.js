@@ -122,6 +122,10 @@ export const pageQuery = graphql`
               publicUrl
             }
           }
+          ... on WpGuide_Acftextimageblocks_Modules_BlockForm {
+            fieldGroupName
+            formId
+          }
         }
       }
       featuredImage {

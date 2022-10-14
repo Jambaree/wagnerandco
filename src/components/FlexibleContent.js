@@ -4,10 +4,12 @@ import styled from '@emotion/styled'
 
 import BlockTextarea from './BlockTextarea'
 import BlockGifVideo from './VideoLoop'
+import BlockForm from './GravityFormIFrame'
 
 const components = {
   BlockTextarea,
   BlockGifVideo,
+  BlockForm,
 }
 
 const FlexibleContent = (props) => {

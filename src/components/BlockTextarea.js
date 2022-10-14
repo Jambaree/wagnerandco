@@ -9,11 +9,7 @@ const BlockTextarea = (props) => {
   if (typeof content === 'string' || content instanceof String) {
     contentString = content.toString().replace('data-srcset', 'srcset')
 
-    return (
-      <Container className="wysiwyg relative z-10 font-sans md:inline-block ">
-        {Parser(contentString)}
-      </Container>
-    )
+    return <Container>{Parser(contentString)}</Container>
   } else {
     return null
   }
@@ -21,9 +17,6 @@ const BlockTextarea = (props) => {
 
 export default BlockTextarea
 const Container = styled.div`
-  position: relative;
-  z-index: 10;
-  display: inline-block;
   && {
     clear: both;
 

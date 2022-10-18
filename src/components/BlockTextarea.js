@@ -103,13 +103,7 @@ const Container = styled.div`
     cite:before {
       content: '—';
     }
-    table {
-      width: 100%;
-      border-spacing: 0;
-      margin-left: calc(-1 * var(--space-1));
-      margin-right: calc(-1 * var(--space-1));
-      font-feature-settings: 'tnum';
-    }
+
     figcaption {
       font-size: 12px;
       line-height: 16px;
@@ -167,59 +161,52 @@ const Container = styled.div`
       }
     }
 
-    .table-wrapper {
+    table {
       width: 100%;
-      max-width: 100%;
-      flex: 1;
-      overflow-x: auto;
+      border-spacing: 0;
+      margin-left: calc(-1 * var(--space-1));
+      margin-right: calc(-1 * var(--space-1));
+      font-feature-settings: 'tnum';
     }
 
-    table {
-      border-collapse: separate;
-      border-spacing: 2px;
-      margin-left: 0;
-      margin-right: 0;
-      margin-top: 1.6rem;
-      padding-bottom: 0;
-      padding-left: 0;
-      padding-right: 0;
-      padding-top: 0;
-      margin-bottom: 1.6rem;
-      font-size: 1rem;
-      line-height: 1.6rem;
-      border-collapse: collapse;
-      width: 100%;
-    }
     td {
-      display: table-cell;
-      vertical-align: inherit;
       padding: var(--space-1);
-    }
-    tr {
-      display: table-row;
-      vertical-align: inherit;
-      border-color: inherit;
-    }
-    td,
-    th {
-      text-align: left;
-      border: 1px solid #e0e0e0;
-      font-feature-settings: 'tnum';
-      -moz-font-feature-settings: 'tnum';
-      -ms-font-feature-settings: 'tnum';
-      -webkit-font-feature-settings: 'tnum';
-      padding-left: 1.06667rem;
-      padding-right: 1.06667rem;
-      padding-top: 0.8rem;
-      padding-bottom: calc(0.8rem - 1px);
-    }
-    th:first-child,
-    td:first-child {
-      padding-left: 0.8rem;
     }
     tr:nth-of-type(2n + 1) td {
       background: var(--blue);
       color: var(--peach);
+      a {
+        color: var(--red);
+      }
+    }
+
+    cite {
+      opacity: 0.5;
+      font-size: var(--h4);
+      margin-left: var(--space-3);
+    }
+    hr {
+      width: 66.6%;
+      margin-top: 19vh;
+      margin-bottom: 21vh;
+    }
+
+    blockquote {
+      border-left: var(--border-width-medium, 2px) solid;
+      margin-left: var(--space-3);
+      font-size: var(--h3);
+      padding-top: var(--space-1);
+      padding-bottom: var(--space-1);
+      padding-left: var(--space-3);
+    }
+
+    .block_core_quote p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .block_core_quote p + p {
+      text-indent: var(--space-3);
     }
 
     .iframe-wrapper {

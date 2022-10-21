@@ -14,14 +14,7 @@ let config = {
     'gatsby-plugin-layout',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
-    {
-      resolve: `gatsby-plugin-gatsby-cloud`,
-      options: {
-        mergeSecurityHeaders: false,
-        mergeLinkHeaders: true,
-        mergeCachingHeaders: true,
-      },
-    },
+    `gatsby-plugin-gatsby-cloud`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

@@ -47,6 +47,9 @@ const Container = styled.div`
       display: block;
       clear: both;
     }
+    span {
+      margin-top: 2rem;
+    }
 
     h1,
     h2,
@@ -66,7 +69,13 @@ const Container = styled.div`
     figcaption,
     div {
     }
-
+    figcaption {
+      text-align: center;
+    }
+    figure {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
     li > ul {
       margin-top: 20px;
     }
@@ -89,12 +98,12 @@ const Container = styled.div`
       padding-left: var(--space-3);
     }
     p {
-      margin-top: 0;
-      margin-bottom: 0;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
-    p + p {
+    /* p + p {
       text-indent: var(--space-3);
-    }
+    } */
     cite {
       opacity: 0.5;
       font-size: var(--h4);
@@ -120,8 +129,8 @@ const Container = styled.div`
     }
 
     img {
-      margin-bottom: 20px;
-      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 20px 0px;
+      width: 100%;
+      height: 100%;
 
       &.alignright {
         float: right;

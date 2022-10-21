@@ -19,10 +19,14 @@ const WPInfo = (props) => {
   const pageNode = data.wpInfo
   const seoData = data.wpInfo.seo
   let sidebarItems = headlineBlocksToNav(
-    props?.data?.wpGuide?.acfTextImageBlocks?.modules
+    props?.data?.wpInfo?.acfTextImageBlocks?.modules
   )
   if (!permittedSlug(pageNode.slug)) {
     return null
+  }
+
+  {
+    console.log(props)
   }
 
   return (
@@ -32,17 +36,17 @@ const WPInfo = (props) => {
         <WhitespaceHeader marginBottom={5}>
           <Header
             showTitle
-            title={props?.data?.wpGuide?.acfTextImageBlocks?.wcoBlockTitle}
+            title={props?.data?.wpInfo?.acfTextImageBlocks?.wcoBlockTitle}
           />
         </WhitespaceHeader>
         <SidebarNav items={sidebarItems} />
 
-        {!!props?.data?.wpGuide?.acfTextImageBlocks?.modules && (
+        {!!props?.data?.wpInfo?.acfTextImageBlocks?.modules && (
           <FlexibleContent
-            rows={props?.data?.wpGuide?.acfTextImageBlocks?.modules}
+            rows={props?.data?.wpInfo?.acfTextImageBlocks?.modules}
             data={{
-              titl: props?.data?.wpGuide?.title,
-              uri: props?.data?.wpGuide?.uri,
+              titl: props?.data?.wpInfo?.title,
+              uri: props?.data?.wpInfo?.uri,
             }}
           />
         )}

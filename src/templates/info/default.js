@@ -24,11 +24,6 @@ const WPInfo = (props) => {
   if (!permittedSlug(pageNode.slug)) {
     return null
   }
-
-  {
-    console.log(props)
-  }
-
   return (
     <PageWrapper className="WPInfo pb4" is="article">
       <Seo {...seoData} />

@@ -28,8 +28,6 @@ const BlockTextarea = (props) => {
     return (
       <Container>
         {Parser(contentString)}
-
-        {console.log(Parser(contentString))}
       </Container>
     )
   } else {

@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const VideoLoop = (props) => {
-  let src = props.src || props?.video?.publicUrl
-  let extSplit = src.toString().split('.')
+  let src = props?.src || props?.video?.publicUrl
+  let extSplit = src?.toString()?.split('.')
   let ext = extSplit[extSplit.length - 1]
   let extSecondary = 'mp4'
 
@@ -25,10 +25,13 @@ const VideoLoop = (props) => {
       muted
       width="auto"
       preload="none"
-      poster={props.poster}>
-      <source src={props.src} type={`video/${ext}`} />
+      poster={props?.poster}>
       <source
-        src={src.toString().replace(ext, extSecondary)}
+        src={props?.src || props?.video?.publicUrl}
+        type={`video/${ext}`}
+      />
+      <source
+        src={src?.toString()?.replace(ext, extSecondary)}
         type={`video/${extSecondary}`}
       />
     </video>
@@ -36,7 +39,7 @@ const VideoLoop = (props) => {
 }
 
 VideoLoop.propTypes = {
-  src: PropTypes.string.isRequired,
+  src: PropTypes.string,
   poster: PropTypes.string,
 }
 

@@ -17,7 +17,7 @@ let config = {
     {
       resolve: `gatsby-plugin-gatsby-cloud`,
       options: {
-        mergeSecurityHeaders: true,
+        mergeSecurityHeaders: false,
         mergeLinkHeaders: true,
         mergeCachingHeaders: true,
       },

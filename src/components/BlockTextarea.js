@@ -51,9 +51,6 @@ const Container = styled.div`
     h4,
     h5,
     h6 {
-      &:not(:first-child) {
-        margin-bottom: 3rem;
-      }
     }
 
     p,

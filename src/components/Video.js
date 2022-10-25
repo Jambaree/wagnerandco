@@ -82,7 +82,7 @@ class Video extends React.Component {
 
     this.player = null
 
-    let vimeoId = props.vimeoId
+    let vimeoId = props.vimeoId 
     if (props.src) {
       vimeoId = this.stripTrailingSlash(props.vimeoId.toString())
       vimeoId = vimeoId.split('/')[0]

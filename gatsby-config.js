@@ -14,7 +14,14 @@ let config = {
     'gatsby-plugin-layout',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
-    `gatsby-plugin-gatsby-cloud`,
+    {
+      resolve: `gatsby-plugin-gatsby-cloud`,
+      options: {
+        mergeSecurityHeaders: false,
+        mergeLinkHeaders: true,
+        mergeCachingHeaders: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -122,7 +129,7 @@ let config = {
             return acc
           }, {})
 
-          return allPages.map(page => {
+          return allPages.map((page) => {
             return { ...page, ...wpNodeMap[page.path] }
           })
         },

@@ -13,7 +13,7 @@ import { H1, Intro } from '../components/Headings'
 import Doodle from '../components/Doodle'
 import Seo from '../components/Seo'
 
-const IndexPage = props => {
+const IndexPage = (props) => {
   const data = props.data
   const pageAcf = data.wpPage.acfFrontPage
   const weddingEdges = data.allWpWedding.edges
@@ -28,7 +28,7 @@ const IndexPage = props => {
             className="mt3"
             showTitle
             title={data.wpPage.title}
-            subtitle={data.wpPage.template.acfPages.wcoPageSubtitle}
+            subtitle={data?.wpPage?.template?.acfPages?.wcoPageSubtitle}
           />
         </WhitespaceHeader>
       </Wrapper>
@@ -116,12 +116,7 @@ export const pageQuery = graphql`
         }
       }
       template {
-        ... on WpTemplate_HomePage {
-          templateName
-          acfPages {
-            wcoPageSubtitle
-          }
-        }
+        templateName
       }
       id
       slug

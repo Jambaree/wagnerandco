@@ -25,11 +25,7 @@ const BlockTextarea = (props) => {
       .replace(/<iframe/g, "<div class='iframe-wrapper'><iframe")
       .replace(/\/iframe>/g, '/iframe></div>')
 
-    return (
-      <Container>
-        {Parser(contentString)}
-      </Container>
-    )
+    return <Container>{Parser(contentString)}</Container>
   } else {
     return null
   }
@@ -46,7 +42,7 @@ const Container = styled.div`
       clear: both;
     }
     span {
-      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
 
     h1,
@@ -56,7 +52,7 @@ const Container = styled.div`
     h5,
     h6 {
       &:not(:first-child) {
-        margin-top: 3rem;
+        margin-bottom: 3rem;
       }
     }
 
@@ -72,7 +68,6 @@ const Container = styled.div`
     }
     figure {
       margin-top: 2rem;
-      margin-bottom: 2rem;
     }
     li > ul {
       margin-top: 20px;
@@ -96,8 +91,8 @@ const Container = styled.div`
       padding-left: var(--space-3);
     }
     p {
-      margin-top: 1rem;
       margin-bottom: 1rem;
+      margin-top: 0 !important;
     }
     /* p + p {
       text-indent: var(--space-3);
@@ -164,6 +159,7 @@ const Container = styled.div`
       img {
         @media (max-width: 420px) {
           width: auto !important;
+          height: auto;
         }
       }
     }
@@ -212,9 +208,9 @@ const Container = styled.div`
       margin-bottom: 0;
     }
 
-    .block_core_quote p + p {
+    /* .block_core_quote p + p {
       text-indent: var(--space-3);
-    }
+    } */
 
     .iframe-wrapper {
       overflow: hidden;

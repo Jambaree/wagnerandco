@@ -45,6 +45,5 @@ const FlexibleContent = (props) => {
 export default FlexibleContent
 
 const Container = styled.div`
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 1rem;
 `

@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const VideoLoop = (props) => {
-  let src = props?.src
+const BlockGifVideo = (props) => {
+  let src = props?.featuredLoop?.mediaItemUrl
   let extSplit = src?.toString()?.split('.')
-  let ext = extSplit[extSplit.length - 1]
+  let ext = extSplit && extSplit[extSplit?.length - 1]
   let extSecondary = 'mp4'
 
   // If the mp4 was provided instead of the webm by default,
@@ -24,8 +24,7 @@ const VideoLoop = (props) => {
       loop
       muted
       width="auto"
-      preload="none"
-      poster={props?.poster}>
+      preload="none">
       <source src={props?.src} type={`video/${ext}`} />
       <source
         src={src?.toString()?.replace(ext, extSecondary)}
@@ -35,9 +34,8 @@ const VideoLoop = (props) => {
   )
 }
 
-VideoLoop.propTypes = {
+BlockGifVideo.propTypes = {
   src: PropTypes.string,
-  poster: PropTypes.string,
 }
 
-export default VideoLoop
+export default BlockGifVideo

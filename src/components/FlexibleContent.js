@@ -3,7 +3,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import BlockTextarea from './BlockTextarea'
-import BlockGifVideo from './VideoLoop'
+import BlockGifVideo from './BlockGifVideo'
 import BlockForm from './GravityFormIFrame'
 import BlockVideo from './Video'
 import BlockHeadline from './BlockHeadline'
@@ -35,6 +35,7 @@ const FlexibleContent = (props) => {
           Component && (
             <Container key={index}>
               <Component {...rowData} {...data} />
+
             </Container>
           )
         )

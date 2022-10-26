@@ -110,8 +110,9 @@ export const pageQuery = graphql`
           }
           ... on WpGuide_Acftextimageblocks_Modules_BlockGifVideo {
             fieldGroupName
-            video {
-              publicUrl
+            featuredLoop {
+              mediaItemUrl
+              id
             }
           }
           ... on WpGuide_Acftextimageblocks_Modules_BlockForm {

@@ -115,9 +115,7 @@ export const pageQuery = graphql`
           }
         }
       }
-      template {
-        templateName
-      }
+
       id
       slug
       title
@@ -127,6 +125,15 @@ export const pageQuery = graphql`
         wcoFrontpageWeddingsFooter
         wcoFrontpageWeddingsSubtitle
         wcoFrontpageWeddingsTitle
+      }
+      template {
+        templateName
+        ... on WpTemplate_HomePage {
+          templateName
+          acfPages {
+            wcoPageSubtitle
+          }
+        }
       }
       featuredImage {
         node {

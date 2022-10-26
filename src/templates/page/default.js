@@ -10,7 +10,7 @@ import Seo from '../../components/Seo'
 // import YoastHelmet from '../../components/YoastHelmet'
 import GutenbergBlocks from '../../components/GutenbergBlocks'
 
-const WPPage = props => {
+const WPPage = (props) => {
   const data = props.data
   const pageNode = data.wpPage
   const seoData = data.wpPage.seo

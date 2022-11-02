@@ -13,7 +13,7 @@ import GlobalColors from '../components/GlobalColors'
 // TODO Improve this API, or add wrapper into each page
 const fullWidthPages = ['/', 'weddings']
 
-const Layout = props => {
+const Layout = (props) => {
   const data = useStaticQuery(graphql`
     query HeaderQuery {
       wp {
@@ -75,10 +75,7 @@ const Layout = props => {
     title: site.generalSettingsTitle,
     description: site.generalSettingsDescription, // TODO
     url: options.url,
-    image: _has(
-      props,
-      'data.home.featuredImage.node.localFile.childImageSharp.sizes.src'
-    )
+    image: _has(props, 'data.home.featuredImage.node.gatsbyImage')
       ? `${options.url}${data.home.featuredImage.node.localFile.childImageSharp.resize.src}`
       : null,
   }
@@ -115,7 +112,7 @@ const Layout = props => {
         pathname={pathname}
         title={og.title}
         showNav={pathnameSplit !== 'highlights'}
-        footerItems={options.wcoSocialmedia.map(item => ({
+        footerItems={options.wcoSocialmedia.map((item) => ({
           href: item.url,
           label: item.label,
         }))}

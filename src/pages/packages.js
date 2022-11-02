@@ -29,7 +29,7 @@ import Doodle from '../components/Doodle'
 import { isLoggedIn, logout, getCurrentUser } from '../utils/auth'
 import Seo from '../components/Seo'
 
-const List = props => {
+const List = (props) => {
   const { className, ...remainingProps } = props
 
   return (
@@ -40,7 +40,7 @@ const List = props => {
 List.defaultProps = { className: '' }
 List.propTypes = { className: PropTypes.string }
 
-const PackagesSubhead = props => {
+const PackagesSubhead = (props) => {
   return (
     <h2 className="h2 md-h1 line-height-2 font-weight-400 left-align mb0 track-1">
       {props.children}
@@ -48,7 +48,7 @@ const PackagesSubhead = props => {
   )
 }
 
-const PackagesListItems = props => {
+const PackagesListItems = (props) => {
   let enoughPackages = props.items.length >= 2
   // let halfLength = props.items.length / 2
 
@@ -76,8 +76,10 @@ const PackagesListItems = props => {
                 <div>
                   {format.price(
                     item.prices[
-                      `price${props.country.value[0].toUpperCase() +
-                        props.country.value.slice(1)}`
+                      `price${
+                        props.country.value[0].toUpperCase() +
+                        props.country.value.slice(1)
+                      }`
                     ],
                     props.country.currencyCode
                   )}
@@ -110,7 +112,7 @@ PackagesListItems.propTypes = {
 
 PackagesListItems.defaultProps = {}
 
-const PackagesList = props => {
+const PackagesList = (props) => {
   return (
     <List>
       {props.items.map((pkg, index) => {
@@ -123,8 +125,10 @@ const PackagesList = props => {
         if (pkg.prices && props.country) {
           price = format.price(
             pkg.prices[
-              `price${props.country.value[0].toUpperCase() +
-                props.country.value.slice(1)}`
+              `price${
+                props.country.value[0].toUpperCase() +
+                props.country.value.slice(1)
+              }`
             ],
             props.country.currencyCode
           )
@@ -175,7 +179,7 @@ PackagesList.propTypes = {
 
 PackagesList.defaultProps = {}
 
-const PackagesCallToAction = props => (
+const PackagesCallToAction = (props) => (
   <footer className="pb4">
     <div className="center my4">
       <p>
@@ -189,7 +193,7 @@ const PackagesCallToAction = props => (
   </footer>
 )
 
-const Section = props => <section className="pb4" {...props} />
+const Section = (props) => <section className="pb4" {...props} />
 
 class PackagesPage extends React.Component {
   constructor(props) {
@@ -257,7 +261,7 @@ class PackagesPage extends React.Component {
 
     let itemsToDisplay = []
 
-    data.faq.template.acfFaq.wcoFaqItem.forEach(function(item) {
+    data.faq.template.acfFaq.wcoFaqItem.forEach(function (item) {
       if (item.wcoShowOnPackagesPage === true) {
         itemsToDisplay.push(item)
       }
@@ -270,16 +274,18 @@ class PackagesPage extends React.Component {
       state.countryKey !== null &&
       acf.wcoPackagesNotes &&
       typeof acf?.wcoPackagesNotes[
-        `wcoPackagesNote${state.countryKey[0].toUpperCase() +
-          state.countryKey.slice(1)}`
+        `wcoPackagesNote${
+          state.countryKey[0].toUpperCase() + state.countryKey.slice(1)
+        }`
       ] !== 'undefined'
     ) {
       activeCountryNote = (
         <p>
           {
             acf?.wcoPackagesNotes[
-              `wcoPackagesNote${state.countryKey[0].toUpperCase() +
-                state.countryKey.slice(1)}`
+              `wcoPackagesNote${
+                state.countryKey[0].toUpperCase() + state.countryKey.slice(1)
+              }`
             ]
           }
         </p>
@@ -294,7 +300,7 @@ class PackagesPage extends React.Component {
         subtitle={acf.wcoPackagesProtected.subtitle}
         location={props.location}
         countryKey={state.countryKey}
-        handleOnChangeCountry={e => {
+        handleOnChangeCountry={(e) => {
           if (e && e.target && e.target.value) {
             this.setState({ countryKey: e.target.value })
           }
@@ -458,11 +464,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       id
@@ -471,17 +478,13 @@ export const pageQuery = graphql`
       content
       featuredImage {
         node {
-          localFile {
-            childImageSharp {
-              id
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          altText
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       template {
@@ -493,16 +496,12 @@ export const pageQuery = graphql`
             wcoPackagesIntroImage {
               altText
               id
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(
-                    quality: 90
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    formats: AUTO
-                  )
-                }
-              }
+              gatsbyImage(
+                placeholder: BLURRED
+                quality: 90
+                width: 600
+                layout: CONSTRAINED
+              )
             }
             wcoPackagesAll {
               item
@@ -528,16 +527,12 @@ export const pageQuery = graphql`
               image {
                 altText
                 id
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData(
-                      quality: 90
-                      layout: CONSTRAINED
-                      placeholder: BLURRED
-                      formats: AUTO
-                    )
-                  }
-                }
+                gatsbyImage(
+                  placeholder: BLURRED
+                  quality: 90
+                  width: 600
+                  layout: CONSTRAINED
+                )
               }
             }
             wcoPackagesAddons {

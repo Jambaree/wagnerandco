@@ -13,7 +13,7 @@ import { StylizedAbout } from '../components/HeadingsStylized'
 import WeddingIntro from '../components/WeddingIntro'
 import Seo from '../components/Seo'
 
-const AboutH2 = props => {
+const AboutH2 = (props) => {
   return (
     <div className="center py2 sm-py3 md-py4 max-width-1 mx-auto">
       <H1 is="h2">{props.children}</H1>
@@ -21,7 +21,7 @@ const AboutH2 = props => {
   )
 }
 
-const About = props => {
+const About = (props) => {
   const data = props.data
   const pageNode = data.wpPage
   const seoData = data.wpPage.seo
@@ -102,11 +102,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       id
@@ -115,17 +116,13 @@ export const pageQuery = graphql`
       content
       featuredImage {
         node {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                width: 1200
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          altText
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       template {
@@ -149,17 +146,12 @@ export const pageQuery = graphql`
               }
               image {
                 altText
-                localFile {
-                  childImageSharp {
-                    id
-                    gatsbyImageData(
-                      quality: 90
-                      layout: CONSTRAINED
-                      placeholder: BLURRED
-                      formats: AUTO
-                    )
-                  }
-                }
+                gatsbyImage(
+                  placeholder: BLURRED
+                  quality: 90
+                  width: 600
+                  layout: CONSTRAINED
+                )
               }
             }
           }
@@ -176,17 +168,12 @@ export const pageQuery = graphql`
               title
               id
               altText
-              localFile {
-                childImageSharp {
-                  id
-                  gatsbyImageData(
-                    quality: 90
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    formats: AUTO
-                  )
-                }
-              }
+              gatsbyImage(
+                placeholder: BLURRED
+                quality: 90
+                width: 600
+                layout: CONSTRAINED
+              )
             }
           }
         }

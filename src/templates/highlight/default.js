@@ -15,7 +15,7 @@ import WhitespaceHeaderCorners from '../../components/WhitespaceHeaderCorners'
 import SidebarNav from '../../components/SidebarNav'
 import Seo from '../../components/Seo'
 
-const ButtonDownload = props => {
+const ButtonDownload = (props) => {
   return (
     <LinkDuo to={props.href} className="h2 line-height-2">
       {props.children}
@@ -31,7 +31,7 @@ ButtonDownload.defaultProps = {
   children: 'Download Film Clips',
 }
 
-const HighlightTemplate = props => {
+const HighlightTemplate = (props) => {
   const data = props.data
   const wpHighlight = data.wpHighlight
   const videos = wpHighlight.acfHighlight.wcoHighlightVideos
@@ -46,9 +46,8 @@ const HighlightTemplate = props => {
 
   if (videos && videos.length >= 1) {
     videos.forEach((video, index) => {
-      let type = (video.type === 'Other'
-        ? video.typeCustom
-        : video.type
+      let type = (
+        video.type === 'Other' ? video.typeCustom : video.type
       ).toLowerCase()
       let slug = slugify(type)
       navSections.push({ href: `#${slug}`, label: type })
@@ -147,11 +146,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       date
@@ -163,16 +163,12 @@ export const pageQuery = graphql`
           id
           slug
           altText
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       acfHighlight {

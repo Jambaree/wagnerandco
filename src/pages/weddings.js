@@ -10,7 +10,7 @@ import WeddingsListing from '../components/WeddingsListing'
 import { stripTrailingSlash } from '../utils/format'
 import Seo from '../components/Seo'
 
-const WeddingsIndexPage = props => {
+const WeddingsIndexPage = (props) => {
   const data = props.data
   const pageNode = data.wpPage
   let postEdges = data.allWpWedding.edges
@@ -56,11 +56,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       id
@@ -76,16 +77,13 @@ export const pageQuery = graphql`
       }
       featuredImage {
         node {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          altText
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
     }
@@ -100,19 +98,12 @@ export const pageQuery = graphql`
             node {
               id
               altText
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(
-                    quality: 90
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    formats: AUTO
-                  )
-                  fluid {
-                    src
-                  }
-                }
-              }
+              gatsbyImage(
+                placeholder: BLURRED
+                quality: 90
+                width: 600
+                layout: CONSTRAINED
+              )
             }
           }
           acfFeaturedLoop {

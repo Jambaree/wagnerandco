@@ -62,7 +62,7 @@ class WeddingTemplate extends React.Component {
 
     let formattedStills = null
     if (stills) {
-      formattedStills = stills.map(item => {
+      formattedStills = stills.map((item) => {
         let figureClasses = this.getFigureClasses(prevFigDirClass)
         prevFigDirClass = figureClasses[2]
         let media = null
@@ -165,11 +165,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       date
@@ -180,19 +181,12 @@ export const pageQuery = graphql`
       featuredImage {
         node {
           id
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-              fluid {
-                src
-              }
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       acfFeaturedLoop {
@@ -220,16 +214,12 @@ export const pageQuery = graphql`
           id
           mimeType
           mediaItemUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 800
+            layout: CONSTRAINED
+          )
         }
       }
     }

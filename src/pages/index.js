@@ -81,16 +81,12 @@ export const pageQuery = graphql`
             node {
               id
               altText
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(
-                    quality: 90
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    formats: AUTO
-                  )
-                }
-              }
+              gatsbyImage(
+                placeholder: BLURRED
+                quality: 90
+                width: 600
+                layout: CONSTRAINED
+              )
             }
           }
           acfPages {
@@ -108,11 +104,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
 
@@ -137,16 +134,13 @@ export const pageQuery = graphql`
       }
       featuredImage {
         node {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          altText
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
     }

@@ -14,7 +14,7 @@ import { StylizedFAQ } from '../components/HeadingsStylized'
 import DoodleRandomCorner from '../components/DoodleRandomCorner'
 import Seo from '../components/Seo'
 
-const FAQImage = props => {
+const FAQImage = (props) => {
   return (
     <ImgSharp
       {...props}
@@ -29,7 +29,7 @@ FAQImage.propTypes = {
   alt: PropTypes.string,
 }
 
-const FAQItem = props => {
+const FAQItem = (props) => {
   return (
     <div className={`block mb3 ${props.className}`}>
       <H4 is="h3">{props.question}</H4>
@@ -43,7 +43,7 @@ const FAQItem = props => {
   )
 }
 
-const FAQItemBlock = props => {
+const FAQItemBlock = (props) => {
   let itemOne = props.items[0]
   let itemTwo = props.items[1]
   // eslint-disable-next-line
@@ -99,7 +99,7 @@ FAQItemBlock.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-const FAQItems = props => {
+const FAQItems = (props) => {
   // eslint-disable-next-line
   let { items, images, ...remainingProps } = props
   let imgIndex = 0
@@ -154,7 +154,7 @@ FAQItems.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
 }
 
-const Faq = props => {
+const Faq = (props) => {
   const data = props.data
   const pageNode = data.wpPage
   const seoData = data.wpPage.seo
@@ -194,11 +194,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       id
@@ -207,16 +208,13 @@ export const pageQuery = graphql`
       content
       featuredImage {
         node {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          altText
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       template {
@@ -232,17 +230,12 @@ export const pageQuery = graphql`
               altText
               title
               id
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(
-                    quality: 90
-                    width: 600
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    formats: AUTO
-                  )
-                }
-              }
+              gatsbyImage(
+                placeholder: BLURRED
+                quality: 90
+                width: 600
+                layout: CONSTRAINED
+              )
             }
           }
         }

@@ -52,8 +52,17 @@ let config = {
       options: {
         // The base URL of the Wordpress site without the trailingslash and the protocol.
         url: `${process.env.WP_URL}/graphql`,
+        html: {
+          useGatsbyImage: false,
+          createStaticFiles: false,
+        },
         type: {
-          BlockEditorContentNode: { exclude: true },
+          MediaItem: {
+            createFileNodes: false,
+          },
+          Post: {
+            limit: 20,
+          },
         },
       },
     },

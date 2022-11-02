@@ -11,7 +11,7 @@ import { StylizedSayHello } from '../components/HeadingsStylized'
 import Seo from '../components/Seo'
 // import YoastHelmet from '../components/YoastHelmet'
 
-const ContactPage = props => {
+const ContactPage = (props) => {
   const data = props.data
   const pageNode = data.wpPage
   const seoData = data.wpPage.seo
@@ -109,11 +109,12 @@ export const pageQuery = graphql`
         opengraphImage {
           altText
           sourceUrl
-          localFile {
-            childImageSharp {
-              gatsbyImageData(quality: 90, layout: CONSTRAINED, formats: AUTO)
-            }
-          }
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
       id
@@ -130,16 +131,13 @@ export const pageQuery = graphql`
       }
       featuredImage {
         node {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 90
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: AUTO
-              )
-            }
-          }
+          altText
+          gatsbyImage(
+            placeholder: BLURRED
+            quality: 90
+            width: 600
+            layout: CONSTRAINED
+          )
         }
       }
     }

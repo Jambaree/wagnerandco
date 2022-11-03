@@ -5972,7 +5972,7 @@ gatsby-source-gravityforms@^1.0.18:
     nanoid "^3.1.20"
     oauth-signature "^1.5.0"
 
-gatsby-source-wordpress@^6.14.0:
+gatsby-source-wordpress@^6.24.0:
   version "6.24.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-wordpress/-/gatsby-source-wordpress-6.24.0.tgz#eb0fb2c75702e4cc8859a7cdb6108a28880bcf59"
   integrity sha512-MrPak8XPCEkYMTPysK2oFCHWOiDte2xmQJ6RI9i7Ufd6lSnpO7OejG2LFilrkVrhePIYJaHSbvY1leK1eEiEeQ==

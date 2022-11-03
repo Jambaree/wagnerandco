@@ -55,6 +55,7 @@ export const pageQuery = graphql`
           altText
           sourceUrl
           gatsbyImage(
+            formats: AUTO
             fit: OUTSIDE
             placeholder: BLURRED
             quality: 90

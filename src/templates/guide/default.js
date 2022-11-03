@@ -86,7 +86,6 @@ export const pageQuery = graphql`
             placeholder: BLURRED
             quality: 90
             width: 600
-            layout: CONSTRAINED
           )
         }
       }
@@ -138,7 +137,6 @@ export const pageQuery = graphql`
             placeholder: BLURRED
             quality: 90
             width: 600
-            layout: CONSTRAINED
           )
         }
       }

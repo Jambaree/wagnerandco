@@ -166,6 +166,7 @@ export const pageQuery = graphql`
           altText
           sourceUrl
           gatsbyImage(
+            formats: AUTO
             fit: OUTSIDE
             placeholder: BLURRED
             quality: 90
@@ -183,6 +184,7 @@ export const pageQuery = graphql`
         node {
           id
           gatsbyImage(
+            formats: AUTO
             fit: OUTSIDE
             placeholder: BLURRED
             quality: 90
@@ -217,6 +219,7 @@ export const pageQuery = graphql`
           mimeType
           mediaItemUrl
           gatsbyImage(
+            formats: AUTO
             fit: OUTSIDE
             placeholder: BLURRED
             quality: 90

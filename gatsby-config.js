@@ -43,7 +43,7 @@ let config = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `assets`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/src/pages/`,
       },
     },
     {

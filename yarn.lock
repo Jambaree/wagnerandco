@@ -5753,7 +5753,7 @@ gatsby-plugin-gatsby-cloud@^4.24.1:
     lodash "^4.17.21"
     webpack-assets-manifest "^5.1.0"
 
-gatsby-plugin-image@^2.11.0:
+gatsby-plugin-image@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-image/-/gatsby-plugin-image-2.24.0.tgz#965b6c82359f3f51bd8dbf976648f6a81a2c3d03"
   integrity sha512-btsUxoVX/tQM09LD36XM9kYNbzZzkfBb3qCiaA+w1dEoArKraUYtmcmoMXW4rep7z8Uo7CmutSRD2GHNF0abFg==
@@ -5824,7 +5824,7 @@ gatsby-plugin-react-helmet@^5.11.0:
   dependencies:
     "@babel/runtime" "^7.15.4"
 
-gatsby-plugin-sharp@^4.11.0, gatsby-plugin-sharp@^4.24.0:
+gatsby-plugin-sharp@^4.24.0:
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-4.24.0.tgz#30fa66295105096b476371dfb36062c1dc7456db"
   integrity sha512-wVs8F9zLeiLf02yLi8vjse1vqSrZsx2u3RsMhoSv1bEinyaI5bcoLZ7mMJCsEeZe2G9mvNrPi4Ymhh/YzgxYCg==
@@ -6036,7 +6036,7 @@ gatsby-theme-headless-wordpress@^0.1.9:
   resolved "https://registry.yarnpkg.com/gatsby-theme-headless-wordpress/-/gatsby-theme-headless-wordpress-0.1.10.tgz#6db076d554cb5e858d54a5c4fe4c19ed5c39c474"
   integrity sha512-UEJTiLMpNFaY+ar7Ra2zISFDRC64wX6C5Xg7q55kUyu5yLTxPLB5nCb6fatmw/viPx4KMBv9p82QumUwu+54NQ==
 
-gatsby-transformer-sharp@^4.11.0:
+gatsby-transformer-sharp@^4.24.0:
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-4.24.0.tgz#0e7d61fa4834971e01a44e0eb0a942e5ef38513f"
   integrity sha512-60Ro4OZbx9ZdfPUZEBEhJnureqQUEaNizDs4CK5QWlUkAU6RvVYwsuT3uWeEMrXgugaLLyGpQStJ881N7Eeodg==
@@ -6073,10 +6073,10 @@ gatsby-worker@^1.24.0:
     "@babel/core" "^7.15.5"
     "@babel/runtime" "^7.15.4"
 
-gatsby@^4.24.4:
-  version "4.24.4"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.24.4.tgz#48db456e812cc6ffd1f8180d393a5b01f4a9e03e"
-  integrity sha512-jUC5X3xspNKTGp5ADlwP7q1I9kZai9mS+cPkEZJvSetdAB5AZjYY867OxwBgj0awt/E1+f8AG255zanK7Nvwtg==
+gatsby@^4.24.6:
+  version "4.24.6"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.24.6.tgz#0af107c0699e829fe543f602b53d478f3f455360"
+  integrity sha512-LFfgmZ38gUJO7Z/dYfbKPFPu+fl1d711pFFiKsUcffehcJ6lYUgJmR0MoRMIZiG9yUlVgo1V0T8GC1azbdYzkA==
   dependencies:
     "@babel/code-frame" "^7.14.0"
     "@babel/core" "^7.15.5"

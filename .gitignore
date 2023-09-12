@@ -13,5 +13,5 @@ public/
 .cache
 
 # Config
-.env*
+
 !.env.example

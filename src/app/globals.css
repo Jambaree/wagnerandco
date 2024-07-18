@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  h1 {
+    @apply font-mont text-base-h1 leading-base-h1 font-base-bold;
+  }
+
+  .wysiwyg h1 {
+    @apply text-[#282829] mb-[0.81rem];
+  }
+
+  hr {
+    @apply mb-4;
+  }
+
+  .wysiwyg a {
+    @apply text-primary underline font-semibold;
+  }
+
+  h2 {
+    @apply font-mont text-base-h2 leading-base-h2 font-base-bold;
+  }
+
+  .wysiwyg h2 {
+    @apply text-[#282829] mb-[0.81rem];
+  }
+
+  h3 {
+    @apply font-mont text-base-h3 leading-base-h3 font-base-bold;
+  }
+
+  .wysiwyg h3 {
+    @apply text-[#282829] mb-[0.81rem];
+  }
+
+  h4 {
+    @apply font-mont text-base-h4 leading-base-h4 font-base-bold;
+  }
+
+  p {
+    @apply text-[18px] font-lato leading-[28px];
+  }
+
+  .wysiwyg div {
+    @apply mb-[13px] text-[18px] text-[#282829] font-lato;
+  }
+
+  .wysiwyg p {
+    @apply mb-[13px];
+  }
+
+  .wysiwyg ul {
+    @apply font-lato;
+    font-size: 18px;
+    line-height: 28px;
+    color: rgb(40, 40, 41);
+    margin-bottom: 0.81rem;
+    margin-left: 25px;
+  }
+
+  .wysiwyg li {
+    font-size: 18px;
+    line-height: 28px;
+    color: rgb(40, 40, 41);
+    margin-bottom: 0.81rem;
+    list-style: disc;
+  }
+
+  .body3 {
+    @apply font-lato text-base-body1 leading-base-body1 text-white;
+  }
+}
+
+form {
+  @apply antialiased block w-full font-lato text-white text-base font-normal leading-normal;
+  box-sizing: inherit;
+}
+
+input {
+  @apply antialiased w-full border-0 block bg-white px-3.5 py-[18.5px] text-current max-w-[300px] md:max-w-[560px] rounded-lg text-[#282829];
+  box-sizing: content-box;
+  -webkit-tap-highlight-color: transparent;
+  /* Custom animation and other properties might need manual CSS */
+}
+
+select {
+  @apply antialiased w-full border-0 block bg-white px-3.5 py-[18.5px] text-current max-w-[300px] md:max-w-[560px] rounded-lg text-[#282829];
+  box-sizing: content-box;
+  -webkit-tap-highlight-color: transparent;
+  /* Custom animation and other properties might need manual CSS */
+}

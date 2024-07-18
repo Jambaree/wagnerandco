@@ -27,7 +27,6 @@ import ScrollAnchor from '../components/ScrollAnchor'
 // import YoastHelmet from '../components/YoastHelmet'
 import Doodle from '../components/Doodle'
 import { isLoggedIn, logout, getCurrentUser } from '../utils/auth'
-import Seo from '../components/Seo'
 
 const List = (props) => {
   const { className, ...remainingProps } = props
@@ -147,7 +146,7 @@ const PackagesList = (props) => {
                   <br />
                   <Link
                     title={hasExampleLink ? pkg.exampleLink.title : undefined}
-                    to={
+                    href={
                       hasExampleLink
                         ? pkg.exampleLink.url
                         : `/highlights/${slug}-example`
@@ -257,7 +256,6 @@ class PackagesPage extends React.Component {
     const data = props.data
     const pageNode = data.wpPage
     const acf = pageNode.template.acfPackages
-    const seoData = data.wpPage.seo
 
     let itemsToDisplay = []
 
@@ -307,8 +305,6 @@ class PackagesPage extends React.Component {
         }}
         onSuccess="/packages">
         <PageWrapper>
-          <Seo {...seoData} />
-
           <div className="relative md-pb4">
             <StylizedInfo />
             <Header

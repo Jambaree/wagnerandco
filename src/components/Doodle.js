@@ -1,8 +1,9 @@
+'use client'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import random from 'lodash.random'
 
-const DoodleLine = props => {
+const DoodleLine = (props) => {
   let lines = []
   let lineProps = {
     fill: 'none',
@@ -52,7 +53,7 @@ const DoodleDiagonal = props => {
 }
 */
 
-const DoodleZagSingle = props => {
+const DoodleZagSingle = (props) => {
   return (
     <g className="doodlegroup doodlegroup-zag">
       <polyline
@@ -66,7 +67,7 @@ const DoodleZagSingle = props => {
   )
 }
 
-const DoodleZag = props => {
+const DoodleZag = (props) => {
   return (
     <g className="doodlegroup doodlegroup-zag">
       <polyline
@@ -87,7 +88,7 @@ const DoodleZag = props => {
   )
 }
 
-const DoodleWave = props => {
+const DoodleWave = (props) => {
   return (
     <g className="doodlegroup doodlegroup-wave">
       <path
@@ -118,13 +119,14 @@ const doodles = {
 
 // const doodleKeys = Object.keys(doodles)
 
-const DoodleClipPath = props => (
+const DoodleClipPath = (props) => (
   <React.Fragment>
     <defs>
       <clipPath id="DoodleClipPath">
         <polygon
-          points={`0,0 ${props.width},0 ${props.width},50 ${props.width /
-            2},50, ${props.width / 2},25 0,25 0,0`}
+          points={`0,0 ${props.width},0 ${props.width},50 ${
+            props.width / 2
+          },50, ${props.width / 2},25 0,25 0,0`}
         />
       </clipPath>
     </defs>

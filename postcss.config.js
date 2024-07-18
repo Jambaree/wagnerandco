@@ -1,8 +1,13 @@
-module.exports = {
-  plugins: {
-    'postcss-import': {},
-    'postcss-preset-env': { stage: 0 },
-    'postcss-browser-reporter': {},
-    'postcss-reporter': {},
-  },
-}
+const postcssImport = require(`postcss-import`)
+const postcssPresetEnv = require(`postcss-preset-env`)
+const postcssBrowserReporter = require(`postcss-browser-reporter`)
+const postcssReporter = require(`postcss-reporter`)
+
+module.exports = () => ({
+  plugins: [
+    postcssImport(),
+    postcssPresetEnv({ stage: 0 }),
+    postcssBrowserReporter(),
+    postcssReporter(),
+  ],
+})

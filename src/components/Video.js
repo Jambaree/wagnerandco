@@ -1,9 +1,8 @@
-'use client'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Play } from './Icons'
 
-const ButtonPlay = (props) => {
+const ButtonPlay = props => {
   return (
     <button
       className="ButtonPlay absolute bg-transparent px4 py3 border-none cursor-pointer z2"
@@ -18,7 +17,7 @@ const ButtonPlay = (props) => {
   )
 }
 
-const EmbedContainer = (props) => {
+const EmbedContainer = props => {
   let ratio = props.ratio.split(':')
   let paddingBottom = props.paddingBottom || (ratio[1] / ratio[0]) * 100
 
@@ -83,7 +82,7 @@ class Video extends React.Component {
 
     this.player = null
 
-    let vimeoId = props.vimeoId
+    let vimeoId = props.vimeoId 
     if (props.src) {
       vimeoId = this.stripTrailingSlash(props.vimeoId.toString())
       vimeoId = vimeoId.split('/')[0]
@@ -92,7 +91,7 @@ class Video extends React.Component {
   }
 
   // https://stackoverflow.com/a/36242700/864799
-  stripTrailingSlash = (str) => {
+  stripTrailingSlash = str => {
     return str !== '/' && str.endsWith('/') ? str.slice(0, -1) : str
   }
 
@@ -103,7 +102,7 @@ class Video extends React.Component {
         this.setState({ showPlayButton: false })
         // the video was played
       })
-      .catch(function (err) {
+      .catch(function(err) {
         switch (err.name) {
           case 'PasswordError':
             // the video is password-protected and the viewer needs to enter the
@@ -125,7 +124,7 @@ class Video extends React.Component {
     player
       .setColor(color)
       .then()
-      .catch((err) => {
+      .catch(err => {
         console.warn(err)
       })
   }
@@ -139,10 +138,10 @@ class Video extends React.Component {
 
       player
         .loadVideo(this.vimeoId)
-        .then(function (id) {
+        .then(function(id) {
           // the video successfully loaded
         })
-        .catch(function (err) {
+        .catch(function(err) {
           switch (err.name) {
             case 'TypeError':
               // the id was not a number
@@ -164,29 +163,29 @@ class Video extends React.Component {
           }
         })
 
-      player.getVideoHeight().then((height) => {
+      player.getVideoHeight().then(height => {
         this.setState({ height: parseFloat(height, 10) })
       })
 
-      player.getVideoWidth().then((width) => {
+      player.getVideoWidth().then(width => {
         this.setState({ width: parseFloat(width, 10) })
       })
 
-      player.getVideoTitle().then((title) => {
+      player.getVideoTitle().then(title => {
         this.setState({ title: title })
       })
 
       this.setPlayerColor(this.player, this.props.color)
 
-      player.on('pause', (data) => {
+      player.on('pause', data => {
         this.setState({ showPlayButton: true })
       })
 
-      player.on('play', (data) => {
+      player.on('play', data => {
         this.setState({ showPlayButton: false })
       })
 
-      player.on('timeupdate', (data) => {
+      player.on('timeupdate', data => {
         this.setState({
           duration: data.duration,
           percent: data.percent,
@@ -200,9 +199,9 @@ class Video extends React.Component {
     if (this.player) {
       const player = this.player
       let playerEvents = ['pause', 'play', 'timeupdate']
-      let cb = function () {}
+      let cb = function() {}
 
-      playerEvents.forEach((name) => {
+      playerEvents.forEach(name => {
         player.off(name, cb)
         player.off(name, cb)
         player.off(name, cb)
@@ -228,7 +227,7 @@ class Video extends React.Component {
           <EmbedContainer
             title={state.title}
             ratio={`${state.width}:${state.height}`}
-            iframeRef={(el) => (this.iframe = el)}
+            iframeRef={el => (this.iframe = el)}
             src={`${src}?title=0&byline=0&portrait=0`}
           />
           {state.showPlayButton ? (

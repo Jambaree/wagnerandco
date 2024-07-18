@@ -1,6 +1,6 @@
 import React from 'react'
-import { graphql, navigate } from 'gatsby'
-import Link from 'next/link'
+import { Link, graphql, navigate } from 'gatsby'
+
 // Ours
 import Header from '../components/Header'
 
@@ -37,7 +37,7 @@ class HighlightsIndexPage extends React.Component {
           {downloadEdges.map(({ node }, index) => {
             return (
               <li key={index}>
-                <Link href={`/highlights/${node.slug}`}>{node.title}</Link>
+                <Link to={`/highlights/${node.slug}`}>{node.title}</Link>
               </li>
             )
           })}

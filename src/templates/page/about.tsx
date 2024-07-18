@@ -1,127 +1,89 @@
 import React from 'react'
 
 // Ours
-import permittedSlug from '../../utils/permitted-slug'
-import PageWrapper from '../../components/PageWrapper'
-import Wrapper from '../../components/Wrapper'
-import Header from '../../components/Header'
-import WhitespaceHeader from '../../components/WhitespaceHeader'
+import Link from '@/components/LinkDuo'
+import PageWrapper from '@/components/PageWrapper'
+import Wrapper from '@/components/Wrapper'
+import Header from '@/components/Header'
+import TeamMembers from '@/components/TeamMembers'
+import Image from 'next/image'
+import { H1, H4 } from '@/components/Headings'
+import { StylizedAbout } from '@/components/HeadingsStylized'
+import WeddingIntro from '@/components/WeddingIntro'
 
-import FlexibleContent from '../../components/FlexibleContent'
-import SidebarNav from '../../components/SidebarNav'
-import headlineBlocksToNav from '../../utils/headline-blocks-to-nav'
-
-// import YoastHelmet from '../../components/YoastHelmet'
-
-export function AboutTemplate(props) {
-  const data = props.data
-  const pageNode = data.wpInfo
-  const seoData = data.wpInfo.seo
-  let sidebarItems = headlineBlocksToNav(
-    props?.data?.wpInfo?.acfTextImageBlocks?.modules
-  )
-  if (!permittedSlug(pageNode.slug)) {
-    return null
-  }
+const AboutH2 = (props) => {
   return (
-    <PageWrapper className="WPInfo pb4" is="article">
-      <div>InfoTemplate</div>
-      {/* <Wrapper maxWidth={3}>
-        <WhitespaceHeader marginBottom={5}>
-          <Header
-            showTitle
-            title={props?.data?.wpInfo?.acfTextImageBlocks?.wcoBlockTitle}
-          />
-        </WhitespaceHeader>
-        <SidebarNav items={sidebarItems} />
-
-        {!!props?.data?.wpInfo?.acfTextImageBlocks?.modules && (
-          <FlexibleContent
-            rows={props?.data?.wpInfo?.acfTextImageBlocks?.modules}
-            data={{
-              titl: props?.data?.wpInfo?.title,
-              uri: props?.data?.wpInfo?.uri,
-            }}
-          />
-        )}
-      </Wrapper> */}
-    </PageWrapper>
+    <div className="center py2 sm-py3 md-py4 max-width-1 mx-auto">
+      <H1 is="h2">{props.children}</H1>
+    </div>
   )
 }
 
-// export const pageQuery = graphql`
-//   query WordpressInfo($id: String!) {
-//     wp {
-//       acfOptions {
-//         options {
-//           url
-//         }
-//       }
-//     }
-//     wpInfo(id: { eq: $id }) {
-//       seo {
-//         title
-//         metaDesc
-//         opengraphTitle
-//         opengraphDescription
-//         opengraphImage {
-//           altText
-//           sourceUrl
-//           gatsbyImage(
-//             formats: AUTO
-//             fit: OUTSIDE
-//             placeholder: BLURRED
-//             quality: 90
-//             width: 600
-//           )
-//         }
-//       }
-//       id
-//       slug
-//       title
-//       # content
-//       acfTextImageBlocks {
-//         wcoBlockTitle
-//         fieldGroupName
-//         modules {
-//           ... on WpInfo_Acftextimageblocks_Modules_BlockHeadline {
-//             fieldGroupName
-//             heading
-//           }
-//           ... on WpInfo_Acftextimageblocks_Modules_BlockTextarea {
-//             fieldGroupName
-//             content
-//           }
-//           ... on WpInfo_Acftextimageblocks_Modules_BlockGifVideo {
-//             fieldGroupName
-//             featuredLoop {
-//               mediaItemUrl
-//               id
-//             }
-//           }
-//           ... on WpInfo_Acftextimageblocks_Modules_BlockForm {
-//             fieldGroupName
-//             formId
-//           }
-//           ... on WpInfo_Acftextimageblocks_Modules_BlockVideo {
-//             fieldGroupName
-//             vimeoId
-//           }
-//         }
-//       }
-//       featuredImage {
-//         node {
-//           id
-//           altText
-//           gatsbyImage(
-//             formats: AUTO
-//             fit: OUTSIDE
-//             placeholder: BLURRED
-//             quality: 90
-//             width: 600
-//           )
-//         }
-//       }
-//     }
-//   }
-// `
+export function AboutTemplate(props) {
+  const { data } = props
+  let wrapperProps = { padding: true, maxWidth: 5 }
+
+  return (
+    <Wrapper {...wrapperProps}>
+      <PageWrapper className="relative">
+        <StylizedAbout />
+        <Header
+          title={data.title.rendered}
+          subtitle={data.acf.wco_page_subtitle}
+        />
+        <Wrapper maxWidth={3}>
+          <WeddingIntro>{data.content.rendered}</WeddingIntro>
+        </Wrapper>
+        <Wrapper maxWidth={5}>
+          <AboutH2>{data.acf.wco_team_title}</AboutH2>
+          <TeamMembers members={data.acf.wco_team_members} />
+        </Wrapper>
+        <AboutH2>Where we’ve been featured</AboutH2>
+        <div className="sm-flex sm-mxn2">
+          <div className="col-12 sm-col-6 sm-px2">
+            <H4 is="h3">Press</H4>
+
+            <ul className="list-style-none m0 p0">
+              {data?.acf?.wco_press_items.map((edge, index) => {
+                return (
+                  <li key={`PressItem_Link_${index}`} className="mb1">
+                    <Link
+                      to={edge.press_link.url}
+                      target="_blank"
+                      rel="noopener">
+                      {edge.press_link.title}
+                    </Link>
+                    , {edge.date}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className="col-12 sm-col-6 sm-px2">
+            <ul className="list-style-none m0 p0 col-12 sm-flex flex-wrap">
+              {data?.acf?.wco_press_logos?.map((image, index) => {
+                return (
+                  <li
+                    key={`PressLogo_${image.id}_${index}`}
+                    className="block col-12 sm-col-6 sm-flex items-center p2">
+                    <Image
+                      src={image?.url}
+                      alt={image.alt || `${image.name} logo`}
+                      // className="block m0 mx-auto max-width-1 col-12"
+                      width={image?.width}
+                      height={image?.height}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                      }}
+                    />
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
+      </PageWrapper>
+    </Wrapper>
+  )
+}

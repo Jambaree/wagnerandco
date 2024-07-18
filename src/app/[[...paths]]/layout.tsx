@@ -11,10 +11,14 @@ export default async function Layout(props) {
     slug: 'nextwp',
   })
 
-  let wrapperProps = { padding: true, maxWidth: 5 }
-
   return (
     <html>
+      <head>
+        <link
+          rel="stylesheet"
+          href={`https://use.typekit.net/${options.wco_service_typekit}.css`}
+        />
+      </head>
       <body>
         <GlobalColors
           // title={og.title}
@@ -25,10 +29,7 @@ export default async function Layout(props) {
           }))}
           footerTagline={options?.wco_footer_tagline}
           footerEstYear={options?.wco_established_year}>
-          <Wrapper {...wrapperProps}>
-            <Header className="mt3" showTitle />
-            {children}
-          </Wrapper>
+          {children}
         </GlobalColors>
       </body>
     </html>

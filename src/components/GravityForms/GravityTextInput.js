@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Label from './GravityLabel'
 import Desc from './GravityDescription'
 
-const GravityTextInput = props => {
+const GravityTextInput = (props) => {
   // TODO props.numberFormat
   // decimal_dot
   let id = props.id.toString()
@@ -31,7 +31,7 @@ const GravityTextInput = props => {
           id={id}
           name={id}
           type={props.type}
-          className={props.cssClass}
+          className={'input block col-12'}
           required={props.isRequired}
           maxLength={props.maxLength}
           placeholder={props.placeholder || props.inputMaskValue}

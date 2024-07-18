@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ImgSharp from './ImgSharp'
+import Image from 'next/image'
 import ImgFallback from './ImgFallback'
 import LinkDuo from './LinkDuo'
 import { H4 } from '../components/Headings'
 import DoodleRandomCorner from '../components/DoodleRandomCorner'
 
-const TeamMembers = props => {
+const TeamMembers = (props) => {
+  const { members } = props
   return (
     <ul className="TeamMembers list-style-none m0 p0 sm-flex flex-wrap sm-mxn2 md-mb3 lg-mb4">
-      {props.members.map((member, index) => {
+      {members.map((member, index) => {
         if (!member) {
           return null
         }
@@ -24,11 +25,15 @@ const TeamMembers = props => {
                   {(index + 1) % 2 === 0 ? (
                     <DoodleRandomCorner color="blue" />
                   ) : null}
-                  <ImgSharp
-                    {...member.image}
-                    alt={
-                      member.image.altText || `Profile photo of ${member.name}`
-                    }
+                  <Image
+                    src={member?.image?.url}
+                    alt={member.image.alt || `Profile photo of ${member.name}`}
+                    width={member?.image?.width}
+                    height={member?.image?.height}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
                   />
                 </div>
               ) : (

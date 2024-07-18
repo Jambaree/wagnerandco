@@ -8,7 +8,7 @@ import Header from '../../components/Header'
 
 import WhitespaceHeader from '@/components/WhitespaceHeader'
 import Doodle from '@/components/Doodle'
-import Video from '@/components/Video'
+import Video from '@/components/blocks/Video'
 import { H1, Intro } from '@/components/Headings'
 import WeddingsListing from '@/components/WeddingsListing'
 import { getAllItems } from '@nextwp/core/src/api/get-all-items'
@@ -33,7 +33,14 @@ export async function DefaultPageTemplate(props) {
   return (
     <PageWrapper>
       {/* <Wrapper maxWidth={3}> */}
-      <Header showTitle title={title?.rendered} subtitle={wco_page_subtitle} />
+      <div style={{ marginTop: '7em' }}></div>
+      <Header
+        showTitle
+        title={title?.rendered}
+        subtitle={wco_page_subtitle}
+        className="mt3 text-center "
+      />
+      <div style={{ marginBottom: '8em' }}></div>
       {/* <div dangerouslySetInnerHTML={{ __html: pageNode.content }} /> */}
       {/* <GutenbergBlocks blocks={pageNode.blocks} /> */}
 
@@ -42,7 +49,9 @@ export async function DefaultPageTemplate(props) {
           <Doodle name="wave" color="red" />
         </div>
       </div>
+
       <Video vimeoId={wco_frontpage_vimeo_id} />
+
       <Wrapper padding>
         <div className="center py2 sm-py3 mb3 md-py4 mb4">
           <H1 is="h2">{wco_frontpage_weddings_title}</H1>

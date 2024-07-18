@@ -1,10 +1,11 @@
+'use client'
 import React from 'react'
 import GravityTextInput from './GravityTextInput'
 import { Rifm } from 'rifm'
 import fecha from 'fecha'
 
 // https://github.com/istarkov/rifm/blob/master/docs/format.js
-export const dateFormat = str => {
+export const dateFormat = (str) => {
   const clean = str.replace(/[^\d]+/gi, '')
   const chars = clean.split('')
 
@@ -54,10 +55,10 @@ class GravityDateInput extends React.Component {
 
     return (
       <Rifm
-        replace={value => value.length >= 10}
+        replace={(value) => value.length >= 10}
         format={dateFormat}
         value={state.value}
-        onChange={newValue => {
+        onChange={(newValue) => {
           this.setState({
             value: newValue,
           })

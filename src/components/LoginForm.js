@@ -31,7 +31,7 @@ class LoginFormWithCountry extends React.Component {
   }
 }
 
-const LoginForm = props => {
+const LoginForm = (props) => {
   return <LoginFormWithCountry {...props} />
 }
 

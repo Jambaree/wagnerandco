@@ -8,3 +8,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return items
 }
+
+// excludes: [
+//   `/packages/*`,
+//   `/highlights/*`,
+//   `/guides/*`,
+//   `/packages`,
+//   `/highlight`,
+//   `/guide`,
+//   `/video-demo`,
+//   `/styleguide`,
+// ],

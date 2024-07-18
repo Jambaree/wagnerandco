@@ -9,7 +9,7 @@ import Header from '../../components/Header'
 import WeddingIntro from '../../components/WeddingIntro'
 import WeddingCredits from '../../components/WeddingCredits'
 import WeddingMore from '../../components/WeddingMore'
-import Video from '../../components/Video'
+import Video from '../../components/blocks/Video'
 
 import DoodleRandomCorner from '../../components/DoodleRandomCorner'
 import WeddingFeaturedMedia from '../../components/WeddingFeaturedMedia'
@@ -54,7 +54,18 @@ function formatStills(stills) {
     ) {
       media = <VideoLoop src={`${item.mediaItemUrl}`} />
     } else {
-      media = <Image src={item?.url} width={650} height={405} />
+      media = (
+        <Image
+          src={item?.url}
+          width={item?.width}
+          height={item?.height}
+          alt={item?.alt || ''}
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+        />
+      )
     }
 
     return (

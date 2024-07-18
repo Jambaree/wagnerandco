@@ -1,6 +1,6 @@
 import React from 'react'
 
-const timestampRange = function (start, end) {
+const timestampRange = function(start, end) {
   start = timestamp(start, false)
   end = timestamp(end)
   let divider = '–'
@@ -15,7 +15,7 @@ const timestampRange = function (start, end) {
   }
 }
 
-const timestamp = function (str, showUnit = true) {
+const timestamp = function(str, showUnit = true) {
   let units = [' hour', ' minute', ' second']
   // let largestUnitIndex = units.length - 1
   let largestUnitIndex = 1
@@ -74,7 +74,7 @@ const priceOpts = {
 // https://stackoverflow.com/a/16233919/864799
 const priceFormatter = new Intl.NumberFormat('en-CA', priceOpts)
 
-const price = function (str, currencyCode) {
+const price = function(str, currencyCode) {
   let num = parseFloat(str, 10)
 
   if (typeof currencyCode === 'undefined') {
@@ -88,11 +88,11 @@ const price = function (str, currencyCode) {
   }
 }
 
-const lowercaseFirstLetter = function (string) {
-  return string?.charAt(0)?.toLowerCase() + string.slice(1)
+const lowercaseFirstLetter = function(string) {
+  return string.charAt(0).toLowerCase() + string.slice(1)
 }
 
-const subtitleStringToObj = function (full, short, opt) {
+const subtitleStringToObj = function(full, short, opt) {
   opt = opt || { bold: false }
   let fullSplit = full.split(short)
 
@@ -118,10 +118,9 @@ const subtitleStringToObj = function (full, short, opt) {
   return full
 }
 
-const subtitle = function (full, short, opt) {
+const subtitle = function(full, short, opt) {
   opt = opt || { bold: false }
-
-  let shortLower = lowercaseFirstLetter(short.rendered)
+  let shortLower = lowercaseFirstLetter(short)
   let result = full
 
   if (full.includes(short)) {
@@ -133,7 +132,7 @@ const subtitle = function (full, short, opt) {
   return result
 }
 
-const stripTrailingSlash = function (str) {
+const stripTrailingSlash = function(str) {
   if (str.substr(-1) === '/') {
     return str.substr(0, str.length - 1)
   }

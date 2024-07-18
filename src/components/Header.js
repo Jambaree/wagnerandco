@@ -1,8 +1,8 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import { H1, Intro } from '../components/Headings'
 
-const Header = (props) => {
+const Header = props => {
   return (
     <header
       className={`col-12 mx-auto max-width-2 center mb4 ${props.className}`}>
@@ -20,6 +20,17 @@ const Header = (props) => {
       ) : null}
     </header>
   )
+}
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  showTitle: PropTypes.bool,
+  // subtitle: PropTypes.string, // String or Component
+}
+
+Header.defaultProps = {
+  showTitle: false,
+  className: '',
 }
 
 export default Header

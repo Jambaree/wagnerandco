@@ -2,7 +2,7 @@ import React from 'react'
 import unesc from '../utils/unescape'
 import typogr from 'typogr'
 
-const handleAlign = (direction) => {
+const handleAlign = direction => {
   let directions = {
     left: 'left-align',
     right: 'right-align',
@@ -16,7 +16,7 @@ const handleAlign = (direction) => {
   return directions['left']
 }
 
-const H1 = (props) => {
+const H1 = props => {
   let Tag = props.is
   let align = handleAlign(props.align)
 
@@ -32,7 +32,7 @@ H1.defaultProps = {
   align: 'center',
 }
 
-const H2 = (props) => {
+const H2 = props => {
   let Tag = props.is
   let align = handleAlign(props.align)
 
@@ -48,7 +48,7 @@ H2.defaultProps = {
   align: 'center',
 }
 
-const H3 = (props) => {
+const H3 = props => {
   let Tag = props.is
   let align = handleAlign(props.align)
 
@@ -64,7 +64,7 @@ H3.defaultProps = {
   align: 'left',
 }
 
-const H4 = (props) => {
+const H4 = props => {
   let Tag = props.is
 
   return (
@@ -81,27 +81,27 @@ H4.defaultProps = {
   track: 2,
 }
 
-const Intro = (props) => {
+const Intro = props => {
   let { typogrify, ...remainingProps } = props
   let className = 'h3 line-height-4'
 
-  // if (props.typogrify) {
-  //   return (
-  //     <div
-  //       className={className}
-  //       dangerouslySetInnerHTML={
-  //         props.dangerouslySetInnerHTML || {
-  //           __html: typogr(unesc(props.children))
-  //             .chain()
-  //             .initQuotes()
-  //             .smartypants()
-  //             .widont()
-  //             .value(),
-  //         }
-  //       }
-  //     />
-  //   )
-  // }
+  if (props.typogrify) {
+    return (
+      <div
+        className={className}
+        dangerouslySetInnerHTML={
+          props.dangerouslySetInnerHTML || {
+            __html: typogr(unesc(props.children))
+              .chain()
+              .initQuotes()
+              .smartypants()
+              .widont()
+              .value(),
+          }
+        }
+      />
+    )
+  }
 
   return <div {...remainingProps} className={className} />
 }

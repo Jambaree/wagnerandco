@@ -1,6 +1,6 @@
 import React from 'react'
-import { graphql, navigate } from 'gatsby'
-import Link from 'next/link'
+import { Link, graphql, navigate } from 'gatsby'
+
 // Ours
 import Header from '../components/Header'
 
@@ -27,7 +27,7 @@ class Guide extends React.Component {
           {edges.map(({ node }, index) => {
             return (
               <li key={index}>
-                <Link href={`/guides/${node.slug}`}>{node.title}</Link>
+                <Link to={`/guides/${node.slug}`}>{node.title}</Link>
               </li>
             )
           })}

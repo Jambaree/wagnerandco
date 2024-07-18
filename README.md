@@ -1,111 +1,55 @@
-# Wagner & Co. frontend
+This is a [NextWP](https://www.nextwp.org/) project that was previously a Gatsby Project but has been revamped.
 
-## Getting started
+![NextWP Image](/screenshot.png)
 
-```
-# Install dependencies
-npm install
-```
+## Getting Started
 
-Create your environment variables to login to WordPress:
 
-```
-# Rename the example .env file
-cp .env.example .env.development
-cp .env.example .env.production
-```
+Set up your environment variables in `.env.local`:
 
-Now, fill in the details with the WordPress API user account (not your own credentials).
-
-To keep the environment variables as minimal as possible, the remainder of the WordPress config is handled conditionally in `gatsby-config.js`.
-
-If you are developing everything locally, you could also remove the `auth` config in that file to disable Basic Auth, but that would also prevent you accessing certain parts of the WordPress REST API that you’ll likely need to build the site.
-
-After starting the WordPress server…
-
-```
-# Run Gatsby in development mode, pulling from production data
-npm start
+```bash
+NEXT_PUBLIC_WP_URL=
+NEXT_SITE_URL=
+REVALIDATE_SECRET_KEY=
+WP_APPLICATION_PASSWORD=
+NEXT_PREVIEW_SECRET=
 ```
 
-## Using a local WordPress site as the backend
+Read more about [NextWP environment variables](https://www.nextwp.org/environment-variables).
 
-In this Gatsby site, the `WP_ENV` environment variable controls whether to pull data from the production site, or from the local WordPress site. It defaults to production. To switch it to your local WordPress site, start it in another Terminal tab:
+Then, run the development server:
 
-```
-cd ~/path-to-your-site/
-wp server -p 8080
-```
-
-And then when starting the Gatsby site, set the `WP_ENV=development`:
-
-```sh
-WP_ENV=development npm start
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
-## Build
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Learn More
+
+To learn more about NextWP, take a look at the following resources:
+
+- [NextWP Documentation](https://www.nextwp.org/) - learn about NextWP features and API.
+- [NextWP Quickstart guide](https://www.nextwp.org/quickstart) - quickstart guide for NextWP.
+
+You can check out [the NextWP GitHub repository](https://github.com/CalebBarnes/nextwp) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your NextWP app is to use the Vercel one click deploy:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCalebBarnes%2Fnextwp-starter&env=NEXT_PUBLIC_WP_URL,WP_APPLICATION_PASSWORD,NEXT_PREVIEW_SECRET,REVALIDATE_SECRET_KEY&envDescription=These%20environment%20variables%20are%20necessary%20for%20the%20Next.js%20to%20WordPress%20connection%20via%20NextWP.%20Refer%20to%20the%20NextWP%20docs%20for%20more%20information.&envLink=https%3A%2F%2Fwww.nextwp.org%2Fenvironment-variables&demo-title=NextWP%20Starter&demo-description=A%20Next.js%20Headless%20WordPress%20site%20built%20with%20NextWP.&demo-url=https%3A%2F%2Fnextwp-starter.vercel.app&demo-image=https%3A%2F%2Fraw.githubusercontent.com%2FCalebBarnes%2Fnextwp-starter%2Fmain%2Fscreenshot.png)
+
+or, you can create a new project with `create-nextwp-app` and deploy manually:
+
+```bash
+npx create-nextwp-app
 ```
-npm run build
-```
 
-## Additional WordPress configuration
-
-### Adding an API User to WordPress for Gatsby
-
-1. Probably get everything working with Basic Auth for dev purposes
-2. Install the Application Passwords plugin
-3. Create an API User account
-4. Write an API User plugin, or use an existing User Role Editor plugin and set their permissions, ex:
-  ```php
-  'read' => true,
-  'read_private_posts' => true,
-  'read_private_pages' => true,
-  'edit_posts' => false,
-  'delete_posts' => false,
-  'gravityforms_edit_forms' => true
-  ```
-  Mine has access to edit users so users can be read, but maybe that’s a bad idea. I also added access to edit Gravity Forms (as in the forms, not the entries) so that I can read the forms themselves when building the site, but not actually read the entries or do anything else with the data.
-4. Generate an “Application Password” / token for that user
-5. Add their token to the environment variables
-6. TODO Change username and password for this token, not sure if that’s possible within Gatsby Source WordPress yet without modifications
-7. Add another API User for submitting to forms only. This one should have reduced permissions, really only:
-  - `gravityforms_edit_forms`
-  - `gravityforms_view_entries`
-  - `gravityforms_edit_entries`
-  - `gravityforms_delete_entries`
-  - `gravityforms_system_status`
-  Experiment, maybe even some of these aren’t necessary for you.
-8. Build your base64 key for that again (this is not more secure, it just turns it into one string and at least keeps it from being plain text in the code, the important part is what we’ve made the application password revokable).
-  ```sh
-  # Note Application Password space at end
-  echo "api_user_username:ABC1 234 ASDF "
-  ```
-9. Pass its token to the front-end as `GATSBY_`, ex. `GATSBY_WP_KEY`
-10. Use that in fetch rather than the current username and password 
-  ```js
-  // This is just a demo, it has already been done in <GravityForm />
-  let headers = new Headers()
-  headers.append('Content-Type', 'application/json')
-  headers.append('Authorization', `Basic ${process.env.GATSBY_WP_KEY}`)
-
-  fetch(`https://example.com/endpoint`, {
-    method: 'POST',
-    headers: headers,
-    body: { msg: 'Hello' },
-  })
-  ```
-  Ideally would also limit to certain domains.
-
-#### Further reading
-
-  - https://codex.wordpress.org/Roles_and_Capabilities
-  - https://ryanbenhase.com/giving-editors-access-to-gravity-forms/
-
-## References
-
-Portions of the configuration and approach to querying WordPress are based on [Gatsby Starter WordPress](https://github.com/ericwindmill/gatsby-starter-wordpress) by Ruben Harutyunyan, and available under the [MIT License](https://github.com/ericwindmill/gatsby-starter-wordpress/blob/master/LICENSE).
-
-## License
-
-Copyright © [Kenneth Ormandy Inc.](https://kennethormandy.com)
+Once you have created your project, you can deploy it with [Vercel](https://vercel.com/) or any other hosting provider.

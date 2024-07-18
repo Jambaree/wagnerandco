@@ -64,7 +64,7 @@ class WeddingsListing extends React.Component {
                     href={`${props.slugPrefix}/${wedding.slug}`}
                     className="block border-none hover-media-opacity hover-color-red">
                     <figure>
-                      <div className="col-12 bg-peach ">
+                      <div className="col-12 relative">
                         <WeddingFeaturedMedia node={wedding} />
                       </div>
                       <figcaption className="block col-12 mt2 md-mt3 line-height-3 md-line-height-4">

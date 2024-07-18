@@ -8,21 +8,24 @@ const WeddingFeaturedMedia = (props) => {
   const { node } = props
 
   const img = node?._embedded?.['wp:featuredmedia']?.[0]
-  // let sharp = img && img.localFile ? img.localFile.childImageSharp : false
 
   return (
     <>
       {node?.acf?.featured_loop ? (
         <VideoLoop
-          poster={img.gatsbyImage ? img.gatsbyImage : null}
-          src={`${node.acf.featured_loop.mediaItemUrl}`}
+          poster={node?.acf?.featured_loop?.link}
+          src={`${node.acf.featured_loop.url}`}
         />
       ) : img ? (
         <Image
           src={img?.source_url}
-          width={img.media_details?.sizes.medium.width}
-          height={img.media_details?.sizes.medium.height}
+          width={img.media_details?.width}
+          height={img.media_details?.height}
           alt={img?.alt_text}
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
         />
       ) : (
         <ImgFallback />

@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Label from './GravityLabel'
@@ -26,7 +27,7 @@ class GravityRadioGroup extends React.Component {
     return (
       <fieldset
         className={`mb2 ${this.state.used ? '' : 'input-unused'}`}
-        onBlur={e => {
+        onBlur={(e) => {
           if (!this.state.used) {
             this.setState({ used: true })
           }

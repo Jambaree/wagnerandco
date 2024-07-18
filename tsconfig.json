@@ -43,7 +43,9 @@
     "src/theme",
     "old-gatsby/pages/index.js",
     "old-gatsby/pages/weddings.js",
-    "old-gatsby/pages/about.js"
+    "old-gatsby/pages/about.js",
+    "old-gatsby/pages/packages.js",
+    "old-gatsby/pages/info.js"
   ],
   "exclude": ["node_modules"]
 }

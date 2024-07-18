@@ -10,9 +10,9 @@ import VideoLoop from './VideoLoop'
 // Gutenberg
 import Video from './Video'
 import GravityForms from './GravityForms'
-import GravityFormIFrame from './GravityFormIFrame'
+import GravityFormIFrame from './blocks/Form'
 
-const getBlockClass = function(name) {
+const getBlockClass = function (name) {
   return `block_${name.replace('/', '_')}`
 }
 
@@ -53,7 +53,7 @@ const getBlockClass = function(name) {
 // Plugin
 // - [x] gravityforms/form // Round 1
 
-const handleTransformImage = function(node) {
+const handleTransformImage = function (node) {
   if (node.type === 'tag') {
     switch (node.name) {
       case 'img':
@@ -83,7 +83,7 @@ const handleTransformImage = function(node) {
   }
 }
 
-const handleTransformVideo = function(node, index) {
+const handleTransformVideo = function (node, index) {
   if (!node || typeof node.children === 'undefined' || !node.children.length) {
     return null
   }
@@ -108,7 +108,7 @@ const handleTransformVideo = function(node, index) {
 
 const gutenbergBlocks = {
   core: {
-    image: function(props) {
+    image: function (props) {
       let { originalContent } = props
       let content = reactHtmlParser(originalContent, {
         transform: handleTransformImage,
@@ -132,7 +132,7 @@ const gutenbergBlocks = {
 
       return <div>{content}</div>
     },
-    gallery: function(props) {
+    gallery: function (props) {
       let { originalContent, name, className } = props
 
       // A different approach for replacing the URL
@@ -156,7 +156,7 @@ const gutenbergBlocks = {
         </div>
       )
     },
-    video: function(props) {
+    video: function (props) {
       let { originalContent, name, className } = props
 
       let content = reactHtmlParser(originalContent, {
@@ -169,15 +169,10 @@ const gutenbergBlocks = {
         </div>
       )
     },
-    default: function(props) {
+    default: function (props) {
       // eslint-ignore
-      let {
-        originalContent,
-        name,
-        className,
-        attributes,
-        ...remainingProps
-      } = props
+      let { originalContent, name, className, attributes, ...remainingProps } =
+        props
       let content = reactHtmlParser(originalContent)
 
       if (name === 'core/heading') {
@@ -201,7 +196,7 @@ const gutenbergBlocks = {
     },
   },
   coreEmbed: {
-    vimeo: function(props) {
+    vimeo: function (props) {
       let { originalContent } = props
       let content = reactHtmlParser(originalContent)
       let wpFigure = content[0].props.children
@@ -223,7 +218,7 @@ const gutenbergBlocks = {
         </figure>
       )
     },
-    instagram: function(props) {
+    instagram: function (props) {
       let { originalContent, name, className } = props
       let content = reactHtmlParser(originalContent)
       let div = content[0].props.children
@@ -282,7 +277,7 @@ const gutenbergBlocks = {
     // },
   },
   gravityforms: {
-    form: function(props) {
+    form: function (props) {
       let { attributes } = props
       let matchingForm = {}
 
@@ -308,7 +303,7 @@ const gutenbergBlocks = {
         />
       )
     },
-    iframe: function(props) {
+    iframe: function (props) {
       let { attributes } = props
       return <GravityFormIFrame formId={attributes.formId} />
     },
@@ -329,7 +324,7 @@ const blocks = {
   'gravityforms/form': gutenbergBlocks.gravityforms.iframe,
 }
 
-const GutenbergBlocks = props => {
+const GutenbergBlocks = (props) => {
   if (props.blocks && props.blocks.length >= 1) {
     //   // Run one parent StaticQuery with all the data we might
     //   // need to pass down to individual Gutenberg blocks

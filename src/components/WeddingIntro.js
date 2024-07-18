@@ -1,29 +1,26 @@
 'use client'
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const MultiColumnOffsetHack = (props) => {
-  // prettier-ignore
+const MultiColumnOffsetHack = ({ large = false }) => {
   return (
     <React.Fragment>
-      { props.large === true ?
-      <span className="select-none xs-hide sm-hide md-hide lg-show">
-        <br /><br /><br /><br />
-      </span> : null }
+      {large === true ? (
+        <span className="select-none xs-hide sm-hide md-hide lg-show">
+          <br />
+          <br />
+          <br />
+          <br />
+        </span>
+      ) : null}
 
       <span className="select-none xs-hide sm-show md-show lg-show">
-        <br /><br /><br /><br />
+        <br />
+        <br />
+        <br />
+        <br />
       </span>
     </React.Fragment>
   )
-}
-
-MultiColumnOffsetHack.defaultProps = {
-  large: false,
-}
-
-MultiColumnOffsetHack.propTypes = {
-  large: PropTypes.bool,
 }
 
 class MultiColumnIntro extends React.Component {
@@ -34,13 +31,13 @@ class MultiColumnIntro extends React.Component {
   }
 
   wpContentToColumns(content) {
-    const props = this.props
+    const { favorColumn } = this.props
 
     // Split on newline, <p> is omitted using WP theme settings
     let contentSplit = content.split(/\n/)
 
     let half
-    if (props.favorColumn === 'first') {
+    if (favorColumn === 'first') {
       half = Math.ceil(contentSplit.length / 2)
     } else {
       half = Math.floor(contentSplit.length / 2)
@@ -77,11 +74,6 @@ class MultiColumnIntro extends React.Component {
 
 MultiColumnIntro.defaultProps = {
   favorColumn: 'last',
-}
-
-MultiColumnIntro.propTypes = {
-  children: PropTypes.string.isRequired,
-  favorColumn: PropTypes.string,
 }
 
 export default MultiColumnIntro

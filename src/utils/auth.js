@@ -8,14 +8,16 @@ const getUser = () =>
     ? JSON.parse(window.localStorage.gatsbyUser)
     : {}
 
-const setUser = user => (window.localStorage.gatsbyUser = JSON.stringify(user))
+const setUser = (user) =>
+  (window.localStorage.gatsbyUser = JSON.stringify(user))
 
 export const handleLogin = ({ username, password, countryKey }) => {
   if (!isBrowser) return false
-
+  console.log(process.env.NEXT_PUBLIC_WP_PAGE_PASSWORD)
   if (
     // window.atob(username) === `demo` &&
-    password === process.env.GATSBY_WP_PAGE_PASSWORD
+
+    password === process.env.NEXT_PUBLIC_WP_PAGE_PASSWORD
   ) {
     return setUser({
       loggedIn: true,
@@ -38,7 +40,7 @@ export const isLoggedIn = () => {
 
 export const getCurrentUser = () => isBrowser && getUser()
 
-export const logout = callback => {
+export const logout = (callback) => {
   if (!isBrowser) return
 
   // console.log(`Ensuring the \`gatsbyUser\` property exists.`)

@@ -1,34 +1,34 @@
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import ImgSharp from './ImgSharp'
+import React from 'react'
+
 import ImgFallback from './ImgFallback'
 import VideoLoop from './VideoLoop'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import Image from 'next/image'
 
 const WeddingFeaturedMedia = (props) => {
-  const node = props.node
-  const img = node.featuredImage.node
+  const { node } = props
+
+  const img = node?._embedded?.['wp:featuredmedia']?.[0]
   // let sharp = img && img.localFile ? img.localFile.childImageSharp : false
-  const image = getImage(img.gatsbyImage)
+
   return (
-    <Fragment>
-      {node.acfFeaturedLoop?.featuredLoop ? (
+    <>
+      {node?.acf?.featured_loop ? (
         <VideoLoop
           poster={img.gatsbyImage ? img.gatsbyImage : null}
-          src={`${node.acfFeaturedLoop.featuredLoop.mediaItemUrl}`}
+          src={`${node.acf.featured_loop.mediaItemUrl}`}
         />
       ) : img ? (
-        <ImgSharp {...img} />
+        <Image
+          src={img?.source_url}
+          width={img.media_details?.sizes.medium.width}
+          height={img.media_details?.sizes.medium.height}
+          alt={img?.alt_text}
+        />
       ) : (
         <ImgFallback />
       )}
-    </Fragment>
+    </>
   )
 }
-
-WeddingFeaturedMedia.propTypes = {
-  node: PropTypes.object.isRequired,
-}
-WeddingFeaturedMedia.defaultProps = {}
 
 export default WeddingFeaturedMedia

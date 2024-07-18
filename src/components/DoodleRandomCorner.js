@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import random from 'lodash.random'
 import Doodle from './Doodle'

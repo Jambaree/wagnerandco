@@ -1,7 +1,8 @@
+'use client'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const MultiColumnOffsetHack = props => {
+const MultiColumnOffsetHack = (props) => {
   // prettier-ignore
   return (
     <React.Fragment>

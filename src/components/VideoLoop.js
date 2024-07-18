@@ -25,8 +25,8 @@ const VideoLoop = (props) => {
       muted
       width="auto"
       preload="none"
-      poster={props?.poster}>
-      <source src={props?.src} type={`video/${ext}`} />
+      poster={props?.link}>
+      <source src={props?.url} type={`video/${ext}`} />
       <source
         src={src?.toString()?.replace(ext, extSecondary)}
         type={`video/${extSecondary}`}

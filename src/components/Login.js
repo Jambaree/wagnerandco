@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import Link from 'next/link'
 import { navigate } from '@reach/router'
 
 // Ours
@@ -10,7 +10,7 @@ import LoginForm from '../components/LoginForm'
 import Header from '../components/Header'
 import Wrapper from '../components/Wrapper'
 
-const LoginMessage = props => {
+const LoginMessage = (props) => {
   return (
     <div
       style={{ minHeight: '6em', transform: `translateY(-1.5em)` }}
@@ -103,7 +103,7 @@ class Login extends React.Component {
         errorMessage = (
           <React.Fragment>
             Incorrect password. If you haven’t been provided with one, please{' '}
-            <Link to="/contact">fill out our contact form</Link>.
+            <Link href="/contact">fill out our contact form</Link>.
           </React.Fragment>
         )
         break
@@ -123,7 +123,7 @@ class Login extends React.Component {
           <LoginMessage visible={this.state.errors} children={errorMessage} />
           <LoginForm
             submitLabel={props.submitLabel}
-            handleUpdate={e => this.handleUpdate(e)}
+            handleUpdate={(e) => this.handleUpdate(e)}
             handleSubmit={(e, cb) => this.handleSubmit(e, cb)}>
             <label className="block">
               <strong className="bold">My wedding is in…</strong>

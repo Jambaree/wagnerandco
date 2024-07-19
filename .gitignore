@@ -1,7 +1,7 @@
 static/admin/*.bundle.*
 node_modules
 .cache/
-public/
+
 yarn-error.log
 .env
 .netlify/

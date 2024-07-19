@@ -1,8 +1,7 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
-
 import { useRouter } from 'next/navigation'
 
 // Ours
@@ -11,149 +10,116 @@ import countriesConfig from '../utils/countries-config'
 import LoginForm from '../components/LoginForm'
 import Header from '../components/Header'
 import Wrapper from '../components/Wrapper'
-const router = useRouter()
-const LoginMessage = (props) => {
+
+const LoginMessage = ({ visible, children }) => {
   return (
     <div
       style={{ minHeight: '6em', transform: `translateY(-1.5em)` }}
       className="center h5">
-      {props.visible ? (
+      {visible ? (
         <div className="inline-block line-height-3 bg-peach red rounded px3 p2 mx-auto">
-          {props.children}
+          {children}
         </div>
       ) : null}
     </div>
   )
 }
 
-// This approach is based on Gatsby Simple Auth
-// example https://git.io/vpgqr MIT
+const Login = (props) => {
+  const [password, setPassword] = useState('')
+  const [modified, setModified] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [errors, setErrors] = useState(false)
+  const router = useRouter()
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      // username: '',
-      password: '',
-      modified: false,
-      submitted: false,
-      errors: false,
-    }
-
-    this.handleSubmit = this.handleSubmit.bind(this)
+  const handleUpdate = (e) => {
+    setPassword(e.target.value)
+    setErrors(false)
   }
 
-  handleUpdate(e) {
-    this.setState({
-      // If you want the password base64 encoded, purely
-      // so the string will not be directly in the source code
-      // [e.target.name]: btoa(e.target.value),
-      [e.target.name]: e.target.value,
-      errors: false,
-    })
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log(e)
-    console.log(this.props.countryKey)
-
-    if (
-      typeof this.props.countryKey === 'undefined' ||
-      !this.props.countryKey
-    ) {
-      this.setState({
-        modified: true,
-        errors: 'countryKey',
-      })
+    if (typeof props.countryKey === 'undefined' || !props.countryKey) {
+      setModified(true)
+      setErrors('countryKey')
       return false
     }
 
-    let result = handleLogin({
-      password: this.state.password,
-      countryKey: this.props.countryKey,
+    const result = handleLogin({
+      password,
+      countryKey: props.countryKey,
     })
 
-    this.setState({
-      submitted: true,
-      modified: true,
-      errors: result ? false : 'password',
-    })
+    setSubmitted(true)
+    setModified(true)
+    setErrors(result ? false : 'password')
 
     if (result) {
-      router.push(this.props.onSuccess)
+      router.push(props.onSuccess)
     }
   }
 
-  render() {
-    const { handleSubmit, handleUpdate, ...props } = this.props
-    // let activeCountry = props.countries[props.countryKey]
+  const nextLocation = `${props.onSuccess}?country=${props.countryKey}`
 
-    let nextLocation = `${props.onSuccess}?country=${props.countryKey}`
-
-    if (isLoggedIn()) {
-      router.push(nextLocation)
-      return null
-    }
-
-    let errorMessage = null
-
-    switch (this.state.errors) {
-      case 'password':
-        errorMessage = (
-          <React.Fragment>
-            Incorrect password. If you haven’t been provided with one, please{' '}
-            <Link href="/contact">fill out our contact form</Link>.
-          </React.Fragment>
-        )
-        break
-      case 'countryKey':
-        errorMessage = (
-          <React.Fragment>You must select a location.</React.Fragment>
-        )
-        break
-      default:
-        errorMessage = null
-    }
-
-    return (
-      <Wrapper>
-        <Header title={props.title} subtitle={props.subtitle} />
-        <div className="mx-auto max-width-2 mb4">
-          <LoginMessage visible={this.state.errors} children={errorMessage} />
-          <LoginForm
-            submitLabel={props.submitLabel}
-            handleUpdate={(e) => this.handleUpdate(e)}
-            handleSubmit={(e, cb) => this.handleSubmit(e, cb)}>
-            <label className="block">
-              <strong className="bold">My wedding is in…</strong>
-              <select
-                required
-                className={`block col-12 border-blue mb2 select ${
-                  this.state.modified ? '' : 'input-unused'
-                }`}
-                value={props.countryKey || ''}
-                onChange={props.handleOnChangeCountry}>
-                <option value="" disabled hidden>
-                  Select location…
-                </option>
-                {Object.keys(props.countries).map((value, index) => {
-                  let country = props.countries[value]
-                  return (
-                    <option key={`opt_${value}_${index}`} value={value}>
-                      {country.label}
-                    </option>
-                  )
-                })}
-              </select>
-            </label>
-          </LoginForm>
-        </div>
-      </Wrapper>
-    )
+  if (isLoggedIn()) {
+    router.push(nextLocation)
+    return null
   }
+
+  let errorMessage = null
+
+  switch (errors) {
+    case 'password':
+      errorMessage = (
+        <>
+          Incorrect password. If you haven’t been provided with one, please{' '}
+          <Link href="/contact">fill out our contact form</Link>.
+        </>
+      )
+      break
+    case 'countryKey':
+      errorMessage = <>You must select a location.</>
+      break
+    default:
+      errorMessage = null
+  }
+
+  return (
+    <Wrapper>
+      <Header title={props.title} subtitle={props.subtitle} />
+      <div className="mx-auto max-width-2 mb4">
+        <LoginMessage visible={errors} children={errorMessage} />
+        <LoginForm
+          submitLabel={props.submitLabel}
+          handleUpdate={handleUpdate}
+          handleSubmit={handleSubmit}>
+          <label className="block">
+            <strong className="bold">My wedding is in…</strong>
+            <select
+              required
+              className={`block col-12 border-blue mb2 select ${
+                modified ? '' : 'input-unused'
+              }`}
+              value={props.countryKey || ''}
+              onChange={props.handleOnChangeCountry}>
+              <option value="" disabled hidden>
+                Select location…
+              </option>
+              {Object.keys(props.countries).map((value, index) => {
+                const country = props.countries[value]
+                return (
+                  <option key={`opt_${value}_${index}`} value={value}>
+                    {country.label}
+                  </option>
+                )
+              })}
+            </select>
+          </label>
+        </LoginForm>
+      </div>
+    </Wrapper>
+  )
 }
 
 Login.propTypes = {
@@ -161,7 +127,6 @@ Login.propTypes = {
   countries: PropTypes.object,
 }
 
-// TODO Consolidate this
 Login.defaultProps = {
   title: 'Log In',
   subtitle: 'You need to log in to see this page.',

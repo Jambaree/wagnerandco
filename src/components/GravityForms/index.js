@@ -20,7 +20,7 @@ import 'whatwg-fetch'
 import formToJSON from '../../vendor/formToJSON'
 
 const GravitySection = (props) => (
-  <div className="mt4 mb3 sm-px2" id={slugify(props.label)}>
+  <div className="mt4 mb3 sm-px2" id={slugify(props?.label)}>
     <h2 className="h2 line-height-2 mb0">{props.label}</h2>
     <p className="h4 mt1">{props.description}</p>
     <hr />
@@ -240,7 +240,7 @@ class GravityForm extends React.Component {
     if (!data) {
       return null
     }
-    console.log(data)
+
     const fields = data.fields
 
     let confirmationMarkup = (

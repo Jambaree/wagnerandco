@@ -98,7 +98,7 @@ const PackagesList = ({ items, country }) => {
   return (
     <List>
       {items.map((pkg, index) => {
-        let slug = slugify(pkg.title).toLowerCase()
+        let slug = slugify(pkg?.title)?.toLowerCase()
         let keyStr = `Package_${slug}_${index}`
 
         let price = null
@@ -178,7 +178,7 @@ const Section = (props) => <section className="pb4" {...props} />
 
 export default function PackagesPrivate(props) {
   const router = useRouter()
-  const pathname = usePathname()
+
   const searchParams = useSearchParams()
   const [countryKey, setCountryKey] = useState(handleCountryFromQueryString())
 

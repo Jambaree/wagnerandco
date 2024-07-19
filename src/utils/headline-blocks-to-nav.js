@@ -14,7 +14,7 @@ const headlineBlocksToNav = function (modules) {
         if (label && typeof label === 'string') {
           sidebarItems.push({
             label: label,
-            href: `#${slugify(label.toLowerCase())}`,
+            href: `#${slugify(label?.toLowerCase())}`,
           })
         }
       }

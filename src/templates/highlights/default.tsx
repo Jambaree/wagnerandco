@@ -43,8 +43,8 @@ export async function SingleHighlightTemplate(props) {
     data?.acf?.wco_highlight_videos.forEach((video, index) => {
       let type = (
         video.type === 'Other' ? video.typeCustom : video.type
-      ).toLowerCase()
-      let slug = slugify(type)
+      )?.toLowerCase()
+      let slug = type && slugify(type)
       navSections.push({ href: `#${slug}`, label: type })
 
       sections.push(

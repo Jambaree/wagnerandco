@@ -52,7 +52,7 @@ export async function SingleHighlightTemplate(props) {
           id={slug}
           key={`HighlightTemplate_${data.id}_${index}`}
           className="py4 md-my4">
-          <Video vimeoId={video.vimeo_id} />
+          <Video vimeo_id={video.vimeo_id} />
         </section>
       )
     })

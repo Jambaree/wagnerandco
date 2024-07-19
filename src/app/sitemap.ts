@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next/types'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const items = await generateSitemap({
-    postTypes: ['pages'],
+    postTypes: ['pages', 'weddings', 'info'],
   })
 
   return items

@@ -2,7 +2,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
-import { navigate } from '@reach/router'
+
+import { useRouter } from 'next/navigation'
 
 // Ours
 import { handleLogin, isLoggedIn } from '../utils/auth'
@@ -10,7 +11,7 @@ import countriesConfig from '../utils/countries-config'
 import LoginForm from '../components/LoginForm'
 import Header from '../components/Header'
 import Wrapper from '../components/Wrapper'
-
+const router = useRouter()
 const LoginMessage = (props) => {
   return (
     <div
@@ -82,7 +83,7 @@ class Login extends React.Component {
     })
 
     if (result) {
-      navigate(this.props.onSuccess)
+      router.push(this.props.onSuccess)
     }
   }
 
@@ -93,7 +94,7 @@ class Login extends React.Component {
     let nextLocation = `${props.onSuccess}?country=${props.countryKey}`
 
     if (isLoggedIn()) {
-      navigate(nextLocation)
+      router.push(nextLocation)
       return null
     }
 

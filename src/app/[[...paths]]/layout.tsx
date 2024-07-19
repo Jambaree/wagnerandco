@@ -1,8 +1,7 @@
 import '../../css/index.css'
 
 import { getOptionsPage } from '@nextwp/core'
-import Wrapper from '../../components/Wrapper'
-import Header from '@/components/Header'
+
 import GlobalColors from '@/components/GlobalColors'
 
 export default async function Layout(props) {

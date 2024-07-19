@@ -348,7 +348,7 @@ export default function PackagesPrivate(props) {
                 <PackagesCallToAction />
               </article>
             </Wrapper>
-            <Video vimeoId={data?.acf?.wco_packages_vimeo_id} />
+            <Video vimeo_id={data?.acf?.wco_packages_vimeo_id} />
             <WhitespaceHeader is="div" minHeight={350} height={25}>
               <div className="max-width-2 mx-auto h3 line-height-4 center">
                 <Intro>

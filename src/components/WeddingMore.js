@@ -27,7 +27,6 @@ const WeddingMore = (props) => {
   return (
     <ul className="m0 p0 list-style-none flex flex-wrap mxn1">
       {props.edges.map((node, index) => {
-        // console.log(node)
         if (!permittedSlug(node.slug)) {
           return null
         }

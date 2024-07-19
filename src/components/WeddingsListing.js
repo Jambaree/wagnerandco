@@ -23,7 +23,7 @@ class WeddingsListing extends React.Component {
     // console.log(props)
     const weddings = props.weddings.slice(0, state.visible)
     let nextVisibleCount = state.visible + 10
-    console.log(nextVisibleCount)
+
     return (
       <div className="md-pb4">
         <ul className="WeddingsListing m0 p0 md-pb4 list-style-none sm-mxn2 md-mxn3 lg-mxn4 sm-flex flex-wrap">

@@ -31,7 +31,9 @@ const WeddingMore = (props) => {
         if (!permittedSlug(node.slug)) {
           return null
         }
-
+        if (index > 7) {
+          return false
+        }
         return (
           <li
             className="col-6 sm-col-4 md-col-3 block px1 mb3"

@@ -54,7 +54,7 @@ const EmbedContainer = ({ title, ratio, src, iframeRef, paddingBottom }) => {
 }
 
 const Video = ({
-  vimeoId = '283522233',
+  vimeo_id = '283522233',
   src,
   showProgress = false,
   showTitle = false,
@@ -117,7 +117,7 @@ const Video = ({
 
       const loadVideo = async () => {
         try {
-          await player.loadVideo(vimeoId)
+          await player.loadVideo(vimeo_id)
         } catch (err) {
           console.warn('Error', err.name, err)
         }
@@ -167,15 +167,15 @@ const Video = ({
         })
       }
     }
-  }, [vimeoId, color])
+  }, [vimeo_id, color])
 
   const { title, showPlayButton, percent, width, height } = state
 
-  if (!src && !vimeoId) {
+  if (!src && !vimeo_id) {
     return null
   }
 
-  const videoSrc = src || `https://player.vimeo.com/video/${vimeoId}`
+  const videoSrc = src || `https://player.vimeo.com/video/${vimeo_id}`
   const progressPercent = percent * 100
 
   return (

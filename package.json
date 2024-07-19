@@ -32,7 +32,6 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@nextwp/core": "^0.0.2",
-    "@reach/router": "^1.3.4",
     "@vimeo/player": "2.18.0",
     "basscss": "8.1.0",
     "basscss-addons": "1.0.0",

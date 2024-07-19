@@ -83,7 +83,7 @@ export async function SingleWeddingTemplate(props) {
   if (!weddingNode) return null
 
   const vimeoProps = weddingNode.acf.wco_wedding_vimeo_id
-    ? { vimeoId: weddingNode.acf.wco_wedding_vimeo_id }
+    ? { vimeo_id: weddingNode.acf.wco_wedding_vimeo_id }
     : {}
 
   const formattedStills = weddingNode.acf.wco_wedding_stills

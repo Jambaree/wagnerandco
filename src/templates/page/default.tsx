@@ -50,7 +50,7 @@ export async function DefaultPageTemplate(props) {
         </div>
       </div>
 
-      <Video vimeoId={wco_frontpage_vimeo_id} />
+      <Video vimeo_id={wco_frontpage_vimeo_id} />
 
       <Wrapper padding>
         <div className="center py2 sm-py3 mb3 md-py4 mb4">

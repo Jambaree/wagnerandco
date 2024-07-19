@@ -10,7 +10,8 @@ import { FaqTemplate } from './page/faq'
 import { SingleWeddingTemplate } from './weddings/default'
 import { ContactPageTemplate } from './page/contact'
 import { PackagesPageTemplate } from './page/packages'
-import { InfoPageTemplate } from './info/default'
+import { InfoPageTemplate } from './archive/info'
+import { SingleInfoTemplate } from './info/default'
 import { SinglePackagesTemplate } from './packages/default'
 import { SingleHighlightTemplate } from './highlights/default'
 
@@ -23,13 +24,14 @@ const templates: Templates = {
     packages: PackagesPageTemplate,
   },
   info: {
-    default: InfoPageTemplate,
+    default: SingleInfoTemplate,
   },
   guides: {
     default: GuideTemplate,
   },
   archive: {
     weddings: WeddingPageTemplate,
+    info: InfoPageTemplate,
   },
   packages: {
     packages: SinglePackagesTemplate,

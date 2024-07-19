@@ -5,7 +5,7 @@ const headlineBlocksToNav = function (modules) {
 
   if (modules && modules.length >= 1) {
     modules.forEach(function (block) {
-      if (block.fieldGroupName.split('_').slice(-1)[0] === 'BlockHeadline') {
+      if (block.acf_fc_layout === 'headline') {
         let label = block?.heading
 
         // If the label isn’t a string by this point,
@@ -14,7 +14,7 @@ const headlineBlocksToNav = function (modules) {
         if (label && typeof label === 'string') {
           sidebarItems.push({
             label: label,
-            href: `#${slugify(label.toLowerCase())}`,
+            href: `#${slugify(label?.toLowerCase())}`,
           })
         }
       }

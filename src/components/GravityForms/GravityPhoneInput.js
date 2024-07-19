@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import GravityTextInput from './GravityTextInput'
 import { AsYouType } from 'libphonenumber-js'
@@ -6,7 +7,7 @@ import { Rifm } from 'rifm'
 // https://github.com/istarkov/rifm/blob/master/docs/format.js
 const usPhone = new AsYouType('US')
 
-export const formatPhone = str => {
+export const formatPhone = (str) => {
   const clean = str.replace(/[^\d]+/gi, '').substr(0, 10)
   const r = usPhone.input(clean)
   usPhone.reset()
@@ -31,7 +32,7 @@ class GravityPhoneInput extends React.Component {
       <Rifm
         format={formatPhone}
         value={state.value}
-        onChange={newValue => {
+        onChange={(newValue) => {
           this.setState({
             value: newValue,
           })

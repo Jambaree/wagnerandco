@@ -1,6 +1,6 @@
 'use client'
 import React, { useRef } from 'react'
-import Helmet from 'react-helmet'
+import Head from 'next/head'
 
 const Form = ({ formId = 1 }) => {
   const iframeRef = useRef(null)
@@ -13,11 +13,11 @@ const Form = ({ formId = 1 }) => {
 
   return (
     <React.Fragment>
-      <Helmet>
+      <Head>
         <script
           src={`${process.env.NEXT_PUBLIC_WP_URL}/wp-content/plugins/gravity-forms-iframe-develop/assets/scripts/gfembed.min.js`}
           type="text/javascript"></script>
-      </Helmet>
+      </Head>
       <iframe
         title={`Form ${formIdString}`}
         ref={iframeRef}

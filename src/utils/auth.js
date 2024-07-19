@@ -13,7 +13,7 @@ const setUser = (user) =>
 
 export const handleLogin = ({ username, password, countryKey }) => {
   if (!isBrowser) return false
-  console.log(process.env.NEXT_PUBLIC_WP_PAGE_PASSWORD)
+
   if (
     // window.atob(username) === `demo` &&
 

@@ -78,7 +78,6 @@
     "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
-    "gatsby-plugin-accessibilityjs": "1.0.3",
     "prettier": "^2.7.1"
   }
 }

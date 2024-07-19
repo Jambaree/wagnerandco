@@ -1,3 +1,4 @@
+'use client'
 // import '../vendor/scroll'
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -16,7 +17,7 @@ class ScrollAnchor extends React.Component {
       <a
         href={props.href}
         {...props}
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault()
           return this.handleOnClick(id)
         }}>

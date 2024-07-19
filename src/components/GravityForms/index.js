@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import PropTypes from 'prop-types'
 // import Button from './Button'
@@ -18,15 +19,15 @@ import slugify from 'slugify'
 import 'whatwg-fetch'
 import formToJSON from '../../vendor/formToJSON'
 
-const GravitySection = props => (
-  <div className="mt4 mb3 sm-px2" id={slugify(props.label)}>
+const GravitySection = (props) => (
+  <div className="mt4 mb3 sm-px2" id={slugify(props?.label)}>
     <h2 className="h2 line-height-2 mb0">{props.label}</h2>
     <p className="h4 mt1">{props.description}</p>
     <hr />
   </div>
 )
 
-const GravityHTML = props => {
+const GravityHTML = (props) => {
   return (
     <div
       className="sm-px2"
@@ -35,7 +36,7 @@ const GravityHTML = props => {
   )
 }
 
-const GravityHiddenInput = props => {
+const GravityHiddenInput = (props) => {
   // console.log(props)
   // devalutValue = {embed_post:post_title}
   // There are many other values Gravity Forms
@@ -100,7 +101,7 @@ const InputTypes = {
   // total
 }
 
-const Debug = props => {
+const Debug = (props) => {
   return (
     <details>
       <summary>JSON output</summary>
@@ -142,7 +143,7 @@ class GravityForm extends React.Component {
 
       conditionalLogic.rules.forEach((ruleObj, index) => {
         // Get the field ID we need
-        this.props.data.formFields.some(field => {
+        this.props.data.formFields.some((field) => {
           if (field.id.toString() === ruleObj.fieldId.toString()) {
             let fieldEls = document.querySelectorAll(`[name="${field.id}"]`)
             for (let fieldEl of fieldEls) {
@@ -183,7 +184,7 @@ class GravityForm extends React.Component {
 
     let headers = new Headers()
     headers.append('Content-Type', 'application/json')
-    headers.append('Authorization', `Basic ${process.env.GATSBY_WP_KEY}`)
+    // headers.append('Authorization', `Basic ${process.env.NEXT_PUBLIC_GF}`)
 
     let formData = formToJSON(this.form.elements)
     let formattedFormData = {}
@@ -194,7 +195,7 @@ class GravityForm extends React.Component {
     } else {
       // Format for /submissions endpoint
       // https://git.io/vhCKE
-      Object.keys(formData).forEach(key => {
+      Object.keys(formData).forEach((key) => {
         formattedFormData[`input_${key}`] = formData[key]
       })
     }
@@ -211,7 +212,7 @@ class GravityForm extends React.Component {
       headers: headers,
       body: body,
     }).then(
-      result => {
+      (result) => {
         // console.log(result)
         if (result.ok) {
           this.setState({
@@ -222,7 +223,7 @@ class GravityForm extends React.Component {
           this.handleReset(this.form)
         }
       },
-      err => {
+      (err) => {
         // TODO Doesn’t seem to work properly?
         console.warn(err)
         this.setState({ status: 'error' })
@@ -240,7 +241,7 @@ class GravityForm extends React.Component {
       return null
     }
 
-    const fields = data['formFields']
+    const fields = data.fields
 
     let confirmationMarkup = (
       <div className="h3 line-height-3 col-12">
@@ -259,7 +260,7 @@ class GravityForm extends React.Component {
         id={`form-${props.formId}`}
         className={data.cssClass || props.defaultClassName}
         onSubmit={this.handleSubmit.bind(this)}
-        ref={el => {
+        ref={(el) => {
           this.form = el
         }}>
         {props.showTitle ? (
@@ -289,7 +290,7 @@ class GravityForm extends React.Component {
 
               // If there is conditional logic, can’t simply check this field
               // for conditionalLogic, because fields change other fields.
-              field.onBlur = e => {
+              field.onBlur = (e) => {
                 if (props.debug) {
                   console.log('Handle conditional logic')
                 }
@@ -317,7 +318,7 @@ class GravityForm extends React.Component {
                 result = (
                   <React.Fragment>
                     <h2>{field.label}</h2>
-                    {field.inputs.map(nestedField => {
+                    {field.inputs.map((nestedField) => {
                       return (
                         <div
                           id={nestedField.id}

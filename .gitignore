@@ -1,17 +1,13 @@
-# OS
-.DS_Store
-
-# Logs
-logs
-*.log*
-
-# Dependency directory
+static/admin/*.bundle.*
 node_modules
+.cache/
 
-# Compile directories
-public/
-.cache
+yarn-error.log
+.env
+.netlify/
+.DS_Store
+*.zip
+.eslintrc
+.next
 
-# Config
-
-!.env.example
+.wordpress-cache/

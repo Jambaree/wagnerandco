@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import Link from 'next/link'
 import unesc from '../utils/unescape'
 import permittedSlug from '../utils/permitted-slug'
 
-const WeddingMoreThumb = props => (
+const WeddingMoreThumb = (props) => (
   <div
     className={`WeddingMoreThumb bg-peach red mb1 hover-bg-${props.hover} hover-color-peach hover-transition-all flex items-center justify-around`}>
     <div
@@ -23,32 +23,30 @@ const WeddingMoreThumb = props => (
 WeddingMoreThumb.defaultProps = {
   hover: 'red',
 }
-
-const WeddingMore = props => {
+const WeddingMore = (props) => {
   return (
     <ul className="m0 p0 list-style-none flex flex-wrap mxn1">
-      {props.edges.map(({ node }, index) => {
+      {props.edges.map((node, index) => {
+        // console.log(node)
         if (!permittedSlug(node.slug)) {
           return null
         }
-
+        if (index > 7) {
+          return false
+        }
         return (
           <li
             className="col-6 sm-col-4 md-col-3 block px1 mb3"
             key={`${node.id}_${index}`}>
             <Link
-              to={`${props.slugPrefix}/${node.slug}`}
+              href={`${props.slugPrefix}/${node.slug}`}
               className="block border-none">
               <WeddingMoreThumb
-                title={node.title}
+                title={node.title.rendered}
                 hover={index % 2 ? 'blue' : 'red'}
               />
-              <div className="red">
-                {unesc(node.acfWedding.wcoWeddingCouple)}
-              </div>
-              <div className="red">
-                {unesc(node.acfWedding.wcoWeddingLocation)}
-              </div>
+              <div className="red">{unesc(node.acf.wco_wedding_couple)}</div>
+              <div className="red">{unesc(node.acf.wco_wedding_location)}</div>
             </Link>
           </li>
         )

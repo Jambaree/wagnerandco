@@ -109,12 +109,9 @@ const PackagesList = ({ items, country }) => {
             country.currencyCode
           )
         }
-
-        const url =
-          'https://staging-wagnerandco.kinsta.cloud/highlights/package-d-example'
+        const url = pkg.example_link.url
         const baseUrl = process.env.NEXT_PUBLIC_WP_URL // Ensure this is set in your environment variables
         const relativeUrl = url.replace(baseUrl, '')
-
         return (
           <li key={keyStr} id={slug} className="mb4">
             <div className="flex items-end lg-mb2">

@@ -40,7 +40,7 @@ export async function ContactPageTemplate(props) {
   let confirmationMessage = getConfirmationMessage(gfForm)
 
   return (
-    <Wrapper>
+    <Wrapper padding>
       <PageWrapper className="relative">
         <StylizedSayHello />
         <Wrapper maxWidth={3}>

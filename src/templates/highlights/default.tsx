@@ -69,7 +69,6 @@ export async function SingleHighlightTemplate(props) {
   return (
     <Wrapper {...wrapperProps}>
       <PageWrapper is="article">
-        <div>HighlightTemplate</div>
         <WhitespaceHeaderCorners
           title={data.title.rendered}
           date={data.date}

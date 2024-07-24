@@ -55,8 +55,8 @@ const PackagesListItems = ({ items, country, namespace }) => {
       }}>
       {items.map((item, j) => {
         let timestamp = format.timestampRange(
-          item.durationShort,
-          item.durationLong
+          item.duration_short,
+          item.duration_long
         )
 
         return (
@@ -66,13 +66,12 @@ const PackagesListItems = ({ items, country, namespace }) => {
             }`}
             key={`${namespace}_${j}`}>
             <H4>
+              {console.log(item)}
               {item.prices && country ? (
                 <div>
                   {format.price(
                     item.prices[
-                      `price${
-                        country.value[0].toUpperCase() + country.value.slice(1)
-                      }`
+                      `price_${country.value[0] + country.value.slice(1)}`
                     ],
                     country.currencyCode
                   )}
@@ -102,13 +101,11 @@ const PackagesList = ({ items, country }) => {
         let keyStr = `Package_${slug}_${index}`
 
         let price = null
-        let hasExampleLink = pkg.exampleLink
+        let hasExampleLink = pkg.example_link
 
         if (pkg.prices && country) {
           price = format.price(
-            pkg.prices[
-              `price${country.value[0].toUpperCase() + country.value.slice(1)}`
-            ],
+            pkg.prices[`price_${country.value[0] + country.value.slice(1)}`],
             country.currencyCode
           )
         }
@@ -125,10 +122,10 @@ const PackagesList = ({ items, country }) => {
                   View:
                   <br />
                   <Link
-                    title={hasExampleLink ? pkg.exampleLink.title : undefined}
+                    title={hasExampleLink ? pkg.example_link.title : undefined}
                     href={
                       hasExampleLink
-                        ? pkg.exampleLink.url
+                        ? pkg.example_link.url
                         : `/highlights/${slug}-example`
                     }>
                     Example of {pkg.title}

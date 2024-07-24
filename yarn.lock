@@ -852,10 +852,10 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@vimeo/player@2.18.0":
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.18.0.tgz#74c2b9f21c28da768baa8e39131e0eec07d43d6e"
-  integrity sha512-AJ8LQJ0WQXoPO6GBiMRmcBpdpUMnNm12blG/H80BgKD75w/+pLw0t1vzDHCE915O2OlFau6u1Q0QVw2HS1eRvg==
+"@vimeo/player@^2.23.0":
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.23.0.tgz#0ffcae773f8eec8bdd943b3c72aed30477797001"
+  integrity sha512-WiLSyoioHdf8TFcSp8ptt8aW1WWEkFJNtZCZgiCopDS11UecGtwRib/OAf0uF7uDlVueeV4ru0AL4QsPD1Y2GA==
   dependencies:
     native-promise-only "0.8.1"
     weakmap-polyfill "2.0.4"

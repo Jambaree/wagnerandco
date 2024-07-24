@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { Play } from '@/components/Icons'
+import Player from '@vimeo/player'
 
 const ButtonPlay = (props) => {
   return (
@@ -36,11 +37,10 @@ const EmbedContainer = ({ title, ratio, src, iframeRef, paddingBottom }) => {
         ref={iframeRef}
         src={src}
         width="640"
+        allow="autoplay"
         height="291"
         frameBorder="0"
-        webkitallowfullscreen="true"
-        mozallowfullscreen="true"
-        allowFullScreen={true}
+        allowFullScreen
         style={{
           position: 'absolute',
           top: 0,
@@ -75,10 +75,6 @@ const Video = ({
   const iframeRef = useRef(null)
   const playerRef = useRef(null)
 
-  const stripTrailingSlash = (str) => {
-    return str !== '/' && str.endsWith('/') ? str.slice(0, -1) : str
-  }
-
   const handlePlay = () => {
     if (playerRef.current) {
       playerRef.current
@@ -89,10 +85,9 @@ const Video = ({
         .catch((err) => {
           switch (err.name) {
             case 'PasswordError':
-              break
             case 'PrivacyError':
-              break
             default:
+              console.error(err)
               break
           }
         })
@@ -109,50 +104,43 @@ const Video = ({
   }
 
   useEffect(() => {
-    const Player = require('@vimeo/player/dist/player.min')
-
     if (Player) {
-      const player = new Player(iframeRef.current)
+      const player = new Player(iframeRef.current, { id: vimeo_id })
       playerRef.current = player
 
       const loadVideo = async () => {
         try {
           await player.loadVideo(vimeo_id)
-        } catch (err) {
-          console.warn('Error', err.name, err)
-        }
+          const height = await player.getVideoHeight()
+          const width = await player.getVideoWidth()
+          const title = await player.getVideoTitle()
 
-        const height = await player.getVideoHeight()
-        setState((prevState) => ({
-          ...prevState,
-          height: parseFloat(height, 10),
-        }))
-
-        const width = await player.getVideoWidth()
-        setState((prevState) => ({
-          ...prevState,
-          width: parseFloat(width, 10),
-        }))
-
-        const title = await player.getVideoTitle()
-        setState((prevState) => ({ ...prevState, title }))
-
-        setPlayerColor(player, color)
-
-        player.on('pause', () =>
-          setState((prevState) => ({ ...prevState, showPlayButton: true }))
-        )
-        player.on('play', () =>
-          setState((prevState) => ({ ...prevState, showPlayButton: false }))
-        )
-        player.on('timeupdate', (data) => {
           setState((prevState) => ({
             ...prevState,
-            duration: data.duration,
-            percent: data.percent,
-            seconds: data.seconds,
+            height: parseFloat(height, 10),
+            width: parseFloat(width, 10),
+            title,
           }))
-        })
+
+          setPlayerColor(player, color)
+
+          player.on('pause', () =>
+            setState((prevState) => ({ ...prevState, showPlayButton: true }))
+          )
+          player.on('play', () =>
+            setState((prevState) => ({ ...prevState, showPlayButton: false }))
+          )
+          player.on('timeupdate', (data) => {
+            setState((prevState) => ({
+              ...prevState,
+              duration: data.duration,
+              percent: data.percent,
+              seconds: data.seconds,
+            }))
+          })
+        } catch (err) {
+          console.warn('Error loading video:', err.name, err)
+        }
       }
 
       loadVideo()
@@ -180,7 +168,7 @@ const Video = ({
 
   return (
     <div>
-      {showTitle ? <div>{title}</div> : null}
+      {showTitle && <div>{title}</div>}
       <div className="relative">
         <EmbedContainer
           title={title}
@@ -188,13 +176,13 @@ const Video = ({
           iframeRef={iframeRef}
           src={`${videoSrc}?title=0&byline=0&portrait=0`}
         />
-        {showPlayButton ? <ButtonPlay onClick={handlePlay} /> : null}
+        {showPlayButton && <ButtonPlay onClick={handlePlay} />}
       </div>
-      {showProgress ? (
+      {showProgress && (
         <progress value={progressPercent} max="100" className="bg-red">
           {progressPercent}%
         </progress>
-      ) : null}
+      )}
     </div>
   )
 }

@@ -110,6 +110,11 @@ const PackagesList = ({ items, country }) => {
           )
         }
 
+        const url =
+          'https://staging-wagnerandco.kinsta.cloud/highlights/package-d-example'
+        const baseUrl = process.env.NEXT_PUBLIC_WP_URL // Ensure this is set in your environment variables
+        const relativeUrl = url.replace(baseUrl, '')
+
         return (
           <li key={keyStr} id={slug} className="mb4">
             <div className="flex items-end lg-mb2">
@@ -125,7 +130,7 @@ const PackagesList = ({ items, country }) => {
                     title={hasExampleLink ? pkg.example_link.title : undefined}
                     href={
                       hasExampleLink
-                        ? pkg.example_link.url
+                        ? relativeUrl
                         : `/highlights/${slug}-example`
                     }>
                     Example of {pkg.title}

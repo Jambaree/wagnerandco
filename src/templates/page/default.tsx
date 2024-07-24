@@ -58,7 +58,12 @@ export async function DefaultPageTemplate(props) {
           <Intro>{wco_frontpage_weddings_subtitle}</Intro>
         </div>
 
-        <WeddingsListing weddings={weddings} limit={4} showMore={false} />
+        <WeddingsListing
+          weddings={weddings}
+          limit={4}
+          showMore={false}
+          homePage={true}
+        />
 
         <WhitespaceHeader
           is="div"

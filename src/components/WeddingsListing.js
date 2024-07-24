@@ -23,6 +23,7 @@ class WeddingsListing extends React.Component {
     // console.log(props)
     const weddings = props.weddings.slice(0, state.visible)
     let nextVisibleCount = state.visible + 10
+    const homePage = props.homePage
 
     return (
       <div className="md-pb4">
@@ -82,14 +83,14 @@ class WeddingsListing extends React.Component {
           })}
         </ul>
 
-        {weddings.length >= state.visible ? (
+        {weddings.length >= state.visible && !homePage ? (
           <div className="mx-auto center">
             <button
               className="border-none px3 btn bg-transparent center"
               onClick={(e) => {
                 this.setState({ visible: nextVisibleCount })
               }}>
-              <div className="h3 a-faux  border-red line-height-4">
+              <div className="h3 a-faux  border-red line-height-4 peach">
                 More Films
               </div>
             </button>

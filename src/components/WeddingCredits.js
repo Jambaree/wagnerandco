@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const WeddingCredit = props => (
+const WeddingCredit = (props) => (
   <li className="block mb2">
     <strong className="uppercase font-weight-600 track-1 block">
       {props.label}
@@ -28,12 +28,13 @@ WeddingCredit.propTypes = {
   href: PropTypes.string,
 }
 
-const WeddingCredits = props => {
+const WeddingCredits = (props) => {
+  console.log(props)
   return (
     <ul className="m0 p0 list-style-none">
       {props.items
         ? props.items.map((obj, index) => {
-            let label = obj.label === 'Other' ? obj.labelCustom : obj.label
+            let label = obj.label === 'Other' ? obj.label_custom : obj.label
 
             return (
               <WeddingCredit

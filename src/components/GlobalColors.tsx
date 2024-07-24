@@ -166,23 +166,26 @@ const GlobalColors: React.FC<GlobalColorsProps> = ({
     wrapperProps.padding = false
   }
 
+  const weddingPath = pathname?.includes('/highlights/')
+
   return (
     <React.Fragment>
       <div className={`GlobalColors sm-pt2 bg-${backgroundColor} ${color}`}>
         <div style={{ minHeight: '100vh' }}>
           {doodle}
-          {showNav !== false && (
-            <Wrapper maxWidth={5} padding>
-              <GlobalNav pathname={pathname} title={title}>
-                <Wordmark
-                  fillName={color}
-                  title={title}
-                  width="125px"
-                  style={{ transform: 'translateY(10px)' }}
-                />
-              </GlobalNav>
-            </Wrapper>
-          )}
+          {weddingPath ||
+            (showNav !== false && (
+              <Wrapper maxWidth={5} padding>
+                <GlobalNav pathname={pathname} title={title}>
+                  <Wordmark
+                    fillName={color}
+                    title={title}
+                    width="125px"
+                    style={{ transform: 'translateY(10px)' }}
+                  />
+                </GlobalNav>
+              </Wrapper>
+            ))}
           {children}
         </div>
       </div>

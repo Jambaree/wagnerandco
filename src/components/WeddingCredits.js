@@ -29,7 +29,6 @@ WeddingCredit.propTypes = {
 }
 
 const WeddingCredits = (props) => {
-  console.log(props)
   return (
     <ul className="m0 p0 list-style-none">
       {props.items

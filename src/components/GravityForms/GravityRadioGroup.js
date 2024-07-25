@@ -32,7 +32,6 @@ class GravityRadioGroup extends React.Component {
             this.setState({ used: true })
           }
 
-          console.log('props', props)
           if (props.onBlur && typeof props.onBlur === 'function') {
             return props.onBlur(e)
           }

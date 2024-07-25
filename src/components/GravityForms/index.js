@@ -130,8 +130,9 @@ class GravityForm extends React.Component {
 
   // Maybe only do this once in constructor
   handleFieldConditionalLogic(conditionalLogic) {
-    conditionalLogic = JSON.parse(conditionalLogic)
-
+    if (typeof document === 'undefined') {
+      return // Ensure this runs only on the client side
+    }
     if (
       conditionalLogic &&
       conditionalLogic.rules &&
@@ -143,7 +144,7 @@ class GravityForm extends React.Component {
 
       conditionalLogic.rules.forEach((ruleObj, index) => {
         // Get the field ID we need
-        this.props.data.formFields.some((field) => {
+        this.props.data.fields.some((field) => {
           if (field.id.toString() === ruleObj.fieldId.toString()) {
             let fieldEls = document.querySelectorAll(`[name="${field.id}"]`)
             for (let fieldEl of fieldEls) {
@@ -348,12 +349,9 @@ class GravityForm extends React.Component {
 
               return (
                 <div
-                  style={{
-                    // outline: conditionalLogicResult
-                    //   ? '2px solid green'
-                    //   : '2px solid red',
-                    opacity: conditionalLogicResult ? 1 : 0.25,
-                  }}
+                  // style={{
+                  //   opacity: conditionalLogicResult ? 1 : 0.25,
+                  // }}
                   key={`${props.namespace}_${field.id}_${index}`}>
                   {result}
                 </div>

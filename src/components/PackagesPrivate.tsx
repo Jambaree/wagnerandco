@@ -66,7 +66,6 @@ const PackagesListItems = ({ items, country, namespace }) => {
             }`}
             key={`${namespace}_${j}`}>
             <H4>
-              {console.log(item)}
               {item.prices && country ? (
                 <div>
                   {format.price(

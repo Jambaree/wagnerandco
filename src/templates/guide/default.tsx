@@ -22,17 +22,19 @@ export function GuideTemplate(props) {
 
   return (
     <PageWrapper className="WPGuide pb4" is="article">
-      <WhitespaceHeaderCorners
-        title={data?.acf?.wco_block_title}
-        date={props.showDate ? data.date : undefined}
-        location=""
-        reverse={true}
-      />
-      <SidebarNav items={sidebarItems} />
-      <Wrapper maxWidth={3}>
-        {!!data?.acf?.modules && (
-          <FlexibleContent blocks={blocks} rows={data?.acf?.modules} />
-        )}
+      <Wrapper maxWidth={5}>
+        <WhitespaceHeaderCorners
+          title={data?.acf?.wco_block_title}
+          date={props.showDate ? data.date : undefined}
+          location=""
+          reverse={true}
+        />
+        <SidebarNav items={sidebarItems} />
+        <Wrapper maxWidth={3}>
+          {!!data?.acf?.modules && (
+            <FlexibleContent blocks={blocks} rows={data?.acf?.modules} />
+          )}
+        </Wrapper>
       </Wrapper>
     </PageWrapper>
   )

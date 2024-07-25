@@ -120,12 +120,13 @@ const subtitleStringToObj = function (full, short, opt) {
 
 const subtitle = function (full, short, opt) {
   opt = opt || { bold: false }
-
+  console.log(opt)
+  console.log(short)
   let shortLower = lowercaseFirstLetter(short.rendered)
   let result = full
 
-  if (full.includes(short)) {
-    return subtitleStringToObj(full, short, opt)
+  if (full.includes(short.rendered)) {
+    return subtitleStringToObj(full, short.rendered, opt)
   } else if (full.includes(shortLower)) {
     return subtitleStringToObj(full, shortLower, opt)
   }

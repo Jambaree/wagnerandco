@@ -85,23 +85,23 @@ const Intro = (props) => {
   let { typogrify, ...remainingProps } = props
   let className = 'h3 line-height-4'
 
-  // if (props.typogrify) {
-  //   return (
-  //     <div
-  //       className={className}
-  //       dangerouslySetInnerHTML={
-  //         props.dangerouslySetInnerHTML || {
-  //           __html: typogr(unesc(props.children))
-  //             .chain()
-  //             .initQuotes()
-  //             .smartypants()
-  //             .widont()
-  //             .value(),
-  //         }
-  //       }
-  //     />
-  //   )
-  // }
+  if (props.typogrify) {
+    return (
+      <div
+        className={className}
+        dangerouslySetInnerHTML={
+          props.dangerouslySetInnerHTML || {
+            __html: typogr(unesc(props.children))
+              .chain()
+              .initQuotes()
+              .smartypants()
+              .widont()
+              .value(),
+          }
+        }
+      />
+    )
+  }
 
   return <div {...remainingProps} className={className} />
 }

@@ -4,7 +4,8 @@ import slugify from 'slugify'
 
 const Headline = (props) => {
   const { heading } = props
-  if (heading) {
+
+  if (!heading) {
     return false
   }
   return <h2 id={`${slugify(heading?.toLowerCase())}`}>{Parser(heading)}</h2>

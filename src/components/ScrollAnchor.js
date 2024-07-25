@@ -6,13 +6,14 @@ import smoothScroll from 'smoothscroll'
 
 class ScrollAnchor extends React.Component {
   handleOnClick(str) {
-    smoothScroll(document.getElementById(str))
+    smoothScroll(document?.getElementById(str))
   }
 
   render() {
     const props = this.props
-    let id = props.href.split('#')[1]
 
+    let id = props.href.split('#')[1]
+    console.log(props.href)
     return (
       <a
         href={props.href}

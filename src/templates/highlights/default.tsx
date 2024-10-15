@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Ours
-import unesc from '../../utils/unescape'
+
 import permittedSlug from '../../utils/permitted-slug'
 import PageWrapper from '../../components/PageWrapper'
 import Video from '../../components/blocks/Video'

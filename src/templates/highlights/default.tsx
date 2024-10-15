@@ -58,13 +58,6 @@ export async function SingleHighlightTemplate(props) {
     })
   }
 
-  // let og = {
-  //   location: unesc(data?.acf?.wco_highlight_location),
-  //   date: data.date,
-  //   description: `${fecha.format(new Date(data.date), 'MMMM Do, YYYY')}. ${
-  //     data?.acf?.wco_highlight_location
-  //   }.`,
-  // }
   let wrapperProps = { padding: true, maxWidth: 5 }
   return (
     <Wrapper {...wrapperProps}>

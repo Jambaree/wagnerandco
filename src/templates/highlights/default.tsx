@@ -58,13 +58,13 @@ export async function SingleHighlightTemplate(props) {
     })
   }
 
-  let og = {
-    location: unesc(data?.acf?.wco_highlight_location),
-    date: data.date,
-    description: `${fecha.format(new Date(data.date), 'MMMM Do, YYYY')}. ${
-      data?.acf?.wco_highlight_location
-    }.`,
-  }
+  // let og = {
+  //   location: unesc(data?.acf?.wco_highlight_location),
+  //   date: data.date,
+  //   description: `${fecha.format(new Date(data.date), 'MMMM Do, YYYY')}. ${
+  //     data?.acf?.wco_highlight_location
+  //   }.`,
+  // }
   let wrapperProps = { padding: true, maxWidth: 5 }
   return (
     <Wrapper {...wrapperProps}>
@@ -85,7 +85,7 @@ export async function SingleHighlightTemplate(props) {
             </div>
           </div>
         ) : null}
-        {console.log(data?.acf)}
+
         <footer className="clearfix center my4 mb4">
           <ButtonDownload href={data?.acf?.wco_highlight_url}>
             Download Film Clips

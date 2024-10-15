@@ -85,8 +85,11 @@ export async function SingleHighlightTemplate(props) {
             </div>
           </div>
         ) : null}
+        {console.log(data?.acf)}
         <footer className="clearfix center my4 mb4">
-          <ButtonDownload href={data?.acf?.wcoHighlightUrl} />
+          <ButtonDownload href={data?.acf?.wco_highlight_url}>
+            Download Film Clips
+          </ButtonDownload>
           {options.wco_socialmedia.map((social, index) => {
             if (social.label !== 'Instagram') {
               return null

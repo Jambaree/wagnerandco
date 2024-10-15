@@ -1,7 +1,5 @@
 import React from 'react'
 
-import fecha from 'fecha'
-
 // Ours
 import unesc from '../../utils/unescape'
 import permittedSlug from '../../utils/permitted-slug'

@@ -392,7 +392,6 @@ export default function PackagesPrivate(props) {
                   <div className="mb-[130px]">
                     <H1>Package Comparison Table</H1>
                   </div>
-                  {console.log(data?.acf?.packages_comparison_table?.table)}
 
                   <ComparisonTable
                     tableData={data?.acf?.packages_comparison_table?.table}

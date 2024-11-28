@@ -388,7 +388,6 @@ export default function PackagesPrivate(props) {
                   </Section>
                 </div>
                 <div>
-                  {/* add the table here */}
                   <div className="mb-[130px]">
                     <H1>Package Comparison Table</H1>
                   </div>

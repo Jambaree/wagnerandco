@@ -15,10 +15,12 @@ type GlobalNavProps = {
 
 const GlobalNav: React.FC<GlobalNavProps> = ({
   items = [
-    { href: '/weddings', label: 'Weddings' },
+    { href: '/weddings', label: 'Wedding stories' },
+    { href: '/services', label: 'services' },
     { href: '/faq', label: 'FAQ' },
-    { href: '/about', label: 'About' },
+    { href: '/about', label: 'the team' },
     { href: '/contact', label: 'Contact' },
+    { href: 'https://www.instagram.com/wagnerandcofilm', label: 'Instagram' },
   ],
   pathname,
   color,

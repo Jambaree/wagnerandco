@@ -67,6 +67,7 @@
 /* @import "../../node_modules/basscss-addons/modules/background-colors/index.css"; */
 /* @import "../../node_modules/basscss-addons/modules/border-colors/index.css"; */
 /* @import "../../node_modules/basscss-addons/modules/darken"; */
+
 @import '../../node_modules/basscss-addons/modules/lighten/index.css';
 /* @import "../../node_modules/basscss-addons/modules/background-images"; */
 @import '../../node_modules/basscss-addons/modules/all';
@@ -83,3 +84,7 @@
 @import './_component-specific.css'; /* Basically the “shame.css” file */
 @import './_gutenberg-blocks.css'; /* Same for WordPress Gutenberg blocks */
 @import './_variables.css';
+
+/* @tailwind base; */
+/* @tailwind components; */
+@tailwind utilities;

@@ -7,20 +7,17 @@ import unesc from '../utils/unescape'
 const today = new Date()
 
 type GlobalFooterProps = {
-  title?: string,
-  items?: { href: string, label: string }[],
-  year: string,
-  tagline?: string,
-  color?: string,
-  pathname?: string,
+  title?: string
+  items?: { href: string; label: string }[]
+  year: string
+  tagline?: string
+  color?: string
+  pathname?: string
 }
 
 const GlobalFooter: React.FC<GlobalFooterProps> = ({
   title = 'Wagner & Co.',
-  items = [
-    { href: '/', label: 'Instagram' },
-    { href: '/', label: 'Facebook' },
-  ],
+  items = [],
   year = today.getFullYear().toString(),
   tagline = 'Based in Vancouver, British Columbia and Toronto, Ontario.',
   color,
@@ -36,9 +33,7 @@ const GlobalFooter: React.FC<GlobalFooterProps> = ({
         <GlobalNav pathname={pathname} title={unescapedTitle} color={color}>
           <Monogram width="64px" fillName={color} />
         </GlobalNav>
-        <div className="mt2 mb2">
-          <GlobalNav color={color} items={items} children="" title="" />
-        </div>
+
         <div className="mt4 sm-mt3 center mx-auto">
           <small
             className="h5 block line-height-4"

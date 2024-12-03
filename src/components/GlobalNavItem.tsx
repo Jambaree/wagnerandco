@@ -2,10 +2,10 @@ import React from 'react'
 import Link from './LinkDuo'
 
 type GlobalNavItemProps = {
-  active?: boolean,
-  className?: string,
-  href: string,
-  label: string,
+  active?: boolean
+  className?: string
+  href: string
+  label: string
 }
 
 const GlobalNavItem: React.FC<GlobalNavItemProps> = ({
@@ -13,9 +13,11 @@ const GlobalNavItem: React.FC<GlobalNavItemProps> = ({
   className = '',
   href,
   label,
+  target,
 }) => (
   <div>
     <Link
+      target={target || ''}
       className={`lowercase border-none ${active ? 'muted' : ''} ${className}`}
       href={href}>
       {label}

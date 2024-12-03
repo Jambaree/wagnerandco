@@ -16,7 +16,7 @@ type GlobalNavProps = {
 const GlobalNav: React.FC<GlobalNavProps> = ({
   items = [
     { href: '/weddings', label: 'Wedding stories' },
-    { href: '/services', label: 'services' },
+    { href: '/services/super-8mm', label: 'services' },
     { href: '/faq', label: 'FAQ' },
     { href: '/about', label: 'the team' },
     { href: '/contact', label: 'Contact' },

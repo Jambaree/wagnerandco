@@ -20,7 +20,11 @@ const GlobalNav: React.FC<GlobalNavProps> = ({
     { href: '/faq', label: 'FAQ' },
     { href: '/about', label: 'the team' },
     { href: '/contact', label: 'Contact' },
-    { href: 'https://www.instagram.com/wagnerandcofilm', label: 'Instagram' },
+    {
+      href: 'https://www.instagram.com/wagnerandcofilm',
+      label: 'Instagram',
+      target: '_blank',
+    },
   ],
   pathname,
   color,
@@ -36,12 +40,14 @@ const GlobalNav: React.FC<GlobalNavProps> = ({
     <div className="flex items-center col-12">
       <div className="col-3 md-col-4 left-align">
         {itemsLeft.map((item, index) => (
-          <GlobalNavItem
-            {...item}
-            className={color}
-            active={strippedPathname === item.href}
-            key={`GlobalNav_ItemLeft_${index}`}
-          />
+          <>
+            <GlobalNavItem
+              {...item}
+              className={color}
+              active={strippedPathname === item.href}
+              key={`GlobalNav_ItemLeft_${index}`}
+            />
+          </>
         ))}
       </div>
       <div className="col-6 md-col-4 center">

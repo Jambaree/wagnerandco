@@ -55,7 +55,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
       }}>
       {items.map((item, j) => {
         let timestamp = item.length
-
+        console.log(item)
         return (
           <li
             className={`col-12 sm-col-6 sm-px2 relative flex flex-col`}
@@ -132,8 +132,8 @@ const PackagesList = ({ items, country }) => {
             country.currencyCode
           )
         }
-        const url = pkg.example_link.url
-        const baseUrl = process.env.NEXT_PUBLIC_WP_URL // Ensure this is set in your environment variables
+        // const url = pkg.example_link.url
+        // const baseUrl = process.env.NEXT_PUBLIC_WP_URL // Ensure this is set in your environment variables
         // const relativeUrl = url.replace(baseUrl, '')
         return (
           <li key={keyStr} id={slug} className="mb4">
@@ -143,19 +143,6 @@ const PackagesList = ({ items, country }) => {
                   <PackagesSubhead>{pkg.title}</PackagesSubhead>
                 </ScrollAnchor>
                 <div className="h3 track-2">{price}</div>
-                {/* <div className="mt2 pr2 h6 sm-h4 PackageItemExampleLink-offset">
-                  View:
-                  <br />
-                  <Link
-                    title={hasExampleLink ? pkg.example_link.title : undefined}
-                    href={
-                      hasExampleLink
-                        ? relativeUrl
-                        : `/highlights/${slug}-example`
-                    }>
-                    Example of {pkg.title}
-                  </Link>
-                </div> */}
               </div>
               <div className="col-6 z3">
                 <Image

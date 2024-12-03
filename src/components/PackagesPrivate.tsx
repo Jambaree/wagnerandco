@@ -54,10 +54,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
         paddingBottom: enoughPackages && items.length % 2 === 0 ? '19%' : 0,
       }}>
       {items.map((item, j) => {
-        let timestamp = format.timestampRange(
-          item.duration_short,
-          item.duration_long
-        )
+        let timestamp = item.length
 
         return (
           <li
@@ -103,10 +100,12 @@ const PackagesListItems = ({ items, country, namespace }) => {
 
               <div className=" flex justify-between">
                 {timestamp && !timestamp.includes(null) ? (
-                  <p className="mt-[5px]">Length: {timestamp}</p>
+                  <p className="mt-[5px] text-[15.6px]">Length: {timestamp}</p>
                 ) : null}
                 {item?.voice_over && (
-                  <p className="mt-[5px]">Voice Over: {item?.voice_over}</p>
+                  <p className="mt-[5px] text-[15.6px]">
+                    Voice Over: {item?.voice_over}
+                  </p>
                 )}
               </div>
             </div>
@@ -387,8 +386,15 @@ export default function PackagesPrivate(props) {
                     </ul>
                   </Section>
                 </div>
+
+                <Section>
+                  <PackagesList
+                    items={data?.acf?.wco_packages}
+                    country={activeCountry}
+                  />
+                </Section>
                 <div>
-                  <div className="mb-[130px]">
+                  <div className="mb-[75px]">
                     <H1>Package Comparison Table</H1>
                   </div>
 
@@ -396,12 +402,6 @@ export default function PackagesPrivate(props) {
                     tableData={data?.acf?.packages_comparison_table?.table}
                   />
                 </div>
-                <Section>
-                  <PackagesList
-                    items={data?.acf?.wco_packages}
-                    country={activeCountry}
-                  />
-                </Section>
                 {data?.acf.wco_packages_addons ? (
                   <Section id="add-ons">
                     <ScrollAnchor href="#add-ons">

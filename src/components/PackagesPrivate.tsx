@@ -88,7 +88,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="#062995"
-                    className="size-5 ml-[2px] relative top-[2px]">
+                    className="size-4 ml-[2px] relative top-[2px]">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

@@ -55,10 +55,14 @@ const PackagesListItems = ({ items, country, namespace }) => {
       }}>
       {items.map((item, j) => {
         let timestamp = format.timestampRange(
-          item.duration_short,
-          item.duration_long
+          item?.duration_short,
+          item?.duration_long
         )
 
+        // Filter out unwanted values (like 720)
+        if (typeof timestamp === 'string') {
+          timestamp = timestamp.replace(/\b720\b:?/g, '').trim() // Remove standalone 720 and any following colon
+        }
         return (
           <li
             className={`col-12 sm-col-6 sm-px2 ${
@@ -100,15 +104,15 @@ const PackagesList = ({ items, country }) => {
         let keyStr = `Package_${slug}_${index}`
 
         let price = null
-        let hasExampleLink = pkg.example_link
+        let hasExampleLink = pkg?.example_link
 
-        if (pkg.prices && country) {
+        if (pkg?.prices && country) {
           price = format.price(
-            pkg.prices[`price_${country.value[0] + country.value.slice(1)}`],
+            pkg?.prices[`price_${country?.value[0] + country.value.slice(1)}`],
             country.currencyCode
           )
         }
-        const url = pkg.example_link.url
+        const url = pkg?.example_link?.url
         const baseUrl = process.env.NEXT_PUBLIC_WP_URL // Ensure this is set in your environment variables
         const relativeUrl = url.replace(baseUrl, '')
         return (
@@ -116,14 +120,16 @@ const PackagesList = ({ items, country }) => {
             <div className="flex items-end lg-mb2">
               <div className="col-6">
                 <ScrollAnchor href={`#${slug}`}>
-                  <PackagesSubhead>{pkg.title}</PackagesSubhead>
+                  <PackagesSubhead>{pkg?.title}</PackagesSubhead>
                 </ScrollAnchor>
                 <div className="h3 track-2">{price}</div>
                 <div className="mt2 pr2 h6 sm-h4 PackageItemExampleLink-offset">
                   View:
                   <br />
                   <Link
-                    title={hasExampleLink ? pkg.example_link.title : undefined}
+                    title={
+                      hasExampleLink ? pkg?.example_link?.title : undefined
+                    }
                     href={
                       hasExampleLink
                         ? relativeUrl
@@ -197,8 +203,11 @@ export default function PackagesPrivate(props) {
       if (isLoggedIn()) {
         let currentUser = getCurrentUser()
 
-        if (currentUser.countryKey && countriesConfig[currentUser.countryKey]) {
-          router.push(`/packages/?country=${currentUser.countryKey}`)
+        if (
+          currentUser?.countryKey &&
+          countriesConfig[currentUser.countryKey]
+        ) {
+          router.push(`/packages/?country=${currentUser?.countryKey}`)
           return currentUser.countryKey
         }
       } else {
@@ -238,10 +247,10 @@ export default function PackagesPrivate(props) {
   return (
     <PrivateRoute
       parentNode={data}
-      title={data.acf.wco_packages_protected.title}
-      submitLabel={data.acf.wco_packages_protected.button_label}
-      subtitle={data.acf.wco_packages_protected.subtitle}
-      location={props.location}
+      title={data?.acf?.wco_packages_protected?.title}
+      submitLabel={data?.acf?.wco_packages_protected?.button_label}
+      subtitle={data?.acf?.wco_packages_protected?.subtitle}
+      location={props?.location}
       countryKey={countryKey}
       handleOnChangeCountry={(e) => {
         if (e && e.target && e.target.value) {
@@ -254,8 +263,8 @@ export default function PackagesPrivate(props) {
           <div className="relative md-pb4">
             <StylizedInfo />
             <Header
-              title={data.title.rendered}
-              subtitle={data.acf.wco_page_subtitle}
+              title={data?.title?.rendered}
+              subtitle={data?.acf?.wco_page_subtitle}
             />
 
             <div className="z2 relative">
@@ -263,7 +272,7 @@ export default function PackagesPrivate(props) {
                 <div className="md-flex flex-wrap md3 md-mb4">
                   <div className="col-12 md-col-8">
                     <WeddingIntro favorColumn="first">
-                      {data.content.rendered}
+                      {data?.content?.rendered}
                     </WeddingIntro>
                   </div>
                   <div className="col-12 md-col-4 md-pl3">

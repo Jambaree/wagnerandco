@@ -54,10 +54,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
         paddingBottom: enoughPackages && items.length % 2 === 0 ? '19%' : 0,
       }}>
       {items?.map((item, j) => {
-        let timestamp = format.timestampRange(
-          item?.duration_short,
-          item?.duration_long
-        )
+        let timestamp = item.length
 
         // Filter out unwanted values (like 720)
         if (typeof timestamp === 'string') {

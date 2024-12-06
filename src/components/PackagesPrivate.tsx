@@ -53,7 +53,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
       style={{
         paddingBottom: enoughPackages && items.length % 2 === 0 ? '19%' : 0,
       }}>
-      {items.map((item, j) => {
+      {items?.map((item, j) => {
         let timestamp = format.timestampRange(
           item?.duration_short,
           item?.duration_long
@@ -61,7 +61,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
 
         // Filter out unwanted values (like 720)
         if (typeof timestamp === 'string') {
-          timestamp = timestamp.replace(/\b720\b:?/g, '').trim() // Remove standalone 720 and any following colon
+          timestamp = timestamp?.replace(/\b720\b:?/g, '').trim() // Remove standalone 720 and any following colon
         }
         return (
           <li

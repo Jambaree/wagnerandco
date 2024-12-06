@@ -55,7 +55,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
       }}>
       {items.map((item, j) => {
         let timestamp = item.length
-        console.log(item)
+
         return (
           <li
             className={`col-12 sm-col-6 sm-px2 relative flex flex-col`}
@@ -126,9 +126,9 @@ const PackagesList = ({ items, country }) => {
         let price = null
         // let hasExampleLink = pkg.example_link
 
-        if (pkg.prices && country) {
+        if (pkg?.prices && country) {
           price = format.price(
-            pkg.prices[`price_${country.value[0] + country.value.slice(1)}`],
+            pkg?.prices[`price_${country?.value[0] + country.value.slice(1)}`],
             country.currencyCode
           )
         }
@@ -140,7 +140,7 @@ const PackagesList = ({ items, country }) => {
             <div className="flex items-center lg-mb2">
               <div className="col-6">
                 <ScrollAnchor href={`#${slug}`}>
-                  <PackagesSubhead>{pkg.title}</PackagesSubhead>
+                  <PackagesSubhead>{pkg?.title}</PackagesSubhead>
                 </ScrollAnchor>
                 <div className="h3 track-2">{price}</div>
               </div>
@@ -265,8 +265,11 @@ export default function PackagesPrivate(props) {
       if (isLoggedIn()) {
         let currentUser = getCurrentUser()
 
-        if (currentUser.countryKey && countriesConfig[currentUser.countryKey]) {
-          router.push(`/packages/?country=${currentUser.countryKey}`)
+        if (
+          currentUser?.countryKey &&
+          countriesConfig[currentUser.countryKey]
+        ) {
+          router.push(`/packages/?country=${currentUser?.countryKey}`)
           return currentUser.countryKey
         }
       } else {
@@ -306,10 +309,10 @@ export default function PackagesPrivate(props) {
   return (
     <PrivateRoute
       parentNode={data}
-      title={data.acf.wco_packages_protected.title}
-      submitLabel={data.acf.wco_packages_protected.button_label}
-      subtitle={data.acf.wco_packages_protected.subtitle}
-      location={props.location}
+      title={data?.acf?.wco_packages_protected?.title}
+      submitLabel={data?.acf?.wco_packages_protected?.button_label}
+      subtitle={data?.acf?.wco_packages_protected?.subtitle}
+      location={props?.location}
       countryKey={countryKey}
       handleOnChangeCountry={(e) => {
         if (e && e.target && e.target.value) {
@@ -322,8 +325,8 @@ export default function PackagesPrivate(props) {
           <div className="relative md-pb4">
             <StylizedInfo />
             <Header
-              title={data.title.rendered}
-              subtitle={data.acf.wco_page_subtitle}
+              title={data?.title?.rendered}
+              subtitle={data?.acf?.wco_page_subtitle}
             />
 
             <div className="z2 relative">
@@ -331,7 +334,7 @@ export default function PackagesPrivate(props) {
                 <div className="md-flex flex-wrap md3 md-mb4">
                   <div className="col-12 md-col-8">
                     <WeddingIntro favorColumn="first">
-                      {data.content.rendered}
+                      {data?.content?.rendered}
                     </WeddingIntro>
                   </div>
                   <div className="col-12 md-col-4 md-pl3">

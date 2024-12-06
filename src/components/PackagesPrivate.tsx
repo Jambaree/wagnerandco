@@ -56,10 +56,6 @@ const PackagesListItems = ({ items, country, namespace }) => {
       {items?.map((item, j) => {
         let timestamp = item.length
 
-        // Filter out unwanted values (like 720)
-        if (typeof timestamp === 'string') {
-          timestamp = timestamp?.replace(/\b720\b:?/g, '').trim() // Remove standalone 720 and any following colon
-        }
         return (
           <li
             className={`col-12 sm-col-6 sm-px2 ${

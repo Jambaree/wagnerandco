@@ -13,6 +13,8 @@ import { PackagesPageTemplate } from './page/packages'
 import { InfoPageTemplate } from './archive/info'
 import { SingleInfoTemplate } from './info/default'
 import { SingleHighlightTemplate } from './highlights/default'
+import { ServicesPageTemplate } from './archive/services'
+import { SingleServiceTemplate } from './services/default'
 
 const templates: Templates = {
   page: {
@@ -21,6 +23,7 @@ const templates: Templates = {
     faq: FaqTemplate,
     contact: ContactPageTemplate,
     packages: PackagesPageTemplate,
+    services: ServicesPageTemplate,
   },
   info: {
     default: SingleInfoTemplate,
@@ -31,6 +34,10 @@ const templates: Templates = {
   archive: {
     weddings: WeddingPageTemplate,
     info: InfoPageTemplate,
+    service: ServicesPageTemplate,
+  },
+  services: {
+    default: SingleServiceTemplate,
   },
 
   highlights: {

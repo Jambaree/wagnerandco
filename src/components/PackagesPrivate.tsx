@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import slugify from 'slugify'
 import queryString from 'query-string'
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
-
+import parse from 'html-react-parser'
 // Ours
 import format from '@/utils/format'
 import unesc from '@/utils/unescape'
@@ -58,9 +58,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
 
         return (
           <li
-            className={`col-12 sm-col-6 sm-px2 ${
-              j % 2 !== 0 ? 'PackageItem-offset' : ''
-            }`}
+            className={`col-12 sm-col-6 sm-px2 relative flex flex-col`}
             key={`${namespace}_${j}`}>
             <H4>
               {item.prices && country ? (
@@ -76,11 +74,40 @@ const PackagesListItems = ({ items, country, namespace }) => {
               <div>{unesc(item.name)}</div>
             </H4>
 
-            <div>
-              <p>{item.description}</p>
-              {timestamp && !timestamp.includes(null) ? (
-                <p>Length: {timestamp}</p>
-              ) : null}
+            <p>{item.description}</p>
+            <div className="flex flex-col justify-between mt-auto relative">
+              {item?.examples && (
+                <div className="text-[15.6px]">
+                  <Link href={item?.examples || '/'} className="w-fit">
+                    View Examples
+                  </Link>
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="#062995"
+                    className="size-4 ml-[2px] relative top-[2px]">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                    />
+                  </svg>
+                </div>
+              )}
+
+              <div className=" flex justify-between">
+                {timestamp && !timestamp.includes(null) ? (
+                  <p className="mt-[5px] text-[15.6px]">Length: {timestamp}</p>
+                ) : null}
+                {item?.voice_over && (
+                  <p className="mt-[5px] text-[15.6px]">
+                    Voice Over: {item?.voice_over}
+                  </p>
+                )}
+              </div>
             </div>
           </li>
         )
@@ -97,7 +124,7 @@ const PackagesList = ({ items, country }) => {
         let keyStr = `Package_${slug}_${index}`
 
         let price = null
-        let hasExampleLink = pkg?.example_link
+        // let hasExampleLink = pkg.example_link
 
         if (pkg?.prices && country) {
           price = format.price(
@@ -105,32 +132,17 @@ const PackagesList = ({ items, country }) => {
             country.currencyCode
           )
         }
-        const url = pkg?.example_link?.url
-        const baseUrl = process.env.NEXT_PUBLIC_WP_URL // Ensure this is set in your environment variables
-        const relativeUrl = url?.replace(baseUrl, '')
+        // const url = pkg.example_link.url
+        // const baseUrl = process.env.NEXT_PUBLIC_WP_URL // Ensure this is set in your environment variables
+        // const relativeUrl = url.replace(baseUrl, '')
         return (
           <li key={keyStr} id={slug} className="mb4">
-            <div className="flex items-end lg-mb2">
+            <div className="flex items-center lg-mb2">
               <div className="col-6">
                 <ScrollAnchor href={`#${slug}`}>
                   <PackagesSubhead>{pkg?.title}</PackagesSubhead>
                 </ScrollAnchor>
                 <div className="h3 track-2">{price}</div>
-                <div className="mt2 pr2 h6 sm-h4 PackageItemExampleLink-offset">
-                  View:
-                  <br />
-                  <Link
-                    title={
-                      hasExampleLink ? pkg?.example_link?.title : undefined
-                    }
-                    href={
-                      hasExampleLink
-                        ? relativeUrl
-                        : `/highlights/${slug}-example`
-                    }>
-                    Example of {pkg.title}
-                  </Link>
-                </div>
               </div>
               <div className="col-6 z3">
                 <Image
@@ -182,6 +194,63 @@ export default function PackagesPrivate(props) {
   useEffect(() => {
     setCountryKey(handleCountryFromQueryString())
   }, [])
+
+  const ComparisonTable = ({ tableData }) => {
+    if (!tableData) return null
+
+    const { use_header, header, body } = tableData
+
+    return (
+      <div className="overflow-x-auto mb-[150px]">
+        <table className="min-w-full table-auto border border-[#062995] border-collapse">
+          {/* Render Header */}
+          {use_header && (
+            <thead>
+              <tr>
+                {header.map((headerCell, index) => (
+                  <th
+                    key={`header-${index}`}
+                    className="px-4 py-6 border border-[#062995] text-left text-sm font-semibold text-[#ea5c44]">
+                    {parse(headerCell.c)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+          )}
+          {/* Render Body */}
+          <tbody>
+            {body.map((row, rowIndex) => (
+              <tr key={`row-${rowIndex}`}>
+                {row.map((cell, cellIndex) => (
+                  <td
+                    key={`cell-${rowIndex}-${cellIndex}`}
+                    className="px-4 py-2 border border-[#062995] text-sm text-[#ea5c44] whitespace-nowrap">
+                    {cell.c === '✔️' ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={3}
+                        stroke="currentColor"
+                        className="size-4 relative top-[2px]">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m4.5 12.75 6 6 9-13.5"
+                        />
+                      </svg>
+                    ) : (
+                      parse(cell.c)
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
 
   function handleCountryFromQueryString() {
     const search = searchParams.toString()
@@ -307,12 +376,22 @@ export default function PackagesPrivate(props) {
                     </ul>
                   </Section>
                 </div>
+
                 <Section>
                   <PackagesList
                     items={data?.acf?.wco_packages}
                     country={activeCountry}
                   />
                 </Section>
+                <div>
+                  <div className="mb-[75px]">
+                    <H1>Package Comparison Table</H1>
+                  </div>
+
+                  <ComparisonTable
+                    tableData={data?.acf?.packages_comparison_table?.table}
+                  />
+                </div>
                 {data?.acf.wco_packages_addons ? (
                   <Section id="add-ons">
                     <ScrollAnchor href="#add-ons">

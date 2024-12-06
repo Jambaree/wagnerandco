@@ -13,7 +13,7 @@ class ScrollAnchor extends React.Component {
     const props = this.props
 
     let id = props.href.split('#')[1]
-    console.log(props.href)
+    // console.log(props.href)
     return (
       <a
         href={props.href}

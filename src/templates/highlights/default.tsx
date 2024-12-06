@@ -62,7 +62,7 @@ export async function SingleHighlightTemplate(props) {
       <PageWrapper is="article">
         <WhitespaceHeaderCorners
           title={data.title.rendered}
-          date={data.date}
+          date={data?.acf?.toggle_off?.toggle_off_date ? false : data.date}
           location={data?.acf?.wco_highlight_location}
         />
         {navSections.length >= 1 ? (
@@ -78,14 +78,18 @@ export async function SingleHighlightTemplate(props) {
         ) : null}
 
         <footer className="clearfix center my4 mb4">
-          <ButtonDownload href={data?.acf?.wco_highlight_url}>
-            Download Film Clips
-          </ButtonDownload>
+          {!data?.acf?.toggle_off?.toggle_off_download_film_clips && (
+            <ButtonDownload href={data?.acf?.wco_highlight_url}>
+              Download Film Clips
+            </ButtonDownload>
+          )}
           {options.wco_socialmedia.map((social, index) => {
             if (social.label !== 'Instagram') {
               return null
             }
-
+            if (data?.acf?.toggle_off?.toggle_off_upload_film_clips) {
+              return null
+            }
             return (
               <p
                 key={`HighlightTemplate_cta_${index}`}

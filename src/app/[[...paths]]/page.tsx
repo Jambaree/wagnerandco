@@ -22,6 +22,13 @@ export { generateMetadata } from '@nextwp/core'
 
 export async function generateStaticParams() {
   return nextWpStaticParams({
-    postTypes: ['pages', 'weddings', 'guides', 'highlights', 'info'],
+    postTypes: [
+      'pages',
+      'weddings',
+      'guides',
+      'highlights',
+      'info',
+      'services',
+    ],
   })
 }

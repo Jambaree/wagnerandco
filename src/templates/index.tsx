@@ -14,7 +14,7 @@ import { InfoPageTemplate } from './archive/info'
 import { SingleInfoTemplate } from './info/default'
 import { SingleHighlightTemplate } from './highlights/default'
 import { ServicesPageTemplate } from './archive/services'
-import { SingleServiceTemplate } from './service/default'
+import { SingleServiceTemplate } from './services/default'
 
 const templates: Templates = {
   page: {

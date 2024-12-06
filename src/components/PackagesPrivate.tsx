@@ -53,7 +53,7 @@ const PackagesListItems = ({ items, country, namespace }) => {
       style={{
         paddingBottom: enoughPackages && items.length % 2 === 0 ? '19%' : 0,
       }}>
-      {items.map((item, j) => {
+      {items?.map((item, j) => {
         let timestamp = item.length
 
         return (

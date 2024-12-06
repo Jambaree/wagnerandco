@@ -36,7 +36,7 @@ const templates: Templates = {
     info: InfoPageTemplate,
     service: ServicesPageTemplate,
   },
-  service: {
+  services: {
     default: SingleServiceTemplate,
   },
 

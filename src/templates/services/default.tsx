@@ -16,7 +16,7 @@ export async function SingleServiceTemplate(props) {
     uri,
     data: { content, acf },
   } = props
-  const services = await getAllItems(['service'])
+  const services = await getAllItems(['services'])
   const archivePage = await getPageData('services')
 
   // console.log(data)

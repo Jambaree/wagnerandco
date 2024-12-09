@@ -78,7 +78,10 @@ const PackagesListItems = ({ items, country, namespace }) => {
             <div className="flex flex-col justify-between mt-auto relative">
               {item?.examples && (
                 <div className="text-[15.6px]">
-                  <Link href={item?.examples || '/'} className="w-fit">
+                  <Link
+                    target="_blank"
+                    href={item?.examples || '/'}
+                    className="w-fit">
                     View Examples
                   </Link>
 

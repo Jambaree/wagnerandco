@@ -48,7 +48,7 @@
     "lodash.has": "4.5.2",
     "lodash.random": "3.2.0",
     "lodash.unescape": "4.0.1",
-    "next": "^14.2.5",
+    "next": "^14.2.32",
     "normalize.css": "8.0.1",
     "postcss": "^8.4.39",
     "postcss-browser-reporter": "^0.7.0",
